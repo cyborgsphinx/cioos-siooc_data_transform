@@ -13,6 +13,18 @@ from shapely.geometry import Point
 from io import StringIO
 
 
+def _get_format_string(fortrantype, width, decimals):
+    fortrantype = fortrantype.strip()
+    width = width.strip()
+    decimals = decimals.strip()
+    if fortrantype in ["F"]:
+        return f"F{width}.{decimals}"
+    elif fortrantype in ["I", "NQ"]:
+        return f"I{width}"
+    else:
+        return fortrantype
+
+
 class ObsFile(object):
     """
     Class template for all the different data file types
@@ -456,6 +468,25 @@ class ObsFile(object):
             print("Error: First record in data does not match start date in header", self.filename)
             return 0
 
+    def get_format(self):
+        FORMAT = "FORMAT"
+        CONTINUED = "CONTINUED"
+        chars_to_remove = " \n\t'"
+        try:
+            if FORMAT in self.file:
+                format_str = self.file[FORMAT].strip(chars_to_remove)
+                if CONTINUED in self.file:
+                    format_str += self.file[CONTINUED].strip(chars_to_remove)
+            else:
+                channel_details = self.get_channel_detail()
+                w = channel_details["Width"]
+                f = channel_details["Format"]
+                d = channel_details["Decimal Places"]
+                format_strs = [_get_format_string(*info) for info in zip(f, w, d)]
+                format_str = "({})".format(",".join(format_strs))
+            return format_str
+        except:
+            return None
 
 #
 # ********************              END DEFINITION FOR OBSFILE CLASS          **************************
