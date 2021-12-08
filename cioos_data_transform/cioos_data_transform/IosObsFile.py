@@ -249,7 +249,7 @@ class ObsFile(object):
             ffline = ff.FortranRecordReader(formatline)
             for i in range(len(lines)):
                 if len(lines[i]) > 0:
-                    data.append([float(r) for r in ffline.read(lines[i])])
+                    data.append([float(r) if r is not None else np.nan for r in ffline.read(lines[i])])
         data = np.asarray(data)
         if self.debug:
             print(data)
