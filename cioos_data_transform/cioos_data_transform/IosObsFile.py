@@ -302,6 +302,7 @@ class ObsFile(object):
         info["Width"] = [l[3] for l in ch_det]
         info["Format"] = [l[4] for l in ch_det]
         info["Type"] = [l[5] for l in ch_det]
+        info["Decimal Places"] = [l[6] if len(l) > 6 else None for l in ch_det]
         if int(self.file["NUMBER OF CHANNELS"]) != len(info["Pad"]):
             raise Exception("Number of channels in file record does not match channel_details!")
         else:
