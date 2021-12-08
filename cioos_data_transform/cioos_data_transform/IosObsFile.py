@@ -212,12 +212,14 @@ class ObsFile(object):
         # assumes on 's' data fromat
         return np.asarray(fmt[0:-1].split("s"), dtype="int").sum()
 
-    def get_data(self, formatline=None):
+    def get_data(self, formatline=None, records=None):
         # reads data using the information in FORMAT
         # if FORMAT information in file header is missing or does not work
         # then create 'struct' data format based on channel details information
         idx = self.find_index("*END OF HEADER")
-        lines = self.lines[idx + 1 :]
+        start = idx + 1
+        end = start + records if records is not None else None
+        lines = self.lines[start:end] if end is not None else self.lines[start:]
         data = []
         # if formatline is None, try reading without any format (assume columns are space limited;
         #       if space limited strategy does not work, try to create format line)
