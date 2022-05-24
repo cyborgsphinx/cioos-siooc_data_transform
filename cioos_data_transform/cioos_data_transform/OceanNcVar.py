@@ -721,6 +721,29 @@ class OceanNcVar(object):
                     "concentration_of_chlorophyll-a_in_water_body"
                 )
                 self.long_name = "Concentration of chlorophyll-a {chl-a CAS 479-61-8} per unit volume of the water body [particulate >GF/F phase] by filtration, acetone extraction and fluorometry"
+            elif is_in(["fluorescence:calibrated"], ios_varname) and is_in(["mg/m^3"], varunits):
+                bodc_code = "CPHLPS01"
+                bodc_units = "mg/m^3"
+                self.standard_name = "mass_concentration_of_chlorophyll_a_in_water_body"
+                self.long_name = "Concentration of chlorophyll-a {chl-a CAS 479-61-8} per unit volume of the water body [particulate >unknown phase] by in-situ chlorophyll fluorometer and calibration against sample data"
+            elif is_in(["fluorescence"], ios_varname) and is_in(["mg/m^3"], varunits):
+                bodc_code = "CPHLPR01"
+                bodc_units = "mg/m^3"
+                self.standard_name = "mass_concentration_of_chlorophyll_a_in_water_body"
+                self.long_name = "Concentration of chlorophyll-a {chl-a CAS 479-61-8} per unit volume of the water body [particulate >unknown phase] by in-situ chlorophyll fluorometer"
+            elif is_in(["transmissivity"], ios_varname) and is_in(["%/metre"], varunits):
+                bodc_code = "POPTPZ01"
+                bodc_units = "%/metre"
+                self.long_name = "Transmittance (unspecified wavelength) per unit length of the water body by transmissometer and correction to a path length of 1m"
+            elif is_in(["ammonium"], ios_varname) and is_in(["umol/l"], varunits):
+                bodc_code = "AMONZZXX"
+                bodc_units = "umol/L"
+                self.long_name = "Concentration of ammonium {NH4+ CAS 14798-03-9} per unit volume of the water body [unknown phase]"
+            elif is_in(["speed:sound"], ios_varname):
+                bodc_code = "SVELXXX"
+                bodc_units = "m/s"
+                self.standard_name = "speed_of_sound_in_sea_water"
+                self.long_name = "Sound velocity in the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",

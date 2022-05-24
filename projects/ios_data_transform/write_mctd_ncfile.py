@@ -274,8 +274,19 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
+        elif is_in(["speed:sound"], channel.name):
+            ncfile.add_var(
+                "other",
+                channel.name,
+                channel.units,
+                data,
+                ("time"),
+                null_value,
+                attributes={"featureType": "timeSeries"},
+            )
         else:
-            print(channel.name, "not transferred to netcdf file !")
+            if not is_in(["record", "sample", "date", "time"], channel.name):
+                print(channel.name, "not transferred to netcdf file !")
             # raise Exception('not found !!')
 
     # attach variables to ncfileclass and call method to write netcdf file

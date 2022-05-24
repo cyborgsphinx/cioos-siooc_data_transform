@@ -522,7 +522,8 @@ def write_cur_ncfile(filename, curcls, config={}):
                 attributes={"featureType": "timeSeries"},
             )
         else:
-            print(channel.name, "not transferred to netcdf file !")
+            if not is_in(["record", "sample", "date", "time"], channel.name):
+                print(channel.name, "not transferred to netcdf file !")
 
     # Calculate North and East components of speed if missing
     try:
