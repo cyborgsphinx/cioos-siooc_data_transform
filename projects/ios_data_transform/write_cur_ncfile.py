@@ -1,5 +1,6 @@
 from datetime import datetime
 from pytz import timezone
+import math
 import json
 from cioos_data_transform.OceanNcFile import CurNcFile
 
@@ -19,8 +20,8 @@ def add_ne_speed(speed, direction):
     output:
         None
     """
-    east_comp = np.zeros(speed.shape, dtype="float32")
-    north_comp = np.zeros(speed.shape, dtype="float32")
+    east_comp = np.zeros(len(speed), dtype="float32")
+    north_comp = np.zeros(len(speed), dtype="float32")
 
     for i in range(len(speed)):
         east_comp[i] = np.round(
@@ -86,22 +87,19 @@ def write_cur_ncfile(filename, curcls, config={}):
         curcls.get_complete_header(), ensure_ascii=False, indent=False
     )
     # initcreate dimension variable
-    global_attrs["nrec"] = int(curcls.file["NUMBER OF RECORDS"])
+    global_attrs["nrec"] = curcls.file.number_of_records
     # add variable profile_id (dummy variable)
     global_attrs["filename"] = curcls.filename.split("/")[-1]
     ncfile.add_var("str_id", "filename", None, curcls.filename.split("/")[-1])
     # add administration variables
-    if "COUNTRY" in curcls.administration:
-        country = curcls.administration["COUNTRY"].strip()
-    else:
-        country = "n/a"
+    country = curcls.administration.country.strip()
     global_attrs["country"] = country
     ncfile.add_var("str_id", "country", None, country)
     # create mission id
-    if "MISSION" in curcls.administration:
-        mission_id = curcls.administration["MISSION"].strip()
-    elif "MISSION" in curcls.deployment:
-        mission_id = curcls.deployment["MISSION"].strip()
+    if curcls.administration.mission != "n/a":
+        mission_id = curcls.administration.mission.strip()
+    elif curcls.deployment is not None and curcls.deployment.mission != "n/a":
+        mission_id = curcls.deployment.mission.strip()
     else:
         mission_id = "n/a"
 
@@ -114,122 +112,111 @@ def write_cur_ncfile(filename, curcls, config={}):
     ncfile.add_var("str_id", "deployment_mission_id", None, mission_id)
 
     # create event and profile ID
-    if "EVENT NUMBER" in curcls.location:
-        event_id = curcls.location["EVENT NUMBER"].strip()
+    if curcls.location.event_number > 0:
+        event_id = curcls.location.event_number
     else:
         print("Event number not found!" + curcls.filename)
-        event_id = "0000"
+        event_id = 0
 
-    ncfile.add_var("str_id", "event_number", None, event_id)
+    ncfile.add_var("str_id", "event_number", None, "{:04d}".format(event_id))
 
+    obs_time = curcls.get_obs_time()
     if mission_id is None or mission_id == "n/a":
-        year_string = curcls.obs_time[0].strftime("%Y")
-        profile_id = "{}-000-{:04d}".format(year_string, int(event_id))
+        year_string = obs_time[0].strftime("%Y")
+        profile_id = "{}-000-{:04d}".format(year_string, event_id)
     else:
         profile_id = "{:04d}-{:03d}-{:04d}".format(
-            int(buf[0]), int(buf[1]), int(event_id)
+            int(buf[0]), int(buf[1]), event_id
         )
     # print(profile_id)
     ncfile.add_var("profile", "profile", None, profile_id)
     global_attrs["id"] = profile_id
 
-    if "SCIENTIST" in curcls.administration:
-        scientist = curcls.administration["SCIENTIST"].strip()
-    else:
-        scientist = "n/a"
+    scientist = curcls.administration.scientist.strip()
     global_attrs["scientist"] = scientist
     ncfile.add_var("str_id", "scientist", None, scientist)
 
-    if "PROJECT" in curcls.administration:
-        project = curcls.administration["PROJECT"].strip()
-    else:
-        project = "n/a"
+    project = curcls.administration.project.strip()
     global_attrs["project"] = project
     ncfile.add_var("str_id", "project", None, project)
 
-    if "AGENCY" in curcls.administration:
-        agency = curcls.administration["AGENCY"].strip()
-    else:
-        agency = "n/a"
+    agency = curcls.administration.agency.strip()
     global_attrs["agency"] = agency
     ncfile.add_var("str_id", "agency", None, agency)
 
-    if "PLATFORM" in curcls.administration:
-        platform = curcls.administration["PLATFORM"].strip()
-    else:
-        platform = "n/a"
+    platform = curcls.administration.platform.strip()
     global_attrs["platform"] = platform
     ncfile.add_var("str_id", "platform", None, platform)
 
     # add instrument type
-    if "TYPE" in curcls.instrument:
+    if curcls.instrument.type != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_type",
             None,
-            curcls.instrument["TYPE"].strip(),
+            curcls.instrument.type.strip(),
         )
 
-    if "MODEL" in curcls.instrument:
+    if curcls.instrument.model != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_model",
             None,
-            curcls.instrument["MODEL"].strip(),
+            curcls.instrument.model.strip(),
         )
 
-    if "SERIAL NUMBER" in curcls.instrument:
+    if curcls.instrument.serial_number != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_serial_number",
             None,
-            curcls.instrument["SERIAL NUMBER"].strip(),
+            curcls.instrument.serial_number.strip(),
         )
 
-    if "DEPTH" in curcls.instrument:
+    if curcls.instrument.depth != "n/a":
         ncfile.add_var(
             "instr_depth",
             "instrument_depth",
             None,
-            float(curcls.instrument["DEPTH"]),
+            float(curcls.instrument.depth),
         )
     # add locations variables
     ncfile.add_var(
         "lat",
         "latitude",
         "degrees_north",
-        curcls.location["LATITUDE"],
+        curcls.location.latitude,
     )
-    global_attrs["geospatial_lat_min"] = curcls.location["LATITUDE"]
-    global_attrs["geospatial_lat_max"] = curcls.location["LATITUDE"]
+    global_attrs["geospatial_lat_min"] = curcls.location.latitude
+    global_attrs["geospatial_lat_max"] = curcls.location.latitude
     ncfile.add_var(
         "lon",
         "longitude",
         "degrees_east",
-        curcls.location["LONGITUDE"],
+        curcls.location.longitude,
     )
-    global_attrs["geospatial_lon_min"] = curcls.location["LONGITUDE"]
-    global_attrs["geospatial_lon_max"] = curcls.location["LONGITUDE"]
+    global_attrs["geospatial_lon_min"] = curcls.location.longitude
+    global_attrs["geospatial_lon_max"] = curcls.location.longitude
     global_attrs["geospatial_bounds"] = "POINT ({}, {})".format(
-        curcls.location["LONGITUDE"], curcls.location["LATITUDE"]
+        curcls.location.longitude, curcls.location.latitude
     )
 
     ncfile.add_var("str_id", "geographic_area", None, curcls.geo_code)
 
     # add time variables and attributes
     global_attrs["time_coverage_duration"] = str(
-        curcls.obs_time[-1] - curcls.obs_time[0]
+        obs_time[-1] - obs_time[0]
     )
 
     global_attrs["time_coverage_resolution"] = str(
-        curcls.obs_time[1] - curcls.obs_time[0]
+        obs_time[1] - obs_time[0]
     )
 
-    ncfile.add_var("time", "time", None, curcls.obs_time, vardim=("time"))
-    global_attrs["time_coverage_start"] = curcls.obs_time[0].strftime(
+    ncfile.add_var("time", "time", None, obs_time, vardim=("time"))
+    global_attrs["time_coverage_start"] = obs_time[0].strftime(
         date_format
     )
-    global_attrs["time_coverage_end"] = curcls.obs_time[-1].strftime(
+    global_attrs["time_coverage_end"] = obs_time[-1].strftime(
         date_format
     )
     # direction_index = None
@@ -252,62 +239,63 @@ def write_cur_ncfile(filename, curcls, config={}):
     temp_count = 0  # counter for the number of "Temperature" channels
 
     # go through channels and add each variable depending on type
-    for i, channel in enumerate(curcls.channels["Name"]):
+    for i, channel in enumerate(curcls.file.channels):
         try:
-            null_value = curcls.channel_details["Pad"][i]
+            null_value = curcls.file.channel_details[i].pad
         except Exception as e:
-            if "PAD" in curcls.file.keys():
-                null_value = curcls.file["PAD"].strip()
+            if not math.isnan(curcls.file.pad):
+                null_value = curcls.file.pad
                 print(
                     "Channel Details missing. Setting Pad value to: ",
-                    null_value.strip(),
+                    null_value,
                 )
             else:
                 print("Channel Details missing. Setting Pad value to ' ' ...")
                 null_value = "' '"
-        if is_in(["depth"], channel):
+        data = [row[i] for row in curcls.data]
+        if is_in(["depth"], channel.name):
             ncfile.add_var(
                 "depth",
                 "depth",
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["pressure"], channel):
+        elif is_in(["pressure"], channel.name):
             ncfile.add_var(
                 "pressure",
                 "pressure",
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["temperature:low_res"], channel):
+        elif is_in(["temperature:low_res"], channel.name):
             ncfile.add_var(
                 "temperature:cur:low_res",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["temperature"], channel) and not is_in(
-            ["temperature:high_res", "temperature:low_res"], channel
+        elif is_in(["temperature"], channel.name) and not is_in(
+            ["temperature:high_res", "temperature:low_res"], channel.name
         ):
             temp_count += 1
             if temp_count == 1:
                 ncfile.add_var(
                     "temperature:cur",
-                    curcls.channels["Name"][i],
-                    curcls.channels["Units"][i],
-                    curcls.data[:, i],
+                    channel.name,
+                    channel.units,
+                    data,
                     ("time"),
                     null_value,
                     attributes={"featureType": "timeSeries"},
@@ -315,244 +303,244 @@ def write_cur_ncfile(filename, curcls, config={}):
             elif temp_count == 2:
                 ncfile.add_var(
                     "temperature:cur:high_res",
-                    curcls.channels["Name"][i],
-                    curcls.channels["Units"][i],
-                    curcls.data[:, i],
+                    channel.name,
+                    channel.units,
+                    data,
                     ("time"),
                     null_value,
                     attributes={"featureType": "timeSeries"},
                 )
-        elif is_in(["temperature:high_res"], channel):
+        elif is_in(["temperature:high_res"], channel.name):
             ncfile.add_var(
                 "temperature:cur:high_res",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
-        elif is_in(["salinity"], channel):
+        elif is_in(["salinity"], channel.name):
             ncfile.add_var(
                 "salinity:cur",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["oxygen"], channel) and not is_in(
-            ["flag", "bottle", "rinko", "temperature", "current"], channel
+        elif is_in(["oxygen"], channel.name) and not is_in(
+            ["flag", "bottle", "rinko", "temperature", "current"], channel.name
         ):
             ncfile.add_var(
                 "oxygen",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["conductivity"], channel) and not is_in(
-            ["conductivity_ratio", "conductivity ratio"], channel
+        elif is_in(["conductivity"], channel.name) and not is_in(
+            ["conductivity_ratio", "conductivity ratio"], channel.name
         ):
             pass
 
-        elif is_in(["conductivity_ratio", "conductivity ratio"], channel):
+        elif is_in(["conductivity_ratio", "conductivity ratio"], channel.name):
             pass
 
-        elif is_in(["speed:east", "ew_comp"], channel):
+        elif is_in(["speed:east", "ew_comp"], channel.name):
             flag_ne_speed += 1
             ncfile.add_var(
                 "speed:east",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed:north", "ns_comp"], channel):
+        elif is_in(["speed:north", "ns_comp"], channel.name):
             ncfile.add_var(
                 "speed:north",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed:up"], channel):
+        elif is_in(["speed:up"], channel.name):
             ncfile.add_var(
                 "speed:up",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["amplitude:beam1"], channel):
+        elif is_in(["amplitude:beam1"], channel.name):
             ncfile.add_var(
                 "amplitude:beam1",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["amplitude:beam2"], channel):
+        elif is_in(["amplitude:beam2"], channel.name):
             ncfile.add_var(
                 "amplitude:beam2",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["amplitude:beam3"], channel):
+        elif is_in(["amplitude:beam3"], channel.name):
             ncfile.add_var(
                 "amplitude:beam3",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed:sound"], channel) and not is_in(
-            ["speed:sound:1", "speed:sound:2"], channel
+        elif is_in(["speed:sound"], channel.name) and not is_in(
+            ["speed:sound:1", "speed:sound:2"], channel.name
         ):
             ncfile.add_var(
                 "speed:sound",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed:sound:1"], channel):
+        elif is_in(["speed:sound:1"], channel.name):
             ncfile.add_var(
                 "speed:sound:1",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed:sound:2"], channel):
+        elif is_in(["speed:sound:2"], channel.name):
             ncfile.add_var(
                 "speed:sound:2",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["heading"], channel):
+        elif is_in(["heading"], channel.name):
             ncfile.add_var(
                 "heading",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["pitch"], channel):
+        elif is_in(["pitch"], channel.name):
             ncfile.add_var(
                 "pitch",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["roll"], channel):
+        elif is_in(["roll"], channel.name):
             ncfile.add_var(
                 "roll",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["speed"], channel):
+        elif is_in(["speed"], channel.name):
             ncfile.add_var(
                 "speed",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
             index_speed = i
 
-        elif is_in(["direction:geog(to)", "direction:current"], channel):
+        elif is_in(["direction:geog(to)", "direction:current"], channel.name):
             ncfile.add_var(
                 "direction:geog(to)",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
             index_direction = i
 
-        elif is_in(["sigma-t"], channel):
+        elif is_in(["sigma-t"], channel.name):
             ncfile.add_var(
                 "sigma-t",
-                curcls.channels["Name"][i],
-                curcls.channels["Units"][i],
-                curcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
         else:
-            print(channel, "not transferred to netcdf file !")
+            print(channel.name, "not transferred to netcdf file !")
 
     # Calculate North and East components of speed if missing
     try:
         if flag_ne_speed == 0:
             if (
-                type(curcls.data[:, index_speed][0]) is np.bytes_
-                and type(curcls.data[:, index_direction][0]) is np.bytes_
+                isinstance(curcls.data[0][index_speed], bytes)
+                and isinstance(curcls.data[0][index_direction], bytes)
             ):
                 speed_decoded = np.array(
                     [
-                        float(a.decode("ascii"))
-                        for a in curcls.data[:, index_speed]
+                        float(row[index_speed].decode("ascii"))
+                        for row in curcls.data
                     ]
                 )
                 direction_decoded = np.array(
                     [
-                        float(a.decode("ascii"))
-                        for a in curcls.data[:, index_direction]
+                        float(row[index_direction].decode("ascii"))
+                        for row in curcls.data
                     ]
                 )
                 speed_east, speed_north = add_ne_speed(
@@ -560,15 +548,15 @@ def write_cur_ncfile(filename, curcls, config={}):
                 )
             else:
                 speed_east, speed_north = add_ne_speed(
-                    curcls.data[:, index_speed],
-                    curcls.data[:, index_direction],
+                    [row[index_speed] for row in curcls.data],
+                    [row[index_direction] for row in curcls.data],
                 )
 
             null_value = "' '"
             ncfile.add_var(
                 "speed:east",
                 "Speed:East",
-                curcls.channels["Units"][index_speed],
+                curcls.file.channels[index_speed].units,
                 speed_east,
                 ("time"),
                 null_value,
@@ -578,7 +566,7 @@ def write_cur_ncfile(filename, curcls, config={}):
             ncfile.add_var(
                 "speed:north",
                 "Speed:North",
-                curcls.channels["Units"][index_speed],
+                curcls.file.channels[index_speed].units,
                 speed_north,
                 ("time"),
                 null_value,

@@ -1,5 +1,6 @@
 from datetime import datetime
 from pytz import timezone
+import math
 import json
 from cioos_data_transform.OceanNcFile import MCtdNcFile
 
@@ -53,24 +54,21 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
         ctdcls.get_complete_header(), ensure_ascii=False, indent=False
     )
     # initcreate dimension variable
-    global_attrs["nrec"] = int(ctdcls.file["NUMBER OF RECORDS"])
+    global_attrs["nrec"] = int(ctdcls.file.number_of_records)
     # add variable profile_id (dummy variable)
     global_attrs["filename"] = ctdcls.filename.split("/")[-1]
     ncfile.add_var("str_id", "filename", None, ctdcls.filename.split("/")[-1])
 
     # add administration variables
-    if "COUNTRY" in ctdcls.administration:
-        country = ctdcls.administration["COUNTRY"].strip()
-    else:
-        country = "n/a"
+    country = ctdcls.administration.country.strip()
     ncfile.add_var("str_id", "country", None, country)
     global_attrs["country"] = country
 
     # create mission id
-    if "MISSION" in ctdcls.administration:
-        mission_id = ctdcls.administration["MISSION"].strip()
-    elif "MISSION" in ctdcls.deployment:
-        mission_id = ctdcls.deployment["MISSION"].strip()
+    if ctdcls.administration.mission != "n/a":
+        mission_id = ctdcls.administration.mission.strip()
+    elif ctdcls.deployment.mission != "n/a":
+        mission_id = ctdcls.deployment.mission.strip()
     else:
         mission_id = None
 
@@ -85,98 +83,86 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
     global_attrs["mission"] = mission_id
     ncfile.add_var("str_id", "mission_id", None, mission_id)
 
-    if "SCIENTIST" in ctdcls.administration:
-        scientist = ctdcls.administration["SCIENTIST"].strip()
-    else:
-        scientist = "n/a"
+    scientist = ctdcls.administration.scientist.strip()
     global_attrs["scientist"] = scientist
     ncfile.add_var("str_id", "scientist", None, scientist)
 
-    if "PROJECT" in ctdcls.administration:
-        project = ctdcls.administration["PROJECT"].strip()
-    else:
-        project = "n/a"
+    project = ctdcls.administration.project.strip()
     global_attrs["project"] = project
     ncfile.add_var("str_id", "project", None, project)
 
-    if "AGENCY" in ctdcls.administration:
-        agency = ctdcls.administration["AGENCY"].strip()
-    else:
-        agency = "n/a"
+    agency = ctdcls.administration.agency.strip()
     global_attrs["agency"] = agency
     ncfile.add_var("str_id", "agency", None, agency)
 
-    if "PLATFORM" in ctdcls.administration:
-        platform = ctdcls.administration["PLATFORM"].strip()
-    else:
-        platform = "n/a"
+    platform = ctdcls.administration.platform.strip()
     global_attrs["platform"] = platform
     ncfile.add_var("str_id", "platform", None, platform)
 
     # add instrument type
-    if "TYPE" in ctdcls.instrument:
+    if ctdcls.instrument.type != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_type",
             None,
-            ctdcls.instrument["TYPE"].strip(),
+            ctdcls.instrument.type.strip(),
         )
 
-    if "MODEL" in ctdcls.instrument:
+    if ctdcls.instrument.model != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_model",
             None,
-            ctdcls.instrument["MODEL"].strip(),
+            ctdcls.instrument.model.strip(),
         )
 
-    if "SERIAL NUMBER" in ctdcls.instrument:
+    if ctdcls.instrument.serial_number != "n/a":
         ncfile.add_var(
             "str_id",
             "instrument_serial_number",
             None,
-            ctdcls.instrument["SERIAL NUMBER"].strip(),
+            ctdcls.instrument.serial_number.strip(),
         )
 
-    if "DEPTH" in ctdcls.instrument:
+    if ctdcls.instrument.depth != "n/a":
         ncfile.add_var(
             "instr_depth",
             "instrument_depth",
             None,
-            float(ctdcls.instrument["DEPTH"]),
+            float(ctdcls.instrument.depth),
         )
     # add locations variables
     ncfile.add_var(
         "lat",
         "latitude",
         "degrees_north",
-        ctdcls.location["LATITUDE"],
+        ctdcls.location.latitude,
     )
-    global_attrs["geospatial_lat_min"] = ctdcls.location["LATITUDE"]
-    global_attrs["geospatial_lat_max"] = ctdcls.location["LATITUDE"]
+    global_attrs["geospatial_lat_min"] = ctdcls.location.latitude
+    global_attrs["geospatial_lat_max"] = ctdcls.location.latitude
     ncfile.add_var(
         "lon",
         "longitude",
         "degrees_east",
-        ctdcls.location["LONGITUDE"],
+        ctdcls.location.longitude,
     )
-    global_attrs["geospatial_lon_min"] = ctdcls.location["LONGITUDE"]
-    global_attrs["geospatial_lon_max"] = ctdcls.location["LONGITUDE"]
+    global_attrs["geospatial_lon_min"] = ctdcls.location.longitude
+    global_attrs["geospatial_lon_max"] = ctdcls.location.longitude
     global_attrs["geospatial_bounds"] = "POINT ({}, {})".format(
-        ctdcls.location["LONGITUDE"], ctdcls.location["LATITUDE"]
+        ctdcls.location.longitude, ctdcls.location.latitude
     )
 
     ncfile.add_var("str_id", "geographic_area", None, ctdcls.geo_code)
 
-    if "EVENT NUMBER" in ctdcls.location:
-        event_id = ctdcls.location["EVENT NUMBER"].strip()
+    if ctdcls.location.event_number > 0:
+        event_id = ctdcls.location.event_number
     else:
         print('Unable to guess event_id from file name. Using "0000" !')
-        event_id = "0000"
+        event_id = 0
 
-    ncfile.add_var("str_id", "event_number", None, event_id)
+    ncfile.add_var("str_id", "event_number", None, "{:04d}".format(event_id))
     profile_id = "{:04d}-{:03d}-{:04d}".format(
-        int(buf[0]), int(buf[1]), int(event_id)
+        int(buf[0]), int(buf[1]), event_id
     )
     # print(profile_id)
     ncfile.add_var(
@@ -188,106 +174,108 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
     )
     global_attrs["id"] = profile_id
     # add time variable
+    obs_time = ctdcls.get_obs_time()
     global_attrs["time_coverage_duration"] = str(
-        ctdcls.obs_time[-1] - ctdcls.obs_time[0]
+        obs_time[-1] - obs_time[0]
     )
     global_attrs["time_coverage_resolution"] = str(
-        ctdcls.obs_time[1] - ctdcls.obs_time[0]
+        obs_time[1] - obs_time[0]
     )
-    ncfile.add_var("time", "time", None, ctdcls.obs_time, vardim=("time"))
-    global_attrs["time_coverage_start"] = ctdcls.obs_time[0].strftime(
+    ncfile.add_var("time", "time", None, obs_time, vardim=("time"))
+    global_attrs["time_coverage_start"] = obs_time[0].strftime(
         date_format
     )
-    global_attrs["time_coverage_end"] = ctdcls.obs_time[-1].strftime(
+    global_attrs["time_coverage_end"] = obs_time[-1].strftime(
         date_format
     )
 
     # go through channels and add each variable depending on type
-    for i, channel in enumerate(ctdcls.channels["Name"]):
+    for i, channel in enumerate(ctdcls.file.channels):
         try:
-            null_value = ctdcls.channel_details["Pad"][i]
+            null_value = ctdcls.file.channel_details[i].pad
         except Exception as e:
             print(e)
-            if "PAD" in ctdcls.file.keys():
-                null_value = ctdcls.file["PAD"].strip()
+            if not math.isnan(ctdcls.file.pad):
+                null_value = ctdcls.file.pad
                 print(
                     "Channel Details missing. Setting Pad value to: ",
-                    null_value.strip(),
+                    null_value,
                 )
             else:
                 print("Channel Details missing. Setting Pad value to ' ' ...")
                 null_value = "' '"
-        if is_in(["depth"], channel):
+        data = [row[i] for row in ctdcls.data]
+        if is_in(["depth"], channel.name):
             ncfile.add_var(
                 "depth",
                 "depth",
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["pressure"], channel):
+        elif is_in(["pressure"], channel.name):
             ncfile.add_var(
                 "pressure",
                 "pressure",
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["temperature"], channel) and not is_in(
-            ["flag", "bottle"], channel
+        elif is_in(["temperature"], channel.name) and not is_in(
+            ["flag", "bottle"], channel.name
         ):
             ncfile.add_var(
                 "temperature",
-                ctdcls.channels["Name"][i],
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
 
-        elif is_in(["salinity"], channel) and not is_in(
-            ["flag", "bottle"], channel
+        elif is_in(["salinity"], channel.name) and not is_in(
+            ["flag", "bottle"], channel.name
         ):
             ncfile.add_var(
                 "salinity",
-                ctdcls.channels["Name"][i],
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
-        elif is_in(["oxygen"], channel) and not is_in(
-            ["flag", "bottle", "rinko", "temperature", "current"], channel
+        elif is_in(["oxygen"], channel.name) and not is_in(
+            ["flag", "bottle", "rinko", "temperature", "current"], channel.name
         ):
             ncfile.add_var(
                 "oxygen",
-                ctdcls.channels["Name"][i],
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
-        elif is_in(["conductivity"], channel):
+        elif is_in(["conductivity"], channel.name):
             ncfile.add_var(
                 "conductivity",
-                ctdcls.channels["Name"][i],
-                ctdcls.channels["Units"][i],
-                ctdcls.data[:, i],
+                channel.name,
+                channel.units,
+                data,
                 ("time"),
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
         else:
-            print(channel, "not transferred to netcdf file !")
+            print(channel.name, "not transferred to netcdf file !")
             # raise Exception('not found !!')
 
     # attach variables to ncfileclass and call method to write netcdf file

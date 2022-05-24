@@ -17,7 +17,7 @@
     TIME INCREMENT      : 0 0 10 0 0  ! (day hr min sec ms)
     TIME UNITS          : Minutes
     TIME ZERO           : UTC 2018/08/17 00:00:00.000
-    NUMBER OF RECORDS   : 37363
+    NUMBER OF RECORDS   : 24984
     DATA DESCRIPTION    : CurrentMeter
     FILE TYPE           : ASCII
     DATA TYPE           : REAL*4

@@ -14,6 +14,7 @@ setuptools.setup(
         "xmltodict",
         "tqdm",
         "pytz",
+        "ios-shell",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
