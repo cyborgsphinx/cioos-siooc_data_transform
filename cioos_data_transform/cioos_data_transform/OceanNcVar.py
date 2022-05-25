@@ -744,6 +744,10 @@ class OceanNcVar(object):
                 bodc_units = "m/s"
                 self.standard_name = "speed_of_sound_in_sea_water"
                 self.long_name = "Sound velocity in the water body"
+            elif ios_varname.lower() == "ph" or ios_varname.lower().startswith("ph:"):
+                bodc_code = "PHXXPR01"
+                bodc_units = "n/a"
+                self.long_name = "pH (unspecified scale) of the water body by pH electrode"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
