@@ -748,6 +748,14 @@ class OceanNcVar(object):
                 bodc_code = "PHXXPR01"
                 bodc_units = "n/a"
                 self.long_name = "pH (unspecified scale) of the water body by pH electrode"
+            elif is_in(["par:reference"], ios_varname) and is_in(["ue/m^2/sec"], varunits):
+                bodc_code = "IRRDSV01"
+                bodc_units = "ue/m^2/sec"
+                self.long_name = "Downwelling vector irradiance as photons of electromagnetic radiation (PAR wavelengths) in the atmosphere by cosine-collector radiometer"
+            elif is_in(["par"], ios_varname) and is_in(["ue/m^2/sec"], varunits):
+                bodc_code = "PFDPAR01"
+                bodc_units = "ue/m^2/sec"
+                self.long_name = "Irradiance as photons of electromagnetic radiation (PAR wavelengths)"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
