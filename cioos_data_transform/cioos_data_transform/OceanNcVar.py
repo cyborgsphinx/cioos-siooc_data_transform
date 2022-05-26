@@ -756,6 +756,11 @@ class OceanNcVar(object):
                 bodc_code = "PFDPAR01"
                 bodc_units = "ue/m^2/sec"
                 self.long_name = "Irradiance as photons of electromagnetic radiation (PAR wavelengths)"
+            elif is_in(["turbidity:seapoint"], ios_varname) and is_in(["ntu", "ftu", "stu"], varunits):
+                bodc_code = "TURBSP01"
+                bodc_units = "ntu"
+                self.standard_name = "sea_water_turbidity"
+                self.long_name = "Turbidity of water in the water body by SeaPoint turbidity meter and laboratory calibration against formazin"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",

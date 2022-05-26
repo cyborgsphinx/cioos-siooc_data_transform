@@ -285,7 +285,7 @@ def write_ctd_ncfile(filename, ctdcls, config={}):
             except Exception as e:
                 print(e)
         #  Chlorophyll
-        elif (is_in(["chlorophyll:extracted", "fluorescence", "transmissivity", "ammonium", "speed:sound", "ph:", "par"], channel.name) or channel.name.lower() == "ph") and not is_in(
+        elif (is_in(["chlorophyll:extracted", "fluorescence", "transmissivity", "ammonium", "speed:sound", "ph:", "par", "turbidity:seapoint"], channel.name) or channel.name.lower() == "ph") and not is_in(
             ["flag"], channel.name
         ):
             try:
