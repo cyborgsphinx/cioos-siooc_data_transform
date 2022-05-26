@@ -75,13 +75,9 @@ def write_cur_ncfile(filename, curcls, config={}):
     global_attrs["Conventions"] = config.get("Conventions")
     global_attrs["cdm_data_type"] = "TimeSeries"
     global_attrs["cdm_timeseries_variables"] = "profile"
-    global_attrs["date_created"] = datetime.now(timezone("UTC")).strftime(
-        date_format
-    )
+    global_attrs["date_created"] = datetime.now(timezone("UTC")).strftime(date_format)
     global_attrs["processing_level"] = config.get("processing_level")
-    global_attrs["standard_name_vocabulary"] = config.get(
-        "standard_name_vocabulary"
-    )
+    global_attrs["standard_name_vocabulary"] = config.get("standard_name_vocabulary")
     # write full original header, as json dictionary
     global_attrs["header"] = json.dumps(
         curcls.get_complete_header(), ensure_ascii=False, indent=False
@@ -125,9 +121,7 @@ def write_cur_ncfile(filename, curcls, config={}):
         year_string = obs_time[0].strftime("%Y")
         profile_id = "{}-000-{:04d}".format(year_string, event_id)
     else:
-        profile_id = "{:04d}-{:03d}-{:04d}".format(
-            int(buf[0]), int(buf[1]), event_id
-        )
+        profile_id = "{:04d}-{:03d}-{:04d}".format(int(buf[0]), int(buf[1]), event_id)
     # print(profile_id)
     ncfile.add_var("profile", "profile", None, profile_id)
     global_attrs["id"] = profile_id
@@ -204,21 +198,13 @@ def write_cur_ncfile(filename, curcls, config={}):
     ncfile.add_var("str_id", "geographic_area", None, curcls.geo_code)
 
     # add time variables and attributes
-    global_attrs["time_coverage_duration"] = str(
-        obs_time[-1] - obs_time[0]
-    )
+    global_attrs["time_coverage_duration"] = str(obs_time[-1] - obs_time[0])
 
-    global_attrs["time_coverage_resolution"] = str(
-        obs_time[1] - obs_time[0]
-    )
+    global_attrs["time_coverage_resolution"] = str(obs_time[1] - obs_time[0])
 
     ncfile.add_var("time", "time", None, obs_time, vardim=("time"))
-    global_attrs["time_coverage_start"] = obs_time[0].strftime(
-        date_format
-    )
-    global_attrs["time_coverage_end"] = obs_time[-1].strftime(
-        date_format
-    )
+    global_attrs["time_coverage_start"] = obs_time[0].strftime(date_format)
+    global_attrs["time_coverage_end"] = obs_time[-1].strftime(date_format)
     # direction_index = None
     # for i, channel in enumerate(curcls.channels['Name']):
     #     if is_in(['direction:geog(to)'], channel):
@@ -528,25 +514,16 @@ def write_cur_ncfile(filename, curcls, config={}):
     # Calculate North and East components of speed if missing
     try:
         if flag_ne_speed == 0:
-            if (
-                isinstance(curcls.data[0][index_speed], bytes)
-                and isinstance(curcls.data[0][index_direction], bytes)
+            if isinstance(curcls.data[0][index_speed], bytes) and isinstance(
+                curcls.data[0][index_direction], bytes
             ):
                 speed_decoded = np.array(
-                    [
-                        float(row[index_speed].decode("ascii"))
-                        for row in curcls.data
-                    ]
+                    [float(row[index_speed].decode("ascii")) for row in curcls.data]
                 )
                 direction_decoded = np.array(
-                    [
-                        float(row[index_direction].decode("ascii"))
-                        for row in curcls.data
-                    ]
+                    [float(row[index_direction].decode("ascii")) for row in curcls.data]
                 )
-                speed_east, speed_north = add_ne_speed(
-                    speed_decoded, direction_decoded
-                )
+                speed_east, speed_north = add_ne_speed(speed_decoded, direction_decoded)
             else:
                 speed_east, speed_north = add_ne_speed(
                     [row[index_speed] for row in curcls.data],

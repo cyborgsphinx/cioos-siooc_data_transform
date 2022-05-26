@@ -42,13 +42,9 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
     global_attrs["Conventions"] = config.get("Conventions")
     global_attrs["cdm_data_type"] = "TimeSeries"
     global_attrs["cdm_timeseries_variables"] = "profile"
-    global_attrs["date_created"] = datetime.now(timezone("UTC")).strftime(
-        date_format
-    )
+    global_attrs["date_created"] = datetime.now(timezone("UTC")).strftime(date_format)
     global_attrs["processing_level"] = config.get("processing_level")
-    global_attrs["standard_name_vocabulary"] = config.get(
-        "standard_name_vocabulary"
-    )
+    global_attrs["standard_name_vocabulary"] = config.get("standard_name_vocabulary")
     # write full original header, as json dictionary
     global_attrs["header"] = json.dumps(
         ctdcls.get_complete_header(), ensure_ascii=False, indent=False
@@ -161,9 +157,7 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
         event_id = 0
 
     ncfile.add_var("str_id", "event_number", None, "{:04d}".format(event_id))
-    profile_id = "{:04d}-{:03d}-{:04d}".format(
-        int(buf[0]), int(buf[1]), event_id
-    )
+    profile_id = "{:04d}-{:03d}-{:04d}".format(int(buf[0]), int(buf[1]), event_id)
     # print(profile_id)
     ncfile.add_var(
         "profile",
@@ -175,19 +169,11 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
     global_attrs["id"] = profile_id
     # add time variable
     obs_time = ctdcls.get_obs_time()
-    global_attrs["time_coverage_duration"] = str(
-        obs_time[-1] - obs_time[0]
-    )
-    global_attrs["time_coverage_resolution"] = str(
-        obs_time[1] - obs_time[0]
-    )
+    global_attrs["time_coverage_duration"] = str(obs_time[-1] - obs_time[0])
+    global_attrs["time_coverage_resolution"] = str(obs_time[1] - obs_time[0])
     ncfile.add_var("time", "time", None, obs_time, vardim=("time"))
-    global_attrs["time_coverage_start"] = obs_time[0].strftime(
-        date_format
-    )
-    global_attrs["time_coverage_end"] = obs_time[-1].strftime(
-        date_format
-    )
+    global_attrs["time_coverage_start"] = obs_time[0].strftime(date_format)
+    global_attrs["time_coverage_end"] = obs_time[-1].strftime(date_format)
 
     # go through channels and add each variable depending on type
     for i, channel in enumerate(ctdcls.file.channels):
