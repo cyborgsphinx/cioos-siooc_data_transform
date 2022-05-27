@@ -274,7 +274,7 @@ def write_ctd_ncfile(filename, ctdcls, config={}):
                 )
             except Exception as e:
                 print(e)
-        #  Chlorophyll
+        #  other
         elif (
             is_in(
                 [
