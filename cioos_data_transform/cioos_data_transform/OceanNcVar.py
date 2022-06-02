@@ -735,6 +735,10 @@ class OceanNcVar(object):
                 bodc_code = "POPTPZ01"
                 bodc_units = "%/metre"
                 self.long_name = "Transmittance (unspecified wavelength) per unit length of the water body by transmissometer and correction to a path length of 1m"
+            elif is_in(["transmissivity"], ios_varname) and varunits.strip() == "%":
+                bodc_code = "POPTZZ01"
+                bodc_units = "%"
+                self.long_name = "Transmittance (unspecified wavelength) per unspecified length of the water body by transmissometer"
             elif is_in(["ammonium"], ios_varname) and is_in(["umol/l"], varunits):
                 bodc_code = "AMONZZXX"
                 bodc_units = "umol/L"

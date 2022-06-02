@@ -507,6 +507,17 @@ def write_cur_ncfile(filename, curcls, config={}):
                 null_value,
                 attributes={"featureType": "timeSeries"},
             )
+
+        elif is_in(["transmissivity"], channel.name):
+            ncfile.add_var(
+                "other",
+                channel.name,
+                channel.units,
+                data,
+                ("time"),
+                null_value,
+                attributes={"featureType": "timeSeries"},
+            )
         else:
             if not is_in(["record", "sample", "date", "time"], channel.name):
                 print(channel.name, "not transferred to netcdf file !")
