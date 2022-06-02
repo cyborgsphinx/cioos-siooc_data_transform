@@ -7,6 +7,8 @@ from cioos_data_transform.OceanNcFile import CtdNcFile
 # from cioos_data_transform.OceanNcVar import OceanNcVar
 from cioos_data_transform.utils import is_in
 
+import convert
+
 
 def write_ctd_ncfile(filename, ctdcls, config={}):
     """
@@ -159,158 +161,8 @@ def write_ctd_ncfile(filename, ctdcls, config={}):
     ncfile.add_var("time", "time", None, [ctdcls.file.start_time])
     global_attrs["time_coverage_start"] = ctdcls.file.start_time.strftime(date_format)
     global_attrs["time_coverage_end"] = ctdcls.file.start_time.strftime(date_format)
-    # go through channels and add each variable depending on type
-    for i, channel in enumerate(ctdcls.file.channels):
-        try:
-            null_value = ctdcls.file.channel_details[i].pad
-        except Exception as e:
-            if not math.isnan(ctdcls.file.pad):
-                null_value = ctdcls.file.pad
-                print(
-                    "Channel Details missing. Setting Pad value to: ",
-                    null_value,
-                )
-            else:
-                print("Channel Details missing. Setting Pad value to ' ' ...")
-                null_value = "' '"
-        data = [row[i] for row in ctdcls.data]
-        if is_in(["depth"], channel.name) and not is_in(["nominal"], channel.name):
-            ncfile.add_var(
-                "depth",
-                "depth",
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["depth"], channel.name) and is_in(["nominal"], channel.name):
-            ncfile.add_var(
-                "depth",
-                "depth_nominal",
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["pressure"], channel.name):
-            ncfile.add_var(
-                "pressure",
-                "pressure",
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["temperature"], channel.name) and not is_in(
-            ["flag", "rinko", "bottle"], channel.name
-        ):
-            ncfile.add_var(
-                "temperature",
-                channel.name,
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["salinity"], channel.name) and not is_in(["flag"], channel.name):
-            ncfile.add_var(
-                "salinity",
-                channel.name,
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["oxygen"], channel.name) and not is_in(
-            [
-                "flag",
-                "bottle",
-                "rinko",
-                "temperature",
-                "current",
-                "isotope",
-                "saturation",
-                "voltage",
-            ],
-            channel.name,
-        ):
-            ncfile.add_var(
-                "oxygen",
-                channel.name,
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        elif is_in(["conductivity"], channel.name):
-            ncfile.add_var(
-                "conductivity",
-                channel.name,
-                channel.units,
-                data,
-                ("z"),
-                null_value,
-                attributes={"featureType": "profile"},
-            )
-        #     Nutrients in bottle files
-        elif is_in(
-            ["nitrate_plus_nitrite", "silicate", "phosphate"], channel.name
-        ) and not is_in(["flag"], channel.name):
-            try:
-                ncfile.add_var(
-                    "nutrient",
-                    channel.name,
-                    channel.units,
-                    data,
-                    ("z"),
-                    null_value,
-                    attributes={"featureType": "profile"},
-                )
-            except Exception as e:
-                print(e)
-        #  other
-        elif (
-            is_in(
-                [
-                    "chlorophyll:extracted",
-                    "fluorescence",
-                    "transmissivity",
-                    "ammonium",
-                    "speed:sound",
-                    "ph:",
-                    "par",
-                    "turbidity:seapoint",
-                ],
-                channel.name,
-            )
-            or channel.name.lower() == "ph"
-        ) and not is_in(["flag"], channel.name):
-            try:
-                ncfile.add_var(
-                    "other",
-                    channel.name,
-                    channel.units,
-                    data,
-                    ("z"),
-                    null_value,
-                    attributes={"featureType": "profile"},
-                )
-            except Exception as e:
-                print(e)
-        else:
-            if not is_in(["record", "sample", "date", "time"], channel.name):
-                print(
-                    channel.name,
-                    channel.units,
-                    "not transferred to netcdf file !",
-                )
-            # raise Exception('not found !!')
+
+    convert.convert_channels(ctdcls, ncfile, ("z",))
 
     # attach variables to ncfileclass and call method to write netcdf file
     ncfile.write_ncfile(filename)

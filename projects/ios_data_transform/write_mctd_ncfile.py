@@ -7,6 +7,8 @@ from cioos_data_transform.OceanNcFile import MCtdNcFile
 # from cioos_data_transform.OceanNcVar import OceanNcVar
 from cioos_data_transform.utils import is_in
 
+import convert
+
 
 def write_mctd_ncfile(filename, ctdcls, config={}):
     """
@@ -175,105 +177,7 @@ def write_mctd_ncfile(filename, ctdcls, config={}):
     global_attrs["time_coverage_start"] = obs_time[0].strftime(date_format)
     global_attrs["time_coverage_end"] = obs_time[-1].strftime(date_format)
 
-    # go through channels and add each variable depending on type
-    for i, channel in enumerate(ctdcls.file.channels):
-        try:
-            null_value = ctdcls.file.channel_details[i].pad
-        except Exception as e:
-            print(e)
-            if not math.isnan(ctdcls.file.pad):
-                null_value = ctdcls.file.pad
-                print(
-                    "Channel Details missing. Setting Pad value to: ",
-                    null_value,
-                )
-            else:
-                print("Channel Details missing. Setting Pad value to ' ' ...")
-                null_value = "' '"
-        data = [row[i] for row in ctdcls.data]
-        if is_in(["depth"], channel.name):
-            ncfile.add_var(
-                "depth",
-                "depth",
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-
-        elif is_in(["pressure"], channel.name):
-            ncfile.add_var(
-                "pressure",
-                "pressure",
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-
-        elif is_in(["temperature"], channel.name) and not is_in(
-            ["flag", "bottle"], channel.name
-        ):
-            ncfile.add_var(
-                "temperature",
-                channel.name,
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-
-        elif is_in(["salinity"], channel.name) and not is_in(
-            ["flag", "bottle"], channel.name
-        ):
-            ncfile.add_var(
-                "salinity",
-                channel.name,
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-        elif is_in(["oxygen"], channel.name) and not is_in(
-            ["flag", "bottle", "rinko", "temperature", "current"], channel.name
-        ):
-            ncfile.add_var(
-                "oxygen",
-                channel.name,
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-        elif is_in(["conductivity"], channel.name):
-            ncfile.add_var(
-                "conductivity",
-                channel.name,
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-        elif is_in(["speed:sound"], channel.name):
-            ncfile.add_var(
-                "other",
-                channel.name,
-                channel.units,
-                data,
-                ("time"),
-                null_value,
-                attributes={"featureType": "timeSeries"},
-            )
-        else:
-            if not is_in(["record", "sample", "date", "time"], channel.name):
-                print(channel.name, "not transferred to netcdf file !")
-            # raise Exception('not found !!')
+    convert.convert_channels(ctdcls, ncfile, ("time",))
 
     # attach variables to ncfileclass and call method to write netcdf file
     ncfile.write_ncfile(filename)
