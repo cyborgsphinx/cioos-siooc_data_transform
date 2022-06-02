@@ -743,11 +743,6 @@ class OceanNcVar(object):
                 bodc_code = "AMONZZXX"
                 bodc_units = "umol/L"
                 self.long_name = "Concentration of ammonium {NH4+ CAS 14798-03-9} per unit volume of the water body [unknown phase]"
-            elif is_in(["speed:sound"], ios_varname):
-                bodc_code = "SVELXXX"
-                bodc_units = "m/s"
-                self.standard_name = "speed_of_sound_in_sea_water"
-                self.long_name = "Sound velocity in the water body"
             elif ios_varname.lower() == "ph" or ios_varname.lower().startswith("ph:"):
                 bodc_code = "PHXXPR01"
                 bodc_units = "n/a"
