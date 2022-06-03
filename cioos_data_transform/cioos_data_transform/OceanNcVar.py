@@ -760,6 +760,10 @@ class OceanNcVar(object):
                 bodc_units = "ntu"
                 self.standard_name = "sea_water_turbidity"
                 self.long_name = "Turbidity of water in the water body by SeaPoint turbidity meter and laboratory calibration against formazin"
+            elif is_in(["alkalinity:total"], ios_varname) and is_in(["umol/kg"], varunits):
+                bodc_code = "MDMAP014"
+                bodc_units = "umol/kg"
+                self.long_name = "Total alkalinity per unit mass of the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",

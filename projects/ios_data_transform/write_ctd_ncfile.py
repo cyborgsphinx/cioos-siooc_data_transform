@@ -92,27 +92,28 @@ def write_ctd_ncfile(filename, ctdcls, config={}):
     ncfile.add_var("str_id", "platform", None, platform)
 
     # add instrument type
-    if ctdcls.instrument.type != "n/a":
-        ncfile.add_var(
-            "str_id",
-            "instrument_type",
-            None,
-            ctdcls.instrument.type.strip(),
-        )
-    if ctdcls.instrument.model != "n/a":
-        ncfile.add_var(
-            "str_id",
-            "instrument_model",
-            None,
-            ctdcls.instrument.model.strip(),
-        )
-    if ctdcls.instrument.serial_number != "n/a":
-        ncfile.add_var(
-            "str_id",
-            "instrument_serial_number",
-            None,
-            ctdcls.instrument.serial_number.strip(),
-        )
+    if ctdcls.instrument is not None:
+        if ctdcls.instrument.type != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_type",
+                None,
+                ctdcls.instrument.type.strip(),
+            )
+        if ctdcls.instrument.model != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_model",
+                None,
+                ctdcls.instrument.model.strip(),
+            )
+        if ctdcls.instrument.serial_number != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_serial_number",
+                None,
+                ctdcls.instrument.serial_number.strip(),
+            )
     # add locations variables
     ncfile.add_var(
         "lat",
