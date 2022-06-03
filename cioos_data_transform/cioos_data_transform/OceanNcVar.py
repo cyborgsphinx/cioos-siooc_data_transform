@@ -764,6 +764,10 @@ class OceanNcVar(object):
                 bodc_code = "MDMAP014"
                 bodc_units = "umol/kg"
                 self.long_name = "Total alkalinity per unit mass of the water body"
+            elif is_in(["alkalinity:carbonate"], ios_varname) and is_in(["umol/kg"], varunits):
+                bodc_code = "CRBTWCAL"
+                bodc_units = "umol/kg"
+                self.long_name = "Concentration of carbonate ions {CO3} per unit mass of the water body by computation"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
