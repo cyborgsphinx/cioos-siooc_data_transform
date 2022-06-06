@@ -1,0 +1,177 @@
+*2019/12/13 13:46:06.66
+*IOS HEADER VERSION 2.0      2016/04/28 2016/06/13 IVF16
+
+*FILE
+    START TIME          : UTC 1975/01/14 00:00:00.000
+    NUMBER OF RECORDS   : 7
+    DATA DESCRIPTION    : Bottle
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 7
+
+    $TABLE: CHANNELS
+    ! No Name                         Units      Minimum        Maximum
+    !--- ---------------------------- ---------- -------------- --------------
+       1 Depth                        metres     0              20
+       2 Temperature                  'deg C'    6.2            6.9
+       3 Salinity                     ppt        27             29.1
+       4 Oxygen:Dissolved             mL/L       6.08           6.62
+       5 Chlorophyll:Extracted        mg/m^3     0              0.15
+       6 Carbon:Dissolved:Inorganic   mg/L       21.7           23.7
+       7 Phytoplankton:Volume         mm^3/m^3   16             948
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        6  F       R4      1
+       2  -99   ' '        6  F       R4      1
+       3  -99   ' '        6  F       R4      1
+       4  -99   ' '        7  F       R4      2
+       5  -99   ' '        7  F       R4      2
+       6  -99   ' '        6  F       R4      1
+       7  -99   ' '        6  F       R4      0
+    $END
+    $REMARKS
+        Time of sampling is not known.
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1975-99
+    PROJECT             : Phytoplankton Ecology of the Strait of Georgia
+    SCIENTIST           : Stockner J. G.
+    PLATFORM            : Vector
+
+*LOCATION
+    STATION             : 5
+    EVENT NUMBER        : 1
+    LATITUDE            :  49  22.00000 N  ! (deg min)
+    LONGITUDE           : 123  17.00000 W  ! (deg min)
+    SECCHI (M)          : 6.5                                   ! custom item
+    MEC                 : 0.19                                  ! custom item
+    PRIMARY PRODUCTION  : 0                                     ! custom item
+    ZOOPLANKTON BIOMASS : 1.8                                   ! custom item
+    STATIONINDEX NUMBER : 47                                    ! custom item
+    $REMARKS
+        StationIndex Number is the same as the StationIndex number from the
+        original Access database, STOCKNER.MDB.
+
+        Secchi units = metres
+        Primary Production = mgC/m^^2/d
+        Zooplankton Biomass units = mg dry weight/m^^3
+    $END
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        SPRD2IS                  4.3    2005/04/22 10:41:36         7         7
+        HDREDIT2                 2.4    2005/04/22 10:51:37 ?         ?
+        CLEAN                    4.7.1  2005/04/22 11:03:49         7         7
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 14:14:55         7         7
+        HDREDIT2                 3.1.1  2019/12/13 13:46:06 ?         ?
+    $END
+    $REMARKS
+        -HEADER EDITS: 2005/04/22 10:51:37
+         Applied edit header: C:\Temp\Stockner\header.TXT
+        -CLEAN functions: 2005/04/22 11:03:49
+         Reset #RECS, MIN & MAX values in header.
+         Delete Empty Channels:     3 deleted.
+         Set event to last  4 characters of file name
+        -HEADER EDITS: 2019/12/13 13:46:06 - none.
+    $END
+
+*COMMENTS
+
+    These files were acquired by Robin Brown.
+
+    Materials and Methods
+    ---------------------
+
+    Total incident solar radiation was recorded on a Belfort pyrheliometer mounted
+    on board ship, and extinction of surface light with depth was measured by a
+    Montedoro-Whitney Underwater Illuminance meter (Model LMT-8A). The natural
+    logarithm of light intensity was plotted against depth, and the slope of a
+    straight line fitted to the points by, linear regression provided an estimate
+    of the mean downward extinction coefficient (k). A standard 30-cm white Secchi
+    disc was used to measure water transparency at every station.
+
+    Temperature profiles to a depth of 50 m were obtained with a bathythermograph
+    and surface temperatures were measured with a bucket thermometer.
+
+    Water samples were collected from 1, 3, 5, and 20 m depths, and later analyzed
+    for carbonate alkalinity, salinity, dissolved oxygen, nitrate (NO3-1), total
+    phosphate (TPO4-3), and silicate (SiO4-4). The method of Strickland and Parsons
+    (1968) was used to determine carbonate alkalinity, using an Orion digital pH
+    meter (Model 801). However, if after acid titration final pH values fell below
+    3.00, then the sample analysis was repeated using the APHA et al. (1971)
+    standard titrimetric method. Salinity was analyzed with an Auto-lab salinometer
+    (Model 601) to an accuracy of ±0.5‰. Density was computed by nomograph from
+    temperature and salinity records. Dissolved oxygen (samples fixed within an
+    hour of being taken) was determined by use of the Winkler titration method
+    (Strickland and Parsons 1968). Samples for nutrient analysis were immediately
+    frozen and later analyzed by the Environmental Protection Service analytical
+    laboratory, Pacific Environment Institute, West Vancouver, using methods
+    outlined in their manual (Fisheries/EPS 1974).
+
+    The standard 14C method as initially proposed by Steemann-Nielsen (1952) was
+    used, with some modifications. Water was collected from surface skim, and 0.5,
+    1, 2, 3, 5, 10, 20, and 30 m depths using a 6-L polyvinyl chloride Van Dorn
+    bottle. Productivity bottles (two 125 mL light and one 125 mL dark) were
+    inoculated with 1 mL NaH14CO3. (37kBq.mL-1). For each experiment, the number
+    of disintegrations.min-l (dpm).mL-l was determined by placing 1 mL in each of
+    three scintillation vials. In most cases, samples were incubated in situ for
+    4-5 h, normally from 0930 to 1430. Water was filtered through 0.45 µm BDH
+    cellulose nitrate filters and placed in 10 mL of a specially prepared
+    toluene-based fluor (POPOP, PPO, 2-ethoxyethanol, and toluene). Samples were
+    analyzed within 24 h for activity in a Packard Tri-Carb Liquid Scintillation
+    Spectrometer (Model 3375). The equation of Strickland (1960) was used to
+    convert dpms to mg C. m-3. Using incident solar radiation for the entire light
+    day and for the incubation period, data were converted to mg C. m-3 . d-l and
+    integrated by a Hewlett-Packard Calculator and Plotter (Model 9820 A, 9862 A)
+    to give phytoplankton production on an area basis (mg C.m-2.d-1). This involved
+    linear interpolation between data points to the depths where light and dark
+    uptake were equal.
+
+    Detailed examination was made of phytoplankton samples from only 1 and 5 m
+    depths to assess (a) species composition and (b) phytoplankton volumes during
+    key spring and fall bloom periods. Phytoplankton samples were preserved in
+    Lugol's, acetate solution and enumerated, usmg the Utermöhl (1958)
+    sedimentation method. Volumes were determined by equating phytop1ankton cells
+    to known geo-metric shapes. Each phytoplankton sample was examined under 175
+    and 700X magnification using a Wild M40 inverted plankton microscope. Results
+    were expressed as cells and totaI volume. m-3.
+
+    One liter of sea water was taken for chlorophyll a analysis from I, 3, 5, and
+    20 m depths and filtered onto 5.5-cm Whatman GF/C glass fiber filters with a
+    small amount of MgCO3 added. Filters were macerated in a tissue grinder with
+    10 mL of 90% acetone, and the filtrate analyzed on a Carr recording
+    spectrophotometer (Model 15). The equation of Strickland and Parsons (1968)
+    was used to calculate chlorophyll a.
+
+    Vertical zooplankton hauls from 50 m were made at each station with a
+    SCOR-UNESCO plankton net, with mouth diameter of 57 cm and screen mesh size of
+    350 µm. Samples were preserved in 5% formaldehyde, returned to the laboratory,
+    and split into two equal subsamples, One portion was dried overnight at 90ºC,
+    and results expressed as zooplankton biomass in mg (dry weight) .m-3. The
+    other portion was preserved for future reference.
+
+    Reference:
+    ----------
+    Stockner, J.G.,D.D. Cliff and K.S. Shorttreed. 1979. Phytoplankton ecology of
+    the Strait of Georgia, British Columbia. J. Fish. Res. Board Can. 36: 657-666.
+!--1-- --2-- --3-- --4--- --5--- --6-- --7--
+!Depth Tempe Salin Oxygen Chloro Carbo Phyto
+!      ratur ity   :      phyll: n:Dis plank
+!      e           Dissol Extrac ~lved ton: 
+!                  ved    ted    :Inor Volum
+!                                ganic e    
+!----- ----- ----- ------ ------ ----- -----
+*END OF HEADER
+   0.0   6.2 -99.0 -99.00 -99.00 -99.0  -99.
+   1.0   6.2  27.0   6.62   0.15  21.7   16.
+   2.0   6.2 -99.0 -99.00 -99.00 -99.0  -99.
+   3.0   6.3  27.7   6.14   0.00  21.8  948.
+   7.5   6.8 -99.0 -99.00 -99.00 -99.0  -99.
+  10.0   6.8 -99.0 -99.00 -99.00 -99.0  -99.
+  20.0   6.9  29.1   6.08   0.00  23.7  -99.
