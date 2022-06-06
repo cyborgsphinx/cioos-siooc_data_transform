@@ -1,0 +1,257 @@
+*2021/03/16 11:02:26.33
+*IOS HEADER VERSION 2.0      2016/04/28 2016/06/13 IVF16
+
+*FILE
+    START TIME          : UTC 2018/03/06 21:08:00.000
+    NUMBER OF RECORDS   : 5
+    DATA DESCRIPTION    : Bottle:Wire + CTD:Down
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 23
+
+    $TABLE: CHANNELS
+    ! No Name                              Units           Minimum        Maximum
+    !--- --------------------------------- --------------- -------------- --------------
+       1 Sample_Number                     n/a             48             52
+       2 Pressure:CTD                      decibar         1              285
+       3 Depth:CTD                         metres          1              282.4
+       4 Temperature:CTD                   'deg C (ITS90)' 6.4608         9.3927
+       5 Salinity:CTD                      PSS-78          25.192         30.9838
+       6 Oxygen:Dissolved:Volume:CTD       mL/L            2.81           7.89
+       7 Oxygen:Dissolved:Mass:CTD         umol/kg         122.4          345.5
+       8 Fluorescence:URU:CTD              mg/m^3          0.63E-01       6.123
+       9 pH:SBE:Nominal                    n/a             8.475          8.931
+      10 Conductivity:Primary              S/m             2.589098       3.373721
+      11 Depth:Nominal                     metres          0              282
+      12 Salinity:Bottle                   PSS-78          23.5177        30.9531
+      13 Flag:Salinity:Bottle              ' '
+      14 Nitrate_plus_Nitrite              umol/L          19.6           27.1
+      15 Flag:Nitrate_plus_Nitrite         ' '
+      16 Silicate                          umol/L          46.5           57.3
+      17 Flag:Silicate                     ' '
+      18 Phosphate                         umol/L          1.51           2.54
+      19 Flag:Phosphate                    ' '
+      20 Alkalinity:Total                  umol/L          1774.57        2118.5
+      21 Flag:Alkalinity:Total             ' '
+      22 Carbon:Dissolved:Inorganic        umol/kg         1741.06        2112.67
+      23 Flag:Carbon:Dissolved:Inorganic   ' '
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        5  I       I       0
+       2  -99   ' '        7  F       R4      1
+       3  -99   ' '        7  F       R4      1
+       4  -99   ' '        9  F       R4      4
+       5  -99   ' '        9  F       R4      4
+       6  -99   ' '        7  F       R4      2
+       7  -99   ' '        6  F       R4      1
+       8  -99   ' '        8  F       R4      3
+       9  -99   ' '        8  F       R4      3
+      10  -99   ' '       10  F       R4      6
+      11  -99   ' '        6  I       I       0
+      12  -99   ' '        9  F       R4      4
+      13  ' '   ' '        3  NQ      C     ' '
+      14  -99   ' '        7  F       R4      2
+      15  ' '   ' '        3  NQ      C     ' '
+      16  -99   ' '        7  F       R4      2
+      17  ' '   ' '        3  NQ      C     ' '
+      18  -99   ' '        8  F       R4      3
+      19  ' '   ' '        3  NQ      C     ' '
+      20  -99   ' '        8  F       R4      2
+      21  ' '   ' '        3  NQ      C     ' '
+      22  -99   ' '        8  F       R4      2
+      23  ' '   ' '        3  NQ      C     ' '
+    $END
+    $REMARKS
+        Quality flags have the following significance:
+         ----------------------------------------------------------------------------------
+        0 = Acceptable measurement with no header comment
+        1 = Sample for this measurement was collected but not analyzed. Sample lost.
+        2 = Acceptable measurement with header comment
+        3 = Questionable measurement (Probably Good)
+        4 = Poor measurement (Probably Bad)
+        5 = Measurement not reported (Bad)
+        6 = Mean of replicate measurements
+        7 = Manual chromatographic peak measurement
+        8 = Irregular digital chromatographic peak integration
+        9 = Sample was planned for this measurement from this bottle but was not collected
+        ----------------------------------------------------------------------------------
+    $END
+
+*ADMINISTRATION
+    MISSION             : 2018-96
+    AGENCY              : IOS, Ocean Sciences Division, Sidney, B.C.
+    PROJECT             : Zooplankton - Strait of Georgia
+    SCIENTIST           : Young K.
+    PLATFORM            : Neocaligus
+
+*LOCATION
+    STATION             : 38
+    EVENT NUMBER        : 48
+    LATITUDE            :  49  11.91840 N  ! (deg min)
+    LONGITUDE           : 123  26.27520 W  ! (deg min)
+    WATER DEPTH         : 298
+
+*INSTRUMENT
+    TYPE                : Sea-Bird CTD
+    MODEL               : SBE-25
+    SERIAL NUMBER       : 0404
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name     Vers   Date       Time     Recs In   Recs Out
+    !   -------- ------ ---------- -------- --------- ---------
+        SPRD2IS  5.1    2018/05/24 12:47:10         5         5
+        CLEAN    5.2.2  2018/05/24 12:47:17         5         5
+        REMOVECH 8.2    2018/05/24 12:47:21         5         5
+        SORT     3.6    2018/05/24 12:47:24         5         5
+        HDREDIT2 3.1.1  2018/05/24 12:47:33 ?         ?
+        HDREDIT2 3.2    2020/01/22 14:20:16 ?         ?
+        REORDER  1.3.1  2021/03/16 10:47:40 ?         ?
+        CLEAN    5.2.4  2021/03/16 11:02:26         5         5
+    $END
+$REMARKS
+    -CLEAN functions: 2018/05/24 12:47:16 20
+     Reset #RECS, MIN & MAX values in header.
+     Change character data from " " to "0" in channels Flag:*
+     Delete Empty Channels:     3 deleted.
+     Set header Start and End times from the data.
+    -REMOVECH 2018/05/24 12:47:21
+     The following CHANNEL(S) were removed:
+      Date
+      TIME:UTC
+    -SORT parameters: 2018/05/24 12:47:24
+     Sorted in ascending order of channel Depth:Nominal [metres]
+    -HEADER EDITS: 2018/05/24 12:47:33
+     Applied edit header: P:\Cruise_Data_Processing\2018-96\Processing\doc\HYDRO\2018-96-bot-hdr.txt
+     Channel  2: Pressure:CTD [decibar]
+       Format: F9.4 ==> F7.1
+     Channel  6: Oxygen:Dissolved:Volume:CTD [mL/L]
+       Format: F9.4 ==> F7.2
+     Channel  7: Oxygen:Dissolved:Mass:CTD [umol/kg]
+       Format: F7.2 ==> F6.1
+     Channel  8: Fluorescence:URU:CTD [mg/m^3]
+       Name:   Fluorescence:CTD ==> Fluorescence:URU:CTD
+     Channel 11: Depth:Nominal [metres]
+       Format: F6.0 ==> I6
+     Channel 14: Nitrate_plus_Nitrite [umol/L]
+       Format: F6.1 ==> F7.2
+     Channel 16: Silicate [umol/L]
+       Format: F6.1 ==> F7.2
+     Channel 18: Phosphate [umol/L]
+       Format: F7.2 ==> F8.3
+    -HEADER EDITS: 2020/01/22 14:20:16 - none.
+    -CLEAN functions: 2021/03/16 11:02:25 20
+     Reset #RECS, MIN & MAX values in header.
+$END
+
+*COMMENTS
+    Sample_Number   49: SAL:  Leaky Niskin bottle.
+    Sample_Number   51: DIC: Salinity used from CTD
+
+    Analysis methods:
+    -----------------
+        Chlorophyll samples were filtered onto 25mm GF/F filters and stored in glass
+        scintillation vials in liquid nitrogen (onboard) and then at -80C (at IOS)
+        prior to analysis. Samples were extracted in 90% acetone at -20C for 24 hours
+        in the lab and analyzed on a Turner 10AU fluorometer calibrated with
+        commercially pure chlorophyll a standard (Sigma).
+        Fluorescence readings taken before and after acidification were used to
+        calculate chlorophyll and phaeopigment concentrations (Holm-Hansen et al 1965).
+        Chlorophyll samples were analyzed at IOS in Room 2423 ~3 weeks after the cruise.
+        The average of two samples is reported. Variability is assessed as the
+        CV% (std dev / mean*100).
+        Flags and comments apply to chlorophyll values only.
+        Precision Statement: Chlorophyll values ranged from 1.23-7.51ug/l. Average %CV for
+          this cruise was 2.62% with 0 out of 11 duplicate pairs having a CV>10% and 0 out
+          of 11 duplicate pairs having a CV>30%. Our average dataset %CV is 3.73 % for
+          2013 - 2017 so the overall quality of this dataset is excellent.
+        For details see worksheet “CV%” in file QF2018-96CHL*.xlsx.
+
+        Nutrient samples were collected in plastic tubes and quick frozen in aluminum
+        blocks stored in a -20C freezer.
+        All analysis was performed on frozen samples.
+        They were analyzed using an Astoria analyzer following methods described in
+        IOS Nutrient Methods (1996) Barwell-Clarke, J. and F. Whitney.
+        For details see document NUTS_QF2018-96*.xlsx.
+
+        Salinity samples were collected in 200 mL type II glass bottles with disposable nylon
+        inserts and screw caps supplied by Ocean Scientific International Limited.  They were
+        analyzed in a temperature-controlled lab on a Guildline 8400B Salinometer
+        standardized with IAPSO standard seawater within 13 to 17 days days after collection.
+        For details, see document QF2018-96SAL*.xls.
+
+        Dissolved inorganic carbon (DIC) was determined using coulometric analysis.
+        Total alkalinity (Alk) was determined by potentiometric titration.
+        Complete documentation on DIC, ALK analysis and precision estimates can be found in
+        in the Metadata section of document QF2018-96_DIC*.xlsx.
+
+        Note that samples with nominal depth 0 were surface samples with no matching CTD
+        data, so the shallowest available CTD data were chosen.
+
+        References:
+        1. Barwell-Clarke, J. and Whitney, F. 1996. Institute of Ocean Sciences
+        Nutrient Methods and Analysis. Canadian Technical Report of Hydrography
+        and Ocean Sciences, No. 182, 43 pp.
+        2. Holm-Hansen, O., Lorenzen, C.J., Holmes, R.W., and Strickland J.D.H. 1965.
+        Fluorometric Determination of Chlorophyll. J.du Cons. Intl. Pour l’Epl.
+        De la Mer. 30:3-15.
+        3. A. Dickson, C. Goyet, Handbook of Methods for the Analysis of the Various
+        Parameters of the Carbon Dioxide System in Sea Water, September 1994, U.S. Department
+        of Energy
+
+        * For PDF versions of these papers see folder
+              \\Cruise_Data\DOCUMENTS\Analysis Reference Papers
+        ---------------------------------------------------------------------------------
+
+        CTD Data Processing Notes:
+        --------------------------
+        The CTD data in these files were extracted from CTD profile files after the
+        recalibration of the CTD dissolved oxygen channels.
+
+        Fluorescence, Dissolved Oxygen and pH:SBE data are nominal and unedited,
+        except that some records were removed in editing temperature and salinity.
+
+        Channel Fluorescence:URU:Wetlabs had some very small negative values in deep
+        water which were set to 0 using program Calibrate.
+
+        There were 8 deep salinity bottle samples during this cruise. The CTD salinity
+        values were higher than the bottles by a median value of 0.0031psu which
+        is within the expected accuracy. Some of this difference may be due to the
+        fact that flushing of Niskin bottles is somewhat inefficient so that the
+        water in the bottles may have come from slightly higher in the water column.
+        A comparison with an SBE911+ cast during a previous cruise also showed that
+        the salinity was likely within expected accuracy.
+        No recalibration was applied to the CTD salinity.
+
+        There was no dissolved oxygen sampling during this cruise or previous cruises
+        using this equipment in 2017. An inter-ship comparison of 2 casts
+        from a June 2017 cruise using these sensors with a cast from a cruise that
+        did include calibration sampling, suggested that dissolved oxygen values were
+        likely low by up to 4%. A comparison with an SBE911+ cast at the same site
+        during a recent cruise had a lot of scatter but suggested that dissolved oxygen
+        was reading low by at least 5%.
+        Channel Oxygen:Dissolved:SBE was recalibrated by adding 5% to all values.
+
+        WARNING: The pH:SBE:Nominal data should be used with caution; no field calibration
+        data were available at the time of processing.
+        Calibration is required for each cast to get absolute values, although general
+        trends within a cast are likely real.
+
+        For details on the processing see processing report: 2018-96-Processing_Report.doc.
+        ---------------------------------------------------------------------------------
+!-1-- --2--- --3--- ---4---- ---5---- --6--- --7-- ---8--- ---9--- ----10--- --11- ---12--- 13 --14-- 15 --16-- 17 ---18-- 19 ---20-- 21 ---22-- 23
+!Samp Pressu Depth: Temperat Salinity Oxygen Oxyge Fluores pH:SBE: Conductiv Depth Salinity Fl Nitrat Fl Silica Fl Phospha Fl Alkalin Fl Carbon: Fl
+!le_  re:CTD CTD    ure:CTD  :CTD     :Disso n:Dis cence:  Nominal ity:      :     :Bottle  ag e_     ag te     ag te      ag ity:    ag Dissolv ag
+!Numb                                 lved:  solve URU:CTD         Primary   Nomin          ~o plus_  ~t        ~i         ~p Total   ~T ed:     ~g
+!er                                   Volume d:Mas                           al             tt Nitrit ri        ca         ha         ot Inorgan an
+!                                     :CTD   s:CTD                                          le e      te        te         te         al ic      ic
+!---- ------ ------ -------- -------- ------ ----- ------- ------- --------- ----- -------- -- ------ -- ------ -- ------- -- ------- -- ------- --
+*END OF HEADER
+   49    1.0    1.0   6.5467  25.1920   7.89 345.5   2.550   8.931  2.589098     0  23.5177 3   20.10 0   54.70 0    1.510 0  1774.57 0  1741.06 0
+   50    5.0    5.0   6.4608  25.6833   7.72 338.0   6.123   8.902  2.629145     5  25.7067 0   19.60 0   46.50 0    1.510 0  1869.74 0  1794.83 0
+   51   10.0    9.9   6.9726  27.1672   6.98 304.9   3.058   8.795  2.804792    10 -99.0000 0   23.00 0   51.40 0    1.850 0  1897.45 0  1850.02 0
+   52   20.0   19.8   7.4858  28.3346   6.38 278.5   1.249   8.729  2.953759    20  28.1953 0   23.70 0   50.20 0    2.000 0  1961.79 6  1920.35 6
+   48  285.0  282.4   9.3927  30.9838   2.81 122.4   0.063   8.475  3.373721   282  30.9531 0   27.10 0   57.30 0    2.540 0  2118.50 0  2112.67 0
