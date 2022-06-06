@@ -1,8 +1,188 @@
+import datetime
+import json
 import logging
 import math
+from pytz import timezone
 
 from cioos_data_transform.utils import is_in
 import numpy as np
+
+def prepare_ncfile(ncfile, shell, config, is_current=False):
+    """
+    use data and methods in ctdcls object to write the CTD data into a netcdf file
+    author: Pramod Thupaki pramod.thupaki@hakai.org
+    inputs:
+        filename: output file name to be created in netcdf format
+        ctdcls: ctd object. includes methods to read IOS format and stores data
+    output:
+        NONE
+    """
+
+    date_format = "%Y-%m-%d %H:%M:%S%Z"
+    global_attrs = {}
+    ncfile.global_attrs = global_attrs
+
+    feature_type = config.get("featureType")
+    global_attrs["featureType"] = feature_type
+    global_attrs["summary"] = config.get("summary")
+    global_attrs["title"] = config.get("title")
+    global_attrs["institution"] = config.get("institution")
+    global_attrs["infoUrl"] = config.get("infoUrl")
+    global_attrs["description"] = config.get("description")
+    global_attrs["keywords"] = config.get("keywords")
+    global_attrs["acknowledgement"] = config.get("acknowledgement")
+    global_attrs["naming_authority"] = "COARDS"
+    global_attrs["comment"] = config.get("comment")
+    global_attrs["creator_name"] = config.get("creator_name")
+    global_attrs["creator_email"] = config.get("creator_email")
+    global_attrs["creator_url"] = config.get("creator_url")
+    global_attrs["license"] = config.get("license")
+    global_attrs["keywords"] = config.get("keywords")
+    global_attrs["keywords_vocabulary"] = config.get("keywords_vocabulary")
+    global_attrs["Conventions"] = config.get("Conventions")
+
+    if feature_type is not None and feature_type == "profile":
+        global_attrs["cdm_data_type"] = "Profile"
+        global_attrs["cdm_profile_variables"] = "profile, filename"
+        global_attrs["time_coverage_duration"] = 0.0
+        global_attrs["time_coverage_resolution"] = "n/a"
+    elif feature_type is not None and feature_type == "timeSeries":
+        global_attrs["cdm_data_type"] = "TimeSeries"
+        global_attrs["cdm_timeseries_variables"] = "profile"
+    else:
+        logging.warn("Unknown feature type: {}".format(feature_type))
+
+    global_attrs["date_created"] = datetime.datetime.now(timezone("UTC")).strftime(date_format)
+    global_attrs["processing_level"] = config.get("processing_level")
+    global_attrs["standard_name_vocabulary"] = config.get("standard_name_vocabulary")
+
+    global_attrs["header"] = json.dumps(shell.get_complete_header(), ensure_ascii=False, indent=False)
+
+    global_attrs["nrec"] = shell.file.number_of_records
+
+    original_filename = shell.filename.split("/")[-1]
+    global_attrs["filename"] = original_filename
+    ncfile.add_var("str_id", "filename", None, original_filename)
+
+    country = shell.administration.country.strip()
+    global_attrs["country"] = country
+    ncfile.add_var("str_id", "country", None, country)
+
+    if shell.administration.mission != "n/a":
+        mission_id = shell.administration.mission.strip()
+    elif feature_type == "profile":
+        mission_id = shell.administration.cruise.strip()
+    elif shell.deployment is not None and shell.deployment.mission != "n/a":
+        mission_id = shell.deployment.mission
+    else:
+        logging.warn("Mission ID not available in {}".format(shell.filename))
+        mission_id = "{:04d}-000".format(shell.file.start_time.year)
+
+    buf = mission_id.split("-")
+    mission_id = "{:04d}-{:03d}".format(int(buf[0]), int(buf[1]))
+    global_attrs["mission"] = mission_id
+    if is_current:
+        ncfile.add_var("str_id", "deployment_mission_id", None, mission_id)
+    else:
+        ncfile.add_var("str_id", "mission_id", None, mission_id)
+
+    if shell.location.event_number > 0:
+        event_id = shell.location.event_number
+    else:
+        logging.warn("Event number not found in {}".format(shell.filename))
+        event_id = 0
+    ncfile.add_var("str_id", "event_number", None, "{:04}".format(event_id))
+
+    profile_attributes = {}
+    if feature_type == "profile":
+        profile_attributes["cf_role"] = "profile_id"
+    elif not is_current:
+        profile_attributes["cf_role"] = "timeSeries_id"
+    profile_id = "{}-{:04d}".format(mission_id, event_id)
+    global_attrs["id"] = profile_id
+    ncfile.add_var("profile", "profile", None, profile_id, attributes=profile_attributes)
+
+    scientist = shell.administration.scientist.strip()
+    global_attrs["scientist"] = scientist
+    ncfile.add_var("str_id", "scientist", None, scientist)
+
+    project = shell.administration.project.strip()
+    global_attrs["project"] = project
+    ncfile.add_var("str_id", "project", None, project)
+
+    agency = shell.administration.agency.strip()
+    global_attrs["agency"] = agency
+    ncfile.add_var("str_id", "agency", None, agency)
+
+    platform = shell.administration.platform.strip()
+    global_attrs["platform"] = platform
+    ncfile.add_var("str_id", "platform", None, platform)
+
+    if shell.instrument is not None:
+        if shell.instrument.type != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_type",
+                None,
+                shell.instrument.type.strip(),
+            )
+        if shell.instrument.model != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_model",
+                None,
+                shell.instrument.model.strip(),
+            )
+        if shell.instrument.serial_number != "n/a":
+            ncfile.add_var(
+                "str_id",
+                "instrument_serial_number",
+                None,
+                shell.instrument.serial_number.strip(),
+            )
+        if feature_type == "timeSeries" and shell.instrument.depth != "n/a":
+            ncfile.add_var(
+                "instr_depth",
+                "instrument_depth",
+                None,
+                shell.instrument.depth,
+            )
+
+    ncfile.add_var(
+        "lat",
+        "latitude",
+        "degrees_north",
+        shell.location.latitude,
+    )
+    global_attrs["geospatial_lat_min"] = shell.location.latitude
+    global_attrs["geospatial_lat_max"] = shell.location.latitude
+    ncfile.add_var(
+        "lon",
+        "longitude",
+        "degrees_east",
+        shell.location.longitude,
+    )
+    global_attrs["geospatial_lon_min"] = shell.location.longitude
+    global_attrs["geospatial_lon_max"] = shell.location.longitude
+    global_attrs["geospatial_bounds"] = "POINT ({}, {})".format(
+        shell.location.longitude, shell.location.latitude
+    )
+
+    ncfile.add_var("str_id", "geographic_area", None, shell.geo_code)
+
+    global_attrs["time_coverage_start"] = shell.file.start_time.strftime(date_format)
+    global_attrs["time_coverage_end"] = shell.file.start_time.strftime(date_format)
+
+    if feature_type == "timeSeries":
+        obs_time = shell.get_obs_time()
+        global_attrs["time_coverage_duration"] = str(obs_time[-1] - obs_time[0])
+        global_attrs["time_coverage_resolution"] = str(obs_time[1] - obs_time[0])
+        ncfile.add_var("time", "time", None, obs_time, vardim=("time"))
+        global_attrs["time_coverage_start"] = obs_time[0].strftime(date_format)
+        global_attrs["time_coverage_end"] = obs_time[-1].strftime(date_format)
+    else:
+        ncfile.add_var("time", "time", None, [shell.file.start_time])
+
 
 def add_ne_speed(speed, direction):
     """
@@ -29,7 +209,7 @@ def add_ne_speed(speed, direction):
     return east_comp, north_comp
 
 
-def convert_channels(shell, ncfile, dimensions, is_current=False):
+def convert_channels(ncfile, shell, dimensions, is_current=False):
     # flags used for current files
     flag_ne_speed = 0  # flag to determine if north and east speed components are vars in the .cur file
     flag_cndc = 0  # flag to check for conductivity
