@@ -627,6 +627,17 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             except Exception as e:
                 logging.error(e)
 
+        elif is_in(["flag"], channel.name):
+            ncfile.add_var(
+                "flag",
+                channel.name,
+                channel.units,
+                data,
+                dimensions,
+                null_value,
+                attributes={"featureType": ncfile.global_attrs["featureType"]},
+            )
+
         else:
             if not is_in(["record", "sample", "date", "time"], channel.name):
                 logging.warn(

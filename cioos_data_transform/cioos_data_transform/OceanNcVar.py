@@ -489,6 +489,14 @@ class OceanNcVar(object):
                             'SYTM': 'float64',
                             'INTE': 'int32'}
             self.datatype= type_mapping[self.type]
+        elif self.type == "flag":
+            last = varlist[-1]
+            # BODC names should be all caps and contain no '_'
+            if last.upper() == last and "_" not in last:
+                self.name = varlist[-1] + "_QC"
+            else:
+                print("Not converting flag value {} seemingly for {}".format(self.name, last))
+            self.datatype = "float32"
         else:
             print("Do not know how to define this variable..")
             raise Exception("Fatal Error")
