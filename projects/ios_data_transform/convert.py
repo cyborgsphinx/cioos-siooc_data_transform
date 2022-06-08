@@ -286,7 +286,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             )
 
         elif is_in(["temperature"], channel.name) and not is_in(
-            ["flag", "rinko", "bottle"], channel.name
+            ["flag", "rinko"], channel.name
         ):
             if is_current:
                 temp_count += 1
@@ -321,7 +321,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     attributes={"featureType": ncfile.global_attrs["featureType"]},
                 )
 
-        elif is_in(["salinity"], channel.name) and not is_in(["flag", "bottle"], channel.name):
+        elif is_in(["salinity"], channel.name) and not is_in(["flag"], channel.name):
             if is_current:
                 ncfile.add_var(
                     "salinity:cur",
@@ -347,7 +347,6 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
         elif is_in(["oxygen"], channel.name) and not is_in(
             [
                 "flag",
-                "bottle",
                 "rinko",
                 "temperature",
                 "current",
