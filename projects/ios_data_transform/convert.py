@@ -347,7 +347,6 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
         elif is_in(["oxygen"], channel.name) and not is_in(
             [
                 "flag",
-                "rinko",
                 "temperature",
                 "current",
                 "isotope",
@@ -358,6 +357,26 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
         ):
             ncfile.add_var(
                 "oxygen",
+                channel.name,
+                channel.units,
+                data,
+                dimensions,
+                null_value,
+                attributes={"featureType": ncfile.global_attrs["featureType"]},
+            )
+
+        elif all(is_in([name], channel.name) for name in ["oxygen", "saturation"]) and not is_in(
+            [
+                "flag",
+                "temperature",
+                "current",
+                "isotope",
+                "voltage",
+            ],
+            channel.name
+        ):
+            ncfile.add_var(
+                "oxygen saturation",
                 channel.name,
                 channel.units,
                 data,

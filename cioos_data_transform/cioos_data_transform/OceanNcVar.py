@@ -219,6 +219,19 @@ class OceanNcVar(object):
             self.standard_name = "dissolved_oxygen_concentration"
             self.units = bodc_units
             self.__set_null_val()
+        elif self.type == "oxygen saturation":
+            self.datatype = "float32"
+            for i in range(4):
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            self.long_name = "Oxygen saturation"
+            self.standard_name = "dissolved_oxygen_saturation"
+            self.units = bodc_units
+            self.__set_null_val()
         elif self.type == "conductivity":
             self.datatype = "float32"
             # self.dimensions = ('z')
@@ -658,6 +671,15 @@ class OceanNcVar(object):
             else:
                 raise Exception(
                     "Oxygen units not defined", ios_varname, varunits, vartype
+                )
+            bodc_code = "{}{:02d}".format(bodc_code, iter + 1)
+        elif vartype == "oxygen saturation":
+            if is_in(["%"], varunits):
+                bodc_code = "OXYSZZ"
+                bodc_units = "%"
+            else:
+                raise Exception(
+                    "Oxygen saturation units not defined", ios_varname, varunits, vartype
                 )
             bodc_code = "{}{:02d}".format(bodc_code, iter + 1)
         elif vartype == "conductivity":
