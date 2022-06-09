@@ -16,7 +16,7 @@
        3 Temperature                         'deg C (ITS90)'   -1.5761   -0.5699
        4 Conductivity                        mS/cm             23.1386   24.2987
        5 Salinity                            PSS-78            28.7249   29.3314
-       6 Fluorescensce:URU:Turner            mg/m^3            0.174     0.236  
+       6 Fluorescence:URU:Turner             mg/m^3            0.174     0.236  
        7 Oxygen:Dissolved:Rinko              mL/L              3.27      8.40   
        8 Oxygen:Dissolved:Saturation:Rinko   %                 38.54     96.21  
     $END
