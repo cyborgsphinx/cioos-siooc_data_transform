@@ -811,6 +811,17 @@ class OceanNcVar(object):
                 bodc_code = "SDBIOL13"
                 bodc_units = "mm^3/m^3"
                 self.long_name = "Biovolume of phytoplankton in the water body"
+            elif is_in(["ethane"], ios_varname) and is_in(["mol/l"], varunits):
+                bodc_code = "AX02GCTX"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of ethane per unit volume of the water body"
+                if is_in(["pmol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["nmol/l"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to picomoles/L".format(varunits))
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",

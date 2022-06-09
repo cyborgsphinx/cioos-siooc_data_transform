@@ -638,11 +638,13 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "ph:",
                     "par",
                     "turbidity:seapoint",
+                    "ethane",
                 ],
                 channel.name,
             )
             or channel.name.lower() == "ph"
-        ) and not is_in(["flag"], channel.name):
+            # methane in water body not yet supported
+        ) and not is_in(["flag", "methane"], channel.name):
             try:
                 ncfile.add_var(
                     "other",
