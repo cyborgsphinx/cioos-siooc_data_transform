@@ -573,6 +573,17 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             )
             index_direction = i
 
+        elif is_in(["density"], channel.name):
+            ncfile.add_var(
+                "density",
+                channel.name,
+                channel.units,
+                data,
+                dimensions,
+                null_value,
+                attributes={"featureType": ncfile.global_attrs["featureType"]},
+            )
+
         elif is_in(["sigma-t"], channel.name):
             ncfile.add_var(
                 "sigma-t",

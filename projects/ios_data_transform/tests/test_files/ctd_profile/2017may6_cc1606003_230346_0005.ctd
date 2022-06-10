@@ -1,0 +1,216 @@
+*2019/08/26 15:30:24.38
+*IOS HEADER VERSION 2.0      2016/04/28 2016/06/13 IVF16
+
+*FILE
+    START TIME          : UTC 2017/05/06 23:03:46.000
+    END TIME            : UTC 2017/05/06 23:03:50.800
+    TIME INCREMENT      : 0 0 0 0 200  ! (day hr min sec ms)
+    TIME UNITS          : Milliseconds
+    NUMBER OF RECORDS   : 25
+    DATA DESCRIPTION    : CTD
+    NUMBER OF CHANNELS  : 8
+
+    $TABLE: CHANNELS
+    ! No Name                   Units           Minimum        Maximum
+    !--- ---------------------- --------------- -------------- --------------
+       1 Pressure               decibar         0.15           7.32
+       2 Depth                  metres          0.15           7.28
+       3 Temperature            'deg C (ITS90)' 8.67           10.128
+       4 Conductivity           S/m             3.38924        3.48726
+       5 Conductance:Specific   S/m             4.96162        5.03306
+       6 Salinity               PSS-78          31.6           31.9
+       7 Speed:Sound            m/s             1481.28        1486.16
+       8 Density                kg/m^3          1024.279       1024.777
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        7  F       R4      2
+       2  -99   ' '        7  F       R4      2
+       3  -99   ' '        8  F       R4      3
+       4  -99   ' '       10  F       R4      5
+       5  -99   ' '       10  F       R4      5
+       6  -99   ' '        7  F       R4      2
+       7  -99   ' '        8  F       R4      2
+       8  -99   ' '        9  F       R4      3
+    $END
+
+*ADMINISTRATION
+    MISSION             : 2017-98
+    AGENCY              : Canadian Hydrographic Service
+    COUNTRY             : Canada
+    PROJECT             : CHS CTD Data Acquisition
+    SCIENTIST           : Dangerfield N.
+
+*LOCATION
+    EVENT NUMBER        : 5
+    LATITUDE            :  52  14.37973 N  ! (deg min)
+    LONGITUDE           : 131   9.45302 W  ! (deg min)
+
+*INSTRUMENT
+    TYPE                : SonTek CTD
+    MODEL               : CastAway
+    SERIAL NUMBER       : CC1606003
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name          Vers   Date       Time     Recs In   Recs Out
+    !   ------------- ------ ---------- -------- --------- ---------
+        READ_CHS_CTDS 1.0    2017/12/08 16:27:55        25        25
+        HDREDIT2      3.1.1  2017/12/13 11:33:14 ?         ?
+        CALIB         12.0   2019/08/26 15:30:24        25        25
+    $END
+   $REMARKS
+       -READ_CHS_CTDS processing: 2017/12/08 16:27:55
+       -HEADER EDITS: 2017/12/13 11:33:14
+        Applied edit header: P:\Cruise_Data_Processing\CHS_data\test\Docs\CHS-ref-HDR.TXT
+        Channel  1: Pressure [decibar]
+          Format: F10.3 ==> F7.2
+        Channel  2: Depth [metres]
+          Format: F10.3 ==> F7.2
+        Channel  3: Temperature [deg C (ITS90)]
+          Format: F10.3 ==> F8.3
+        Channel  4: Conductivity [mS/cm]
+          Format: F10.3 ==> F9.1
+        Channel  6: Salinity [PSS-78]
+          Format: F10.3 ==> F7.2
+        Channel  8: Density [kg/m^3]
+          Format: F10.3 ==> F9.3
+        Channel  5: Conductance:Specific [mS/cm]
+          Format: F10.3 ==> F9.1
+        Channel  7: Speed:Sound [m/s]
+          Format: F10.3 ==> F8.2
+       -CALIB parameters: 2019/08/26 15:30:24
+        Calibration type = Correct
+        Mode: ONLY - calibration specs from Cal File only.
+        Calibration file = Q:\OSD_DataProcessing\Cruise_data\conductivity-corrections\recal-cond.CCF
+        Calibrations applied:
+        Ch Name                          Units    Fmla Coefficents
+        -- ----------------------------- --------- --- -----------------------------
+         4 Conductivity                  S/m        10  0.0000000E+00  0.1000000E-03
+         5 Conductance:Specific          S/m        10  0.0000000E+00  0.1000000E-03
+   $END
+
+*COMMENTS
+    Data Processing Notes:
+
+    The CastAway-CTD is a small profiling instrument that measures
+    conductivity, temperature, and pressure.  Its embedded firmware
+    controls all of the instrument's functions. It is designed for
+    profiling to depths of up to 100m at 5 Hz. It uses a six electrode
+    flow-through conductivity cell with zero external field coupled with
+    a rapid response thermistor (<5Hz) to attain high measurement accuracies.
+    The instrument does not require a pump and is hydrodynamically designed to
+    free fall rate of 1 m/s.
+
+    Processing was done using the CastAway CTD data processing system which
+    included the following steps:
+      - Pressure correction to remove ambient atmospheric pressure.
+      - Removal of records obtained while the system was stationary.
+      - De-spiking of conductivity data to remove erratic measurements near
+          the water surface that can be caused by air bubbles trapped in the
+          conductivity flow cell.
+      - Bin-averaging with 0.3db bins with linear interpolation used to fill
+          empty bins or the nearest available value for surface or bottom bins.
+      - Combination of downcast and upcast data using a weighted average based
+          on fall velocity.
+      - Derivation of specific conductance, salinity, sound speed, density and
+          depth for each pressure bin.
+
+    The data were converted to IOS Header format and some quality control
+    checks were made.
+
+    Resolution and Accuracy as stated by the manufacturer is:
+    Channel                  Resolution        Accuracy
+    Pressure                 0.01 db           0.25 db
+    Depth                    0.01 m            0.25 m
+    Temperature              0.01 degrees C    0.05 degrees C
+    Conductivity             1 mS/cm           5 mS/cm
+    Conductance:Specific     1 mS/cm           5 mS/cm
+    Salinity                 0.01 (PSS-78)     0.1 (PSS-78)
+    Speed:Sound              0.01 m/s          0.15 m/s
+    Density                  0.004 kg/m3       0.02 kg/m3
+    GPS                                        10m
+
+    Density is derived based on temperature resolution and accuracy using the
+    International Equation of State for sea water (EOS-80).
+    Depth and Specific Conductance are derived using the International Equation
+    of State for sea water (EOS-80).
+    Salinity was calculated using the 1978 Practical Salinity Scale.
+    Sound Speed was calculated using the method of Chen-Millero, 1977.
+
+    Original data file header:
+
+    % Device,CC1606003
+    % File name,CC1606003_20170506_230346
+    % Cast time (UTC),2017-05-06 23:03:46
+    % Cast time (local),2017-05-06 23:03:46
+    % Sample type,Cast
+    % Cast data,Processed
+    % Location source,GPS
+    % Default latitude,32
+    % Default altitude,0
+    % Start latitude,52.2396622
+    % Start longitude,-131.1575504
+    % Start altitude,-10.949999809265137
+    % Start GPS horizontal error(Meter),3.5299999713897705
+    % Start GPS vertical error(Meter),5.369999885559082
+    % Start GPS number of satellites,5
+    % End latitude,
+    % End longitude,
+    % End altitude,
+    % End GPS horizontal error(Meter),
+    % End GPS vertical error(Meter),
+    % End GPS number of satellites,
+    % Cast duration (Seconds),59
+    % Samples per second,5
+    % Electronics calibration date,0001-01-01
+    % Conductivity calibration date,2016-03-01
+    % Temperature calibration date,2016-02-23
+    % Pressure calibration date,2016-02-12
+    %
+
+    For more information about the CastAway CTD see document
+        "CastAway CTD Principles of Operation.pdf”.
+
+*CALIBRATION
+
+    $TABLE: CORRECTED CHANNELS
+    !   Name                   Units Fmla Pad    Coefficients
+    !   ---------------------- ----- ---- ------ ------------
+        Conductivity           S/m     10 -99    () (0 0.1E-03)
+        Conductance:Specific   S/m     10 -99    () (0 0.1E-03)
+    $END
+!--1--- --2--- ---3--- ----4---- ----5---- --6--- ---7--- ---8----
+!Pressu Depth  Tempera Conductiv Conductan Salini Speed:  Density 
+!re            ture    ity       ce:       ty     Sound           
+!                                Specific                         
+!------ ------ ------- --------- --------- ------ ------- --------
+*END OF HEADER
+   0.15   0.15  10.128   3.48579   4.96162  31.60 1486.16 1024.279
+   0.45   0.45  10.091   3.48364   4.96367  31.61 1486.05 1024.294
+   0.75   0.75  10.041   3.48446   4.97205  31.66 1485.93 1024.345
+   1.05   1.04   9.944   3.48726   4.98976  31.78 1485.72 1024.450
+   1.35   1.34   9.874   3.47664   4.98461  31.73 1485.42 1024.427
+   1.65   1.64   9.818   3.46868   4.98116  31.70 1485.18 1024.413
+   1.95   1.94   9.705   3.46402   4.99069  31.75 1484.84 1024.473
+   2.25   2.24   9.667   3.45757   4.98682  31.72 1484.66 1024.455
+   2.55   2.54   9.568   3.45427   4.99630  31.77 1484.37 1024.514
+   2.85   2.83   9.445   3.43606   4.98775  31.70 1483.83 1024.475
+   3.15   3.13   9.309   3.42723   4.99463  31.72 1483.37 1024.521
+   3.45   3.43   9.191   3.42407   5.00728  31.80 1483.03 1024.598
+   3.75   3.73   9.131   3.42247   5.01367  31.83 1482.86 1024.637
+   4.05   4.03   9.093   3.41607   5.00989  31.80 1482.68 1024.619
+   4.35   4.33   9.018   3.41289   5.01633  31.84 1482.45 1024.659
+   4.65   4.63   8.938   3.41224   5.02722  31.90 1482.24 1024.723
+   4.95   4.92   8.931   3.40905   5.02354  31.87 1482.18 1024.705
+   5.25   5.22   8.896   3.40681   5.02546  31.88 1482.07 1024.718
+   5.55   5.52   8.868   3.40658   5.02913  31.90 1482.00 1024.740
+   5.85   5.82   8.870   3.40623   5.02846  31.90 1482.00 1024.738
+   6.15   6.12   8.842   3.40230   5.02682  31.88 1481.88 1024.731
+   6.45   6.42   8.814   3.40097   5.02893  31.89 1481.80 1024.745
+   6.75   6.71   8.780   3.39741   5.02873  31.89 1481.67 1024.746
+   7.05   7.01   8.739   3.39005   5.02397  31.85 1481.47 1024.723
+   7.32   7.28   8.670   3.38924   5.03306  31.90 1481.28 1024.777

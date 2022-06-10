@@ -482,6 +482,20 @@ class OceanNcVar(object):
             self.name = bodc_code
             self.standard_name = "sea_water_velocity_to_direction"
             self.units = bodc_units
+        elif self.type == "density":
+            self.datatype = "float32"
+            for i in range(
+                4
+            ):  # will try to get a unique variable name at least 4 times
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            # self.standard_name = ''
+            self.long_name = "Density (neutral)"
+            self.units = bodc_units
         elif self.type == "sigma-t":  # TODO
             self.datatype = "float32"
             for i in range(
@@ -930,6 +944,9 @@ class OceanNcVar(object):
         elif vartype == "direction:geog(to)":
             bodc_code = "LCDAEL01"
             bodc_units = "deg"
+        elif vartype == "density":
+            bodc_code = "NEUTDENS"
+            bodc_units = "kg/m^3"
         elif vartype == "sigma-t":
             bodc_code = "SIGTEQST"
             bodc_units = "n/a"
