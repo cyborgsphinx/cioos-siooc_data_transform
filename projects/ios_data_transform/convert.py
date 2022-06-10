@@ -639,6 +639,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "par",
                     "turbidity:seapoint",
                     "ethane",
+                    "propane",
                 ],
                 channel.name,
             )

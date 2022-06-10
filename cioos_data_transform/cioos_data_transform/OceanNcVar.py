@@ -822,6 +822,17 @@ class OceanNcVar(object):
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
                 self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            elif is_in(["propane"], ios_varname) and is_in(["mol/l"], varunits):
+                bodc_code = "AX03GCTX"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of propane per unit volume of the water body"
+                if is_in(["pmol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["nmol/l"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to picomoles/L".format(varunits))
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
