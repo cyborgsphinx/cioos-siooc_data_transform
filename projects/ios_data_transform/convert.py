@@ -640,6 +640,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "turbidity:seapoint",
                     "ethane",
                     "propane",
+                    "ethylene",
                 ],
                 channel.name,
             )
