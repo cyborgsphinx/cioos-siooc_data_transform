@@ -811,6 +811,10 @@ class OceanNcVar(object):
                 bodc_code = "SDBIOL13"
                 bodc_units = "mm^3/m^3"
                 self.long_name = "Biovolume of phytoplankton in the water body"
+            elif is_in(["methane"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "CH4CGCXX"
+                bodc_units = "nmol/L"
+                self.long_name = "Concentration of methane per unit volume of the water body"
             elif is_in(["ethane"], ios_varname) and is_in(["mol/l"], varunits):
                 bodc_code = "AX02GCTX"
                 bodc_units = "pmol/L"

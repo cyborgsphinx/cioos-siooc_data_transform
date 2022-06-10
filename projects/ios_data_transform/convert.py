@@ -645,7 +645,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             )
             or channel.name.lower() == "ph"
             # methane in water body not yet supported
-        ) and not is_in(["flag", "methane"], channel.name):
+        ) and not is_in(["flag"], channel.name):
             try:
                 ncfile.add_var(
                     "other",
