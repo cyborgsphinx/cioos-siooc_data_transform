@@ -855,9 +855,13 @@ class OceanNcVar(object):
                 bodc_units = "umol/L"
                 self.long_name = "Concentration of ammonium {NH4+ CAS 14798-03-9} per unit volume of the water body [unknown phase]"
             elif is_in(["carbon:dissolved:organic"], ios_varname) and is_in(["umol/l"], varunits):
+                bodc_code = "IC000083"
+                bodc_units = "umol/L"
+                self.long_name = "Concentration of dissolved organic carbon per unit volume of the water body"
+            elif is_in(["carbon:particulate:organic"], ios_varname) and is_in(["umol/l"], varunits):
                 bodc_code = "MDMAP010"
                 bodc_units = "umol/L"
-                self.long_name = "Concentration of organic carbon per unit volume of the water body"
+                self.long_name = "Concentration of particulate organic carbon per unit volume of the water body"
             elif is_in(["carbon:dissolved:inorganic"], ios_varname) and is_in(["umol/kg"], varunits):
                 bodc_code = "TCO2MSXX"
                 bodc_units = "umol/kg"
