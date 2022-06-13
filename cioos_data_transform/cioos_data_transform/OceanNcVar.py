@@ -523,6 +523,16 @@ class OceanNcVar(object):
                     break
             self.name = bodc_code
             self.units = bodc_units
+        elif self.type == "isotope":
+            self.datatype = "float32"
+            for i in range(4):
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            self.units = bodc_units
         elif self.type in ['DOUB', 'SING', 'SYTM', 'INTE']:
             type_mapping = {'DOUB': 'float64',
                             'SING': 'float32',
@@ -707,9 +717,6 @@ class OceanNcVar(object):
             elif is_in(["umol/L"], varunits):
                 bodc_code = "DOXY"
                 bodc_units = "umol/L"
-            elif is_in(["isotope:18"], ios_varname) and is_in(["/mille"], varunits):
-                bodc_code = "D18OMXWT"
-                bodc_units = "PPT"
             else:
                 raise Exception(
                     "Oxygen units not defined", ios_varname, varunits, vartype
@@ -724,6 +731,20 @@ class OceanNcVar(object):
                     "Oxygen saturation units not defined", ios_varname, varunits, vartype
                 )
             bodc_code = "{}{:02d}".format(bodc_code, iter + 1)
+        elif vartype == "isotope":
+            if all(is_in([name], ios_varname) for name in ["oxygen", "18"]) and is_in(["/mille"], varunits):
+                bodc_code = "D18OMXWT"
+                bodc_units = "PPT"
+            elif all(is_in([name], ios_varname) for name in ["carbon", "13"]) and is_in(["/mille"], varunits):
+                bodc_code = "D13CMICX"
+                bodc_units = "PPT"
+            elif all(is_in([name], ios_varname) for name in ["carbon", "14"]) and is_in(["/mille"], varunits):
+                bodc_code = "D14CMIXX"
+                bodc_units = "PPT"
+            else:
+                raise Exception(
+                    "Isotope units not defined", ios_varname, varunits, vartype
+                )
         elif vartype == "conductivity":
             if is_in(["s/m"], varunits):
                 bodc_code = "CNDCST"

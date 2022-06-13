@@ -349,6 +349,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "flag",
                 "temperature",
                 "current",
+                "isotope",
                 "saturation",
                 "voltage",
             ],
@@ -376,6 +377,22 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
         ):
             ncfile.add_var(
                 "oxygen saturation",
+                channel.name,
+                channel.units,
+                data,
+                dimensions,
+                null_value,
+                attributes={"featureType": ncfile.global_attrs["featureType"]},
+            )
+
+        elif all(is_in([name], channel.name) for name in ["oxygen", "isotope"]) and not is_in(
+            [
+                "flag",
+            ],
+            channel.name
+        ):
+            ncfile.add_var(
+                "isotope",
                 channel.name,
                 channel.units,
                 data,
@@ -630,6 +647,17 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
         elif is_in(["carbon:dissolved"], channel.name) and not is_in(["flag"], channel.name):
             ncfile.add_var(
                 "other",
+                channel.name,
+                channel.units,
+                data,
+                dimensions,
+                null_value,
+                attributes={"featureType": ncfile.global_attrs["featureType"]},
+            )
+
+        elif is_in(["carbon:isotope"], channel.name) and not is_in(["flag"], channel.name):
+            ncfile.add_var(
+                "isotope",
                 channel.name,
                 channel.units,
                 data,

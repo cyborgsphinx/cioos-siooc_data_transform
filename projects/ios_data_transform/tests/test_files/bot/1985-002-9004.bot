@@ -1,0 +1,133 @@
+*2013/12/16 14:23:24.30
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 1985/05/05 00:00:00.000
+    NUMBER OF RECORDS   : 11
+    DATA DESCRIPTION    : Bottle:Wire
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 5
+
+    $TABLE: CHANNELS
+    ! No Name                Units    Minimum        Maximum
+    !--- ------------------- -------- -------------- --------------
+       1 Depth               metres   6              3001
+       2 Salinity:Bottle     PSS-78   32.611         34.651
+       3 Tritium             TU81N    -0.3           4.03
+       4 Carbon:Isotope:13   /mille   -3.4           0.3
+       5 Carbon:Isotope:14   /mille   -238.5         71.7
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '    ' '    F7.1    R4    ' '
+       2  -99   ' '    ' '    F8.3    R4    ' '
+       3  -99   ' '    ' '    F7.2    R4    ' '
+       4  -99   ' '    ' '    F7.1    R4    ' '
+       5  -999  ' '    ' '    F7.1    R4    ' '
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1985-02
+    AGENCY              : IOS, Ocean Physics Division, Sidney, B.C.
+    COUNTRY             : Canada
+    PROJECT             : Line P
+    SCIENTIST           : Bellegay R.
+    PLATFORM            : Parizeau
+
+*LOCATION
+    EVENT NUMBER        : 9004
+    LATITUDE            :  50   0.00000 N  ! (deg min)
+    LONGITUDE           : 145   0.00000 W  ! (deg min)
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        SPRD2IS                  4.5    2011/02/18 14:56:37        11        11
+        HDREDIT2                 2.5.1  2011/02/18 15:05:32 ?         ?
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 14:23:24        11        11
+    $END
+    $REMARKS
+        -HEADER EDITS: 2011/02/18 15:05:32
+         Applied edit header: O:\Data Processing\Header Comments\Work\1985-02.TXT
+    $END
+
+*INSTRUMENT
+    TYPE                : Bottle
+    MODEL               : Niskin
+
+*COMMENTS
+
+    Sample collection methods:
+    --------------------------
+      Sea Water Temperature:
+      - Reversing thermometers mounted on bottles.
+      Salinity:
+      - Collected in bottles.
+      Dissolved Oxygen:
+      - Collected in bottles.
+      Reactive Nutrients (Phosphate, nitrate, silicate):
+      - Collected in bottles
+
+    Analyzes methods:
+    -------------------------
+      Temperatures at depth were measured by deep-sea reversing thermometers of
+      German (Richter and Wiese) and/or Japanese (Yoshimo Keiki Co.) manufacture.
+      Two protected thermometers were used on all bottles, and one unprotected
+      thermometer was used on each bottle at depths of 300 m or greater. The
+      accuracy of protected reversing thermometers is believed to be +-0.02C.
+
+      Salinity determinations were made at sea with either a Guildline Autosal
+      salinometer. Accuracy using duplicate determinations is estimated to be
+      +-0.003 ppt.
+
+      Depth determinations were made using the "depth difference" method
+      described in the U.S.N. Hydrographic Office Publication No. 607 (1955).
+      Depth estimates have an approximate accuracy of +-5 m for depths less than
+      1000 m, and +-0.5% of depth for depths greater than 1000 m.
+
+      The dissolved oxygen analyses were done in the shipboard laboratory by a
+      modified Winkler method (Carpenter, 1965).
+
+      Nutrient samples were frozen for analyzes ashore.
+
+      Chlorophyll and nutrients were analyzed using methods from Bulletin 125
+      Fisheries Research Board of Canada 1960 "A manual of seawater analysis"
+      J.D.H. Strickland and T.R. Parsons, and subsequent editions.
+
+      Tritium data reported in Data Release #86-24 from the Tritium Laboratory
+      at the University of Miami, April 24, 1986. Data reported in TU18N values
+      which are the TU ratios in the "NEW" scale that the sample would have had
+      on 1981/01/01. The C13 and C14 data were also reported in the same Data
+      Release. Further information available in the Data Release found in the
+      \DOC directory.
+
+      References:
+      1. Carpenter, J.H. 1965. The Chesapeake Bay Institute Technique for the
+      Winkler Dissolved Oxygen Method. Limmnol. & Oceanogr., 10: 141-143.
+      2. Strickland, J.D.H., and T.R. Parsons. 1968. A Practical Handbook of
+      Seawater Analysis. Bullettin 167. Fisheries Research Board, Canada.
+      3. Strickland, J.D.H., and T.R. Parsons. 1972. A Practical Handbook of
+      Seawater Analysis. Bullettin 167 (2nd edition). Fisheries Research
+      Board, Canada.
+!--1--- ---2--- --3--- --4--- --5---
+!Depth  Salinit Tritiu Carbon Carbon
+!       y:      m      :      :     
+!       Bottle         Isotop Isotop
+!                      e:13   e:14  
+!------ ------- ------ ------ ------
+*END OF HEADER
+    6.0  32.611   4.03    0.3   71.7
+  200.0  33.797   3.89   -1.2  -38.7
+  500.0  34.116   1.52   -1.6 -148.2
+ 1000.0  34.350  -0.10   -3.4 -203.3
+ 1500.0  34.486  -0.05   -1.5 -199.7
+ 1750.0  34.545   0.04   -2.0 -226.9
+ 2000.0  34.584  -0.14   -3.0 -238.5
+ 2250.0  34.609  -0.30   -0.8 -237.4
+ 2500.0  34.617   0.03   -1.2 -201.5
+ 2750.0  34.638  -0.08   -1.8 -215.6
+ 3001.0  34.651  -0.07   -1.5 -217.4
