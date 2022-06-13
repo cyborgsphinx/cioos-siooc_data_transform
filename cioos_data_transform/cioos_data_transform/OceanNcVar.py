@@ -243,9 +243,12 @@ class OceanNcVar(object):
                 )
                 if bodc_code not in varlist:
                     break
+            if "Conductance:Specific" == self.name:
+                self.long_name = "Sea Water Electrical Conductivity Corrected to 25° C"
+            else:
+                self.long_name = "Sea Water Electrical Conductivity"
+                self.standard_name = "sea_water_electrical_conductivity"
             self.name = bodc_code
-            self.long_name = "Sea Water Electrical Conductivity"
-            self.standard_name = "sea_water_electrical_conductivity"
             self.units = bodc_units
             self.__set_null_val()
         elif self.type == "conductivity_gsw":  # TODO
