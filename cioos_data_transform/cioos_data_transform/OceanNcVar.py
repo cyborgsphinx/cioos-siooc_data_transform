@@ -759,7 +759,11 @@ class OceanNcVar(object):
                 )
             bodc_code = "{}{:01d}".format(bodc_code, iter + 1)
         elif vartype == "other":
-            if is_in(["chlorophyll"], ios_varname) and is_in(
+            if is_in(["chlorophyll_plus_phaeo-pigment"], ios_varname) and is_in(["mg/m^3"], varunits):
+                bodc_code = "CPPHFLP1"
+                bodc_units = "mg/m^3"
+                self.long_name = "Concentration of chlorophyll+phaeopigments per unit volume of the water body"
+            elif is_in(["chlorophyll"], ios_varname) and is_in(
                 ["mg/m^3"], varunits
             ):
                 bodc_code = "CPHLFLP"

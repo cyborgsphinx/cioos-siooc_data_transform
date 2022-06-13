@@ -644,6 +644,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             is_in(
                 [
                     "chlorophyll:extracted",
+                    "chlorophyll_plus_phaeo-pigment:extracted",
                     "fluorescence",
                     "ammonium",
                     "ph:",

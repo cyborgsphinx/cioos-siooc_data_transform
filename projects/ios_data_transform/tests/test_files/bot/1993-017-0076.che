@@ -1,0 +1,125 @@
+*2013/12/16 14:41:39.43
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : PDT 1993/06/25 10:23:00.000
+    NUMBER OF RECORDS   : 10
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop
+    FILE TYPE           : ASCII
+    DATA TYPE           : REAL*4
+    RECORD LENGTH       : 52
+    NUMBER OF CHANNELS  : 6
+
+    $TABLE: CHANNELS
+    ! No Name                                       Units     Minimum        Maximum
+    !--- ------------------------------------------ --------- -------------- --------------
+       1 Pressure                                   decibar   10             500
+       2 Sample_Number                              n/a       1              10
+       3 Nitrate_plus_Nitrite                       umol/L    0.8            38
+       4 Silicate                                   umol/L    9              75.1
+       5 Phosphate                                  umol/L    0.45           2.71
+       6 Chlorophyll_plus_Phaeo-Pigment:Extracted   mg/m^3    0.84           2.2
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        7  F       ' '     1
+       2  -99   ' '        5  I       I       0
+       3  -99   ' '        6  F       ' '     1
+       4  -99   ' '        6  F       ' '     1
+       5  -99   ' '        7  F       ' '     2
+       6  -99   ' '        7  F       ' '     2
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1993-17
+    AGENCY              : IOS, Ocean Ecology, Sidney, B.C.
+    COUNTRY             : Canada
+    PROJECT             : JGOFS
+    SCIENTIST           : Mackas D.
+    PLATFORM            : John P. Tully
+
+*LOCATION
+    STATION             : JI20
+    EVENT NUMBER        : 76
+    LATITUDE            :  50  25.00000 N  ! (deg min)
+    LONGITUDE           : 128  58.80000 W  ! (deg min)
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        SPRD2IS                  2.1    1999/03/12 14:58:36         0        10
+        REVERSE                  1.1    1999/03/24 14:39:49        10        10
+        HDREDIT2                 1.7    2003/09/11 11:31:26 ?         ?
+        HDREDIT2                 1.7    2003/09/11 12:04:27 ?         ?
+        MERGE                    3.0    2003/09/11 13:04:08        10        10
+        HDREDIT2                 1.7    2003/09/11 14:03:34 ?         ?
+        CLEAN                    4.4    2003/09/11 14:03:42        10        10
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 14:41:39        10        10
+    $END
+    $REMARKS
+        -The following MERGE parameters were used:
+         Merge Channel: Pressure
+         Merge Scheme Used: Interweave Records from Both Files
+         Overlap Scheme Used: Keep Primary
+         Primary Channels to Include: ALL
+         Secondary Channels to Include:
+           Temperature:Reversing,
+           Salinity:Bottle,
+           Oxygen:Dissolved
+         Primary file  : H:\New_Archive\1993\1993-17\nuts\93170076.fix
+         Secondary file: H:\New_Archive\1993\1993-17\nuts\93170076.clnche
+
+        Comments from secondary file:
+        H:\New_Archive\1993\1993-17\nuts\93170076.clnche
+        ------------------------------------------------
+        CLEAN functions:
+        - Reset #RECS, MIN & MAX values in header.
+        - Change Pad Value to -99 in All Channels.
+        - Delete Empty Channels:   0 deleted.
+        - Set channel name post-colon letters to upper case.
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Delete Empty Channels:   2 deleted.
+    $END
+
+*CALIBRATION
+
+*COMMENTS
+    "The nutrient data (nitrate_plus nitrate, silicate and orthophosphate)"
+    were prepared in an excel spreadsheet format.
+
+    Nutrient comments:
+    "Main source files for
+    nutrients:ecol_lib:\data\waterpro\nutrient\9317nut.xls, 9317nut3.xls."
+    "Samples were frozen before analyzed. N/Si samples were defrosted 24 h, P
+    were defrosted 1 h."
+
+    Chlorophyll comments:
+    "Main source file for chlorophylls: ecol_lib:
+    data\waterpro\chloroph\chldata\9317chl.xls, 9317cha.xls."
+    ,Loop samples: see separate file
+    Missing samples: chlorophyll stn 90-98.
+    Calibration problems preclude separate calculation of Chlorophyll a and
+    Phaeopigment a.
+!--1--- -2-- --3-- --4-- --5--- --6---
+!Pressu Samp Nitra Silic Phosph Chloro
+!re     le_  te_   ate   ate    phyll_
+!       Numb plus_              ~Pigme
+!       er   Nitri              nt:Ext
+!            te                 racted
+!------ ---- ----- ----- ------ ------
+*END OF HEADER
+   10.0   10   0.8   9.0   0.45   2.08
+   17.0    9   0.9   9.3   0.50   2.20
+   35.0    8   3.1  10.7   0.66   2.15
+   50.0    7   7.4  10.5   0.72   0.84
+   75.0    6  13.6  16.3   1.06 -99.00
+  100.0    5  18.0  19.7   1.46 -99.00
+  150.0    4  27.9  36.3   1.60 -99.00
+  200.0    3  27.5  41.1   1.73 -99.00
+  350.0    2  33.0  57.0   2.65 -99.00
+  500.0    1  38.0  75.1   2.71 -99.00
