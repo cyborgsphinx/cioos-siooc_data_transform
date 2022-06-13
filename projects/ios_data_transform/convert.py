@@ -349,7 +349,6 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "flag",
                 "temperature",
                 "current",
-                "isotope",
                 "saturation",
                 "voltage",
             ],

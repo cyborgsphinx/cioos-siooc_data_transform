@@ -707,6 +707,9 @@ class OceanNcVar(object):
             elif is_in(["umol/L"], varunits):
                 bodc_code = "DOXY"
                 bodc_units = "umol/L"
+            elif is_in(["isotope:18"], ios_varname) and is_in(["/mille"], varunits):
+                bodc_code = "D18OMXWT"
+                bodc_units = "PPT"
             else:
                 raise Exception(
                     "Oxygen units not defined", ios_varname, varunits, vartype
