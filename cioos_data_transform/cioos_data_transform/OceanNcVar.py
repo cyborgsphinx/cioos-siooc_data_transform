@@ -699,9 +699,23 @@ class OceanNcVar(object):
             if ios_varname.endswith("_11") and is_in(["pmol/kg"], varunits):
                 bodc_code = "FR11GCKG"
                 bodc_units = "pmol/kg"
+                self.long_name = "Concentration of trichlorofluoromethane per unit mass of the water body"
+            elif ios_varname.endswith("_11") and is_in(["pmol/l"], varunits):
+                bodc_code = "FR11GCTX"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of trichlorofluoromethane per unit volume of the water body"
             elif ios_varname.endswith("_12") and is_in(["pmol/kg"], varunits):
                 bodc_code = "FR12GCKG"
                 bodc_units = "pmol/kg"
+                self.long_name = "Concentration of dichlorodifluoromethane per unit mass of the water body"
+            elif ios_varname.endswith("_12") and is_in(["pmol/l"], varunits):
+                bodc_code = "FR12GCTX"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of dichlorodifluoromethane per unit volume of the water body"
+            elif ios_varname.endswith("_113") and is_in(["pmol/l"], varunits):
+                bodc_code = "F113GCTX"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of 1,1,2-trichloro-1,2,2-trifluoroethane per unit volume of the water body"
             else:
                 raise Exception(
                     "Chlorofluorocarbon not defined", ios_varname, varunits, vartype
