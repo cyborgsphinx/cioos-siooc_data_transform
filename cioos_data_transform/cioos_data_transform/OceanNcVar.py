@@ -513,6 +513,16 @@ class OceanNcVar(object):
             # self.standard_name = ''
             self.long_name = "Sigma-theta"
             self.units = bodc_units
+        elif self.type == "chlorofluorocarbon":
+            self.datatype = "float32"
+            for i in range(4):
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            self.units = bodc_units
         elif self.type in ['DOUB', 'SING', 'SYTM', 'INTE']:
             type_mapping = {'DOUB': 'float64',
                             'SING': 'float32',
@@ -673,6 +683,18 @@ class OceanNcVar(object):
                     ios_varname,
                     varunits,
                     vartype,
+                )
+
+        elif vartype == "chlorofluorocarbon":
+            if ios_varname.endswith("_11") and is_in(["pmol/kg"], varunits):
+                bodc_code = "FR11GCKG"
+                bodc_units = "pmol/kg"
+            elif ios_varname.endswith("_12") and is_in(["pmol/kg"], varunits):
+                bodc_code = "FR12GCKG"
+                bodc_units = "pmol/kg"
+            else:
+                raise Exception(
+                    "Chlorofluorocarbon not defined", ios_varname, varunits, vartype
                 )
 
         elif vartype == "oxygen":
