@@ -979,6 +979,10 @@ class OceanNcVar(object):
                 bodc_code = "P18318A9"
                 bodc_units = "/mL"
                 self.long_name = "Abundance of bacteria per unit volume of the water body"
+            elif is_in(["picophytoplankton"], ios_varname) and is_in(["/ml"], varunits):
+                bodc_code = "PU00A02Z"
+                bodc_units = "/mL"
+                self.long_name = "Abundance of picophytoplankton per unit volume of the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",

@@ -702,6 +702,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "barium:dissolved",
                     "total_suspended_solids",
                     "bacteria",
+                    "picophytoplankton",
                 ],
                 channel.name,
             )
