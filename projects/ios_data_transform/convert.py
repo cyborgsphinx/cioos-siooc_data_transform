@@ -703,6 +703,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "total_suspended_solids",
                     "bacteria",
                     "picophytoplankton",
+                    "nanophytoplankton",
                 ],
                 channel.name,
             )
