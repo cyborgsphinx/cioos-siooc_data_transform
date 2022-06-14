@@ -701,6 +701,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "carbontetrachloride",
                     "barium:dissolved",
                     "total_suspended_solids",
+                    "bacteria",
                 ],
                 channel.name,
             )

@@ -975,6 +975,10 @@ class OceanNcVar(object):
                 bodc_code = "RBYJLY26"
                 bodc_units = "ug/L"
                 self.long_name = "Total concentration of solids per unit volume in the water body"
+            elif is_in(["bacteria"], ios_varname) and is_in(["/ml"], varunits):
+                bodc_code = "P18318A9"
+                bodc_units = "/mL"
+                self.long_name = "Abundance of bacteria per unit volume of the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
@@ -983,6 +987,7 @@ class OceanNcVar(object):
                     vartype,
                 )
             bodc_code = "{}{:01d}".format(bodc_code, iter + 1)
+
         elif vartype == "speed:east":
             if is_in(["m/s", "metres/sec"], varunits):
                 bodc_code = "LCEWEL01"
