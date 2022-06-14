@@ -959,6 +959,10 @@ class OceanNcVar(object):
                 else:
                     raise Exception("No known conversion from {} to nanomoles/L".format(varunits))
                 self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            elif is_in(["dimethyl_sulphide"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "DMSXGCD4"
+                bodc_units = "nmol/L"
+                self.long_name = "Concentration of dimethyl sulphide in the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
