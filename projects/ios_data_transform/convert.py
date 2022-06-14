@@ -704,6 +704,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "bacteria",
                     "picophytoplankton",
                     "nanophytoplankton",
+                    "phaeo-pigment:extracted",
                 ],
                 channel.name,
             )

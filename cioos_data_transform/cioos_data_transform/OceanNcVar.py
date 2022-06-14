@@ -987,6 +987,10 @@ class OceanNcVar(object):
                 bodc_code = "PU00A01B"
                 bodc_units = "/mL"
                 self.long_name = "Abundance of nanophytoplankton per unit volume of the water body"
+            elif is_in(["phaeo-pigment:extracted"], ios_varname) and is_in(["mg/m^3"], varunits):
+                bodc_code = "PHAEFLPZ"
+                bodc_units = "mg/m^3"
+                self.long_name = "Concentration of phaeopigments per unit volume of the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
