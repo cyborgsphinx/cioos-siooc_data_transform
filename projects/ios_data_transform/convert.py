@@ -696,6 +696,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "ethane",
                     "propane",
                     "ethylene",
+                    "dimethylsulfoniopropionate",
                 ],
                 channel.name,
             )

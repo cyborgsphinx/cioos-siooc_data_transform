@@ -937,6 +937,28 @@ class OceanNcVar(object):
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
                 self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            elif is_in(["dimethylsulfoniopropionate_dissolved"], ios_varname) and is_in(["mol/l"], varunits):
+                bodc_code = "DMSPGCD1"
+                bodc_units = "nmol/L"
+                self.long_name = "Concentration of dimethylsulphoniopropionate per unit volume of the water body"
+                if is_in(["nmol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["umol/l"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to nanomoles/L".format(varunits))
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            elif is_in(["dimethylsulfoniopropionate_total"], ios_varname) and is_in(["mol/l"], varunits):
+                bodc_code = "DMSPPTR3"
+                bodc_units = "nmol/L"
+                self.long_name = "Total concentration of dimethylsulphoniopropionate per unit volume of the water body"
+                if is_in(["nmol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["umol/l"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to nanomoles/L".format(varunits))
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
