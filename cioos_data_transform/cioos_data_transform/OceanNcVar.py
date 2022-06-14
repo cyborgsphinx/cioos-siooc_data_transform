@@ -963,6 +963,10 @@ class OceanNcVar(object):
                 bodc_code = "DMSXGCD4"
                 bodc_units = "nmol/L"
                 self.long_name = "Concentration of dimethyl sulphide in the water body"
+            elif is_in(["carbontetrachloride"], ios_varname) and is_in(["pmol/l"], varunits):
+                bodc_code = "QCMXMASS"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of carbontetrachloride in the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
