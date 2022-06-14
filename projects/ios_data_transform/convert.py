@@ -700,6 +700,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "dimethyl_sulphide",
                     "carbontetrachloride",
                     "barium:dissolved",
+                    "total_suspended_solids",
                 ],
                 channel.name,
             )
