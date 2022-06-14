@@ -699,6 +699,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "dimethylsulfoniopropionate",
                     "dimethyl_sulphide",
                     "carbontetrachloride",
+                    "barium:dissolved",
                 ],
                 channel.name,
             )

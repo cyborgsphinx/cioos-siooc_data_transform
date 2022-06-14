@@ -967,6 +967,10 @@ class OceanNcVar(object):
                 bodc_code = "QCMXMASS"
                 bodc_units = "pmol/L"
                 self.long_name = "Concentration of carbontetrachloride in the water body"
+            elif is_in(["barium:dissolved"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "RWS00147"
+                bodc_units = "nmol/L"
+                self.long_name = "Concentration of barium per unit volume in the water body"
             else:
                 raise Exception(
                     "'Other' units not compatible with BODC code",
