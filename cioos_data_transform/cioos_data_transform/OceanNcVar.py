@@ -788,6 +788,9 @@ class OceanNcVar(object):
             elif is_in(["but-fuco"], ios_varname):
                 bodc_code = "BUTAMHP1"
                 self.long_name = "Concentration of 19'-butanoyloxyfucoxanthin per unit volume of the water body"
+            elif is_in(["fuco"], ios_varname) and not is_in(["but-"], ios_varname):
+                bodc_code = "FUCXMHP1"
+                self.long_name = "Concentration of fucoxanthin per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOMHP1"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"
