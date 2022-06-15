@@ -769,6 +769,7 @@ class OceanNcVar(object):
                 raise Exception(
                     "Isotope units not defined", ios_varname, varunits, vartype
                 )
+
         elif vartype == "pigment":
             if is_in(["chl-c3"], ios_varname):
                 bodc_code = "CLC3MHP1"
@@ -818,6 +819,9 @@ class OceanNcVar(object):
             elif is_in(["lut"], ios_varname):
                 bodc_code = "LUTNMHP1"
                 self.long_name = "Concentration of lutein per unit volume of the water body"
+            elif is_in(["chl-b"], ios_varname):
+                bodc_code = "CHLBMHP1"
+                self.long_name = "Concentration of chlorophyll-b per unit volume of the water body"
             else:
                 raise Exception(
                     "Pigment not defined", ios_varname, varunits, vartype
@@ -831,6 +835,7 @@ class OceanNcVar(object):
             else:
                 raise Exception("No known conversion from {} to ng/L".format(varunits))
             self.data = conversion_rate * np.asarray(self.data, dtype=float)
+
         elif vartype == "conductivity":
             if is_in(["s/m"], varunits):
                 bodc_code = "CNDCST"
