@@ -797,6 +797,9 @@ class OceanNcVar(object):
             elif is_in(["pras"], ios_varname):
                 bodc_code = "COPRWA11"
                 self.long_name = "Concentration of prasinoxanthin per unit volume of the water body"
+            elif is_in(["viola"], ios_varname):
+                bodc_code = "VILXMHP1"
+                self.long_name = "Concentration of violaxanthin per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOMHP1"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"
