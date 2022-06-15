@@ -809,6 +809,9 @@ class OceanNcVar(object):
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOMHP1"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"
+            elif is_in(["diato"], ios_varname):
+                bodc_code = "DIATMHP1"
+                self.long_name = "Concentration of diatoxanthin per unit volume of the water body"
             else:
                 raise Exception(
                     "Pigment not defined", ios_varname, varunits, vartype

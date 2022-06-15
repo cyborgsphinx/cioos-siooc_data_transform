@@ -686,6 +686,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "hplc:hex-fuco",
                 "hplc:diadino",
                 "hplc:allo",
+                "hplc:diato",
             ],
             channel.name
         ) and not is_in(["flag"], channel.name):
