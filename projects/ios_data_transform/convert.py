@@ -690,6 +690,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "hplc:zea",
                 "hplc:lut",
                 "hplc:chl-b",
+                "hplc:dvchl-a",
             ],
             channel.name
         ) and not is_in(["flag"], channel.name):
