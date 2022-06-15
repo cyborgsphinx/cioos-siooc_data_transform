@@ -772,33 +772,31 @@ class OceanNcVar(object):
         elif vartype == "pigment":
             if is_in(["chl-c3"], ios_varname):
                 bodc_code = "CLC3MHP1"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyll-c3 per unit volume of the water body"
             elif is_in(["chlide-a"], ios_varname):
                 bodc_code = "CIDAMHP1"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyllide-a per unit volume of the water body"
             elif is_in(["chl-c2"], ios_varname):
                 bodc_code = "COCHWA01"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyll-c2 per unit volume of the water body"
             elif is_in(["peri"], ios_varname):
                 bodc_code = "PERIMHP1"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of peridinin per unit volume of the water body"
             elif is_in(["pheide-a"], ios_varname):
                 bodc_code = "PBAXXXP1"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of phaeophorbide-a per unit volume of the water body"
+            elif is_in(["but-fuco"], ios_varname):
+                bodc_code = "BUTAMHP1"
+                self.long_name = "Concentration of 19'-butanoyloxyfucoxanthin per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOMHP1"
-                bodc_units = "ng/L"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"
             else:
                 raise Exception(
                     "Pigment not defined", ios_varname, varunits, vartype
                 )
             # common across all pigments
+            bodc_units = "ng/L"
             if is_in(["ng/L"], varunits):
                 conversion_rate = 1.0
             elif is_in(["mg/m^3"], varunits):
