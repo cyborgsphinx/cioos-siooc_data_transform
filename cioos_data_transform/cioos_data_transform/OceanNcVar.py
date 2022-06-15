@@ -771,7 +771,7 @@ class OceanNcVar(object):
                 )
         elif vartype == "pigment":
             if is_in(["chl-c3"], ios_varname):
-                bodc_code = "CHLC03PX"
+                bodc_code = "CLC3MHP1"
                 bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyll-c3 per unit volume of the water body"
             elif is_in(["chlide-a"], ios_varname):
@@ -779,7 +779,7 @@ class OceanNcVar(object):
                 bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyllide-a per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
-                bodc_code = "ALLOXXPX"
+                bodc_code = "ALLOMHP1"
                 bodc_units = "ng/L"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"
             else:
