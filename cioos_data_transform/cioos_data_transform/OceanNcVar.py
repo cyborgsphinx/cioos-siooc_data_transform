@@ -803,6 +803,9 @@ class OceanNcVar(object):
             elif is_in(["hex-fuco"], ios_varname):
                 bodc_code = "HEXAMHP1"
                 self.long_name = "Concentration of 19'-hexanoyloxyfucoxanthin per unit volume of the water body"
+            elif is_in(["diadino"], ios_varname):
+                bodc_code = "DIADMHP1"
+                self.long_name = "Concentration of diadinoxanthin per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOMHP1"
                 self.long_name = "Concentration of alloxanthin per unit volume of the water body"

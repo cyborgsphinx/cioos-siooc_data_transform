@@ -684,6 +684,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "hplc:pras",
                 "hplc:viola",
                 "hplc:hex-fuco",
+                "hplc:diadino",
                 "hplc:allo",
             ],
             channel.name
