@@ -771,6 +771,7 @@ class OceanNcVar(object):
                 )
 
         elif vartype == "pigment":
+            bodc_units = "ng/L"
             if is_in(["chl-c3"], ios_varname):
                 bodc_code = "CLC3MHP1"
                 self.long_name = "Concentration of chlorophyll-c3 per unit volume of the water body"
@@ -825,18 +826,29 @@ class OceanNcVar(object):
             elif is_in(["dvchl-a"], ios_varname):
                 bodc_code = "DVCAMHP1"
                 self.long_name = "Concentration of divinyl chlorophyll-a per unit volume of the water body"
+            elif is_in(["chl-a"], ios_varname) and not is_in(["dv"], ios_varname):
+                bodc_code = "CPHLMHP1"
+                bodc_units = "mg/m^3"
+                self.long_name = "Concentration of chlorophyll-a per unit volume of the water body"
             else:
                 raise Exception(
                     "Pigment not defined", ios_varname, varunits, vartype
                 )
             # common across all pigments
-            bodc_units = "ng/L"
-            if is_in(["ng/L"], varunits):
-                conversion_rate = 1.0
-            elif is_in(["mg/m^3"], varunits):
-                conversion_rate = 1000.0
+            if bodc_units == "ng/L":
+                if is_in(["ng/L"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["mg/m^3"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to ng/L".format(varunits))
+            elif bodc_units == "mg/m^3":
+                if is_in(["mg/m^3"], varunits):
+                    conversion_rate = 1.0
+                else:
+                    raise Exception("No known conversion from {} to mg/m^3".format(varunits))
             else:
-                raise Exception("No known conversion from {} to ng/L".format(varunits))
+                raise Exception("No known conversions to {}".format(bodc_units))
             self.data = conversion_rate * np.asarray(self.data, dtype=float)
 
         elif vartype == "conductivity":
