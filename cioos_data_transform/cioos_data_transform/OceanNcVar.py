@@ -533,6 +533,16 @@ class OceanNcVar(object):
                     break
             self.name = bodc_code
             self.units = bodc_units
+        elif self.type == "pigment":
+            self.datatype = "float32"
+            for i in range(4):
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            self.units = bodc_units
         elif self.type in ['DOUB', 'SING', 'SYTM', 'INTE']:
             type_mapping = {'DOUB': 'float64',
                             'SING': 'float32',
@@ -758,6 +768,22 @@ class OceanNcVar(object):
             else:
                 raise Exception(
                     "Isotope units not defined", ios_varname, varunits, vartype
+                )
+        elif vartype == "pigment":
+            if is_in(["allo"], ios_varname):
+                bodc_code = "ALLOXXPX"
+                bodc_units = "ng/L"
+                self.long_name = "Concentration of alloxanthin per unit volume of the water body"
+                if is_in(["ng/L"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["mg/m^3"], varunits):
+                    conversion_rate = 1000.0
+                else:
+                    raise Exception("No known conversion from {} to ng/L".format(varunits))
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            else:
+                raise Exception(
+                    "Pigment not defined", ios_varname, varunits, vartype
                 )
         elif vartype == "conductivity":
             if is_in(["s/m"], varunits):
