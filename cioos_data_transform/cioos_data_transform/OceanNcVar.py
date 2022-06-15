@@ -774,6 +774,10 @@ class OceanNcVar(object):
                 bodc_code = "CHLC03PX"
                 bodc_units = "ng/L"
                 self.long_name = "Concentration of chlorophyll-c3 per unit volume of the water body"
+            elif is_in(["chlide-a"], ios_varname):
+                bodc_code = "CIDAMHP1"
+                bodc_units = "ng/L"
+                self.long_name = "Concentration of chlorophyllide-a per unit volume of the water body"
             elif is_in(["allo"], ios_varname):
                 bodc_code = "ALLOXXPX"
                 bodc_units = "ng/L"
