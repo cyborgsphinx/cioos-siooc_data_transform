@@ -675,6 +675,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             [
                 "hplc:chl-c3",
                 "hplc:chlide-a",
+                "hplc:chl-c2",
                 "hplc:allo",
             ],
             channel.name
