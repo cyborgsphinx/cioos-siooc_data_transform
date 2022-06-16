@@ -415,7 +415,14 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
 
         #     Nutrients in bottle files
         elif is_in(
-            ["nitrate_plus_nitrite", "silicate", "phosphate"], channel.name
+            [
+                "nitrate_plus_nitrite",
+                "nitrate",
+                "nitrite",
+                "silicate",
+                "phosphate",
+            ],
+            channel.name
         ) and not is_in(["flag"], channel.name):
             try:
                 ncfile.add_var(
@@ -749,7 +756,6 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "nanophytoplankton",
                     "phaeo-pigment:extracted",
                     "hydrogen_sulfide",
-                    "nitrite",
                 ],
                 channel.name,
             )
