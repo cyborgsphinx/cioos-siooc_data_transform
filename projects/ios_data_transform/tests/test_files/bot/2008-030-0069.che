@@ -1,0 +1,353 @@
+*2018/01/09 15:04:03.97
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 2008/08/15 14:04:00.000
+    NUMBER OF RECORDS   : 24
+    DATA DESCRIPTION    : 'Bottle:Rosette:Up:NoStop and Stop as specified in'
+        CONTINUED       : ' SAMPLE METHOD'
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 16
+
+    $TABLE: CHANNELS
+    ! No Name                               Units           Minimum        Maximum
+    !--- ---------------------------------- --------------- -------------- --------------
+       1 Sample_Number                      n/a             1498           1521
+       2 Sample_Method                      n/a
+       3 Bottle_Number                      n/a             1              24
+       4 Pressure                           decibar         5.7            1013.9
+       5 Temperature                        'deg C (ITS90)' -0.1127        4.7945
+       6 Salinity                           PSS-78          22.3179        34.8804
+       7 Oxygen:Dissolved:SBE               mL/L            6.43           7.86
+       8 Fluorescence:Calibrated:Seapoint   mg/m^3          0.27E-01       0.97E-01
+       9 Transmissivity                     %/metre         61.3           65.6
+      10 Transmissivity2                    %/metre         56.6           60.1
+      11 Fluorescence_CDOM:URU:Wetlabs      volts           0.91E-01       0.109
+      12 Salinity:Bottle                    PSS-78          22.4704        34.8811
+      13 Flag:Salinity:Bottle               n/a
+      14 Cesium137                          mBq/L           1.32           6.55
+      15 Cesium137uncert                    mBq/L           0.16           0.55
+      16 Flag:Cesium137                     n/a
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '    ' '    I5      I     ' '
+       2  ' '   ' '        8  NQ      C     ' '
+       3  -99   ' '    ' '    I5      I     ' '
+       4  -99   ' '    ' '    F7.1    R4    ' '
+       5  -99   ' '    ' '    F9.4    R4    ' '
+       6  -99   ' '    ' '    F9.4    R4    ' '
+       7  -99   ' '    ' '    F7.2    R4    ' '
+       8  -99   ' '    ' '    F8.3    R4    ' '
+       9  -99   ' '    ' '    F6.1    R4    ' '
+      10  -99   ' '    ' '    F6.1    R4    ' '
+      11  -99   ' '    ' '    F8.3    R4    ' '
+      12  -99   ' '    ' '    F9.4    R4    ' '
+      13  ' '   ' '        3  NQ      C     ' '
+      14  -99   ' '    ' '    F8.2    R4    ' '
+      15  -99   ' '    ' '    F8.2    R4    ' '
+      16  ' '   ' '        3  NQ      C     ' '
+    $END
+    $REMARKS
+        Flag channels were initialized with zeros. Non-zero values have the following significance:
+        ------------------------------------------------------------------------------------------
+        1 = Sample for this measurement was collected but not analyzed. Sample lost.
+        2 = Acceptable Measurement
+        3 = Questionable Measurement (Probably Good)
+        4 = Poor Measurement (Probably Bad)
+        5 = Measurement Not Reported (Bad)
+        6 = Mean of replicate measurements
+        7 = Manual chromatographic peak measurement
+        8 = Irregular digital chromatographic peak integration
+        9 = Sample was planned for this measurement from this bottle but was not collected
+        ------------------------------------------------------------------------------------------
+
+        Sampling Methods are expressed with the following codes:
+        --------------------------------------------------------------------------------------
+        ROS:UN  - No Stop
+        ROS:US  - Stop for 30 seconds
+        ROS:USM - Up Stop Mix (Stop 30s, up 1m, down 2m, up 1m, wait 30s, close bottle)
+        --------------------------------------------------------------------------------------
+    $END
+
+*ADMINISTRATION
+    MISSION             : 2008-30
+    AGENCY              : IOS, Ocean Sciences Division, Sidney, B.C
+    COUNTRY             : Canada
+    PROJECT             : Joint Ocean Ice Study (JOIS incl JWACS and BGEP)
+    SCIENTIST           : Sarah Zimmermann
+    PLATFORM            : Louis S. St. Laurent
+
+*LOCATION
+    STATION             : Stn-A
+    EVENT NUMBER        : 69
+    LATITUDE            :  72  36.04000 N  ! (deg min)
+    LONGITUDE           : 144  41.79000 W  ! (deg min)
+    WATER DEPTH         : 3428
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name         Vers   Date       Time     Recs In   Recs Out
+    !   ------------ ------ ---------- -------- --------- ---------
+        SPRD2IS      5.1    2018/01/09 14:40:15        24        24
+        CLEAN        5.2.2  2018/01/09 15:00:38        24        24
+        SORT         3.6    2018/01/09 15:00:51        24        24
+        REORDER      1.3.1  2018/01/09 15:01:10 ?         ?
+        HDREDIT2     3.1.1  2018/01/09 15:02:47 ?         ?
+        CHANGE_FLAGS 2.0    2018/01/09 15:04:03        24        24
+    $END
+$REMARKS
+  -CLEAN functions: 2018/01/09 15:00:34 20
+   Reset #RECS, MIN & MAX values in header.
+   Delete Empty Channels:    33 deleted.
+  -SORT parameters: 2018/01/09 15:00:51
+   Sorted in ascending order of channel Pressure [decibar]
+  -HEADER EDITS: 2018/01/09 15:02:47
+   Applied edit header: Z:\SHARE\DATA\Data Archive Process - 2017\Joe's work\2008-30\Headers\2008-30
+  CHE Header casts 54-73.txt
+$END
+
+*INSTRUMENT
+    TYPE                : Sea-Bird CTD
+    MODEL               : SBE-911plus
+    SERIAL NUMBER       : 0724
+    $REMARKS
+        A rosette, holding 24 ten-litre Niskin Bottles, with a CTD was used.
+    $END
+
+*CALIBRATION
+
+    $TABLE: CORRECTED CHANNELS
+    !   Name                        Units    Fmla Pad    Coefficients
+    !   --------------------------- -------- ---- ------ ------------
+        Conductivity:Primary        mS/cm      10 -99    () (-0.4E-03 1)
+        Conductivity:Secondary      mS/cm      10 -99    () (0.21E-02 1)
+        Fluorescence:URU:Seapoint   mg/m^3     10 -99    () (-0.174E-01 1.3324)
+    $END
+
+*COMMENTS
+ CTD Data Processing Notes:
+ --------------------------
+
+ Processing notes can be found in the DOC directory in folder "Individual Data Reports"
+ (2008-30_CTD SBE911 Processing_v2017-12-18.docx).
+
+ Standard seabird processing steps were used.
+
+ CTD Pressure: Lab calibration was adjusted by applying +0.9dbar offset to the bias based
+ on in-air surface readings of the CTD.
+
+ CTD Temperature: Pre-cruise lab calibration was used after comparisons with dual sensor and
+ post-cruise calibration information.
+
+ CTD Conductivity: Pre-cruise lab calibration adjusted after comparisons with dual sensor,
+ post-cruise calibrations and water sample data. For casts 1 to 43, primary conductivity
+ received offset of -0.0013 mS/cm and secondary conductivity received offset of 0.0016 mS/cm.
+ For casts 44 to 53, primary was changed by -0.0007 mS/cm and secondary conductivity was
+ changed by 0.0018 mS/cm. For casts 54 to 73, primary was changed by -0.0004 mS/cm and
+ secondary conductivity was changed by 0.0021 mS/cm.
+
+ CTD Oxygen: Oxygen data are from three SeaBird SBE43 sensors which were installed for
+ casts 1 to 5, 6 to 22 and 23 to 73 respectively. They were installed with pumped flow
+ in-line after the primary temperature and conductivity sensors. A lag of -8 seconds was
+ applied to oxygen voltage in the Seabird processing step Align. Downcast CTD oxygen voltage
+ and upcast temperature and salinity were used to calibrate CTD to water sample oxygen
+ (upcast). The 73 casts required 12 calibration groups. Fitting method followed Seabirds
+ Application Note 64-2 (“SBE 43 Dissolved Oxygen Sensor Calibration and Data Corrections
+ using Winkler Titrations”). A remaining pressure dependent shape in the residual between
+ water sample and CTD oxygen was removed by subtracting a mean curve. Parts of the mean curve
+ were found by fitting sections of data from discreet pressure ranges. The parts were then
+ stitched together via spline interpolation to create a full profile mean curve.
+
+ CTD Fluorometer: Fluorometer data are from a Seapoint sensor with pumped flow in-line after
+ the secondary temperature and conductivity sensors. Calibration with bottle data performed
+ using bottle chlorophyll values between 0.025 and 0.60 mg/m3. The number of observations used
+ were 121 out of 177 with a standard deviation of 0.01 in the residuals. Coefficients used:
+ Slope: 1.3324, Bias -0.0174. Alignment of -3 seconds was used.
+
+ Transmissometer data are unprocessed, using calibration from 26 May 2008 (s/n 662) and 9 Jun
+ 2008 (s/n993).
+
+ CTD CDOM Fluorometer data are unprocessed and given as raw voltage.
+
+ Altimeter data are unprocessed, using calibration from Mar 2005.
+
+ Data Notes:
+ - Spikes in temperature, conductivity and oxygen have been linearly interpolated over
+   and where needed secondary values (when available) have replaced the primary values.
+
+ Transmissivity:
+   During Collection:
+     Casts 1-5,   Two Transmissometers, s/n 662 is primary, s/n 993 is secondary.
+     Casts 6-34,  One Transmissometer, s/n 662 is primary and column of zeros for secondary.
+                  Secondary channel was removed.
+     Casts 35-73, Two Transmissometers, s/n 993 is now primary and 662 is secondary.
+   Final Reported Files:
+     All casts,   In the final files the channels were reordered so that the data from s/n 662
+                  is in the Transmissivity channel and the data from s/n 993 is in the
+                  Transmissivity2 channel.
+
+ Oxygen:
+   Casts 1-5,  Oxygen s/n 435;
+   Casts 6-22  Oxygen s/n 1115;
+   Casts 23-73 Oxygen s/n 398.
+   Casts 9, 14-17, CTD oxygen removed due to failed sensor.
+
+ Chemistry Sampling and Analysis Methods:
+ ---------------------------------------
+
+ For further information see corresponding processing document in the DOC directory in
+ folder "Individual Data Reports"
+
+ Salinity samples were collected in 200 mL type II glass bottles with screw caps and
+ disposable plastic inserts. On board, samples were analyzed in a temperature-controlled lab
+ on a Guildline AutoSalinometer Model 8400B (SN: 69086), which was standardized with IAPSO
+ standard seawater. Onshore, samples, 1546 to 1617, were analyzed 6 months later in a
+ temperature-controlled lab on the Guildline AutoSalinometer Model 8400B (SN: 68572), which
+ was standardized with IAPSO standard seawater.
+
+ Oxygen samples were collected in glass flasks and analyzed at sea using an automated Scripps
+ Institution of Oceanography (SIO) Winkler-based UV titration system, consisting of laptop with
+ LVO2 software (v2.34), 2 Brinkmann 665 Dosimats, pencil UV lamp, UV100BQ photodiode detector,
+ mini stirrer with a water bath sample holder mounted on top, 2 Platinum Resistance Thermometers
+ (PRT) to monitor solution temperatures, an analogue to digital converter to convert voltages
+ from the detector and the 2 PRTs to a digital signal. The methodology followed was as described
+ in the SIO Oxygen Titration Manual Version 10-Apr-2003.
+
+ Nutrient samples (nitrate plus nitrite, silicate and orthophosphate) were collected in
+ polystyrene test tubes. If analysis could be performed within 24 hours the samples were
+ stored at 4 degree C, if not they were frozen at -20 degree C. All samples were analyzed
+ fresh on board using a Technicon auto-analyzer following methods described in Barwell-Clarke
+ and Whitney (1996).
+
+ Ammonium samples were collected in 40.5 mL glass tubes, and analyzed on board following the
+ Holmes et al. (1999) fluorometric protocol. Samples were kept in the dark for 5 to 8 hours
+ at room temperature. Samples were then measured using a Turner Designs TD-700 fluorometer.
+
+ Oxygen Isotopes Samples were collected into 30 ml glass vials. Once at room  temperature, the
+ caps were retightened and wrapped with parafilm for storage. Samples were analyzed at Oregon
+ State University using the Thermo DeltaPlusXL mass spectrometer connected to a H2O-CO2
+ equilibration unit. Samples were analyzed Feb to Apr 2009 (6 to 8 months after collection).
+
+ Dissolved Inorganic Carbon (DIC) and Alkalinity:
+   DIC and Alkalinity were collected into 250 or 500 mL glass bottles. Samples were kept at
+   4 degree C until analysis and preserved with HGCL2. Samples were analyzed Nov 2008 to
+   Jan 2009 (3 to 5 months after collection).
+
+   Alkalinity ("Alkalinity:Total") and DIC ("Carbon:Dissolved:Inorganic") were measured from the
+   same sample bottle at select stations. In addition, more frequent samples of Alkalinity were
+   collected at most stations and have been labelled "Alkalinity:Total:Potentiometric" to
+   distinguish this set of separate samples, even though both sets of Alkalinity samples were
+   measured using potentiometric titration.
+
+   DIC was analyzed at the Institute of Ocean Sciences using a SOMMA (Single-Operator
+   Multi-Metabolic Analyzer) - Coulometer system to determine DIC.
+
+   Alkalinity samples were analyzed at the Institute of Ocean Sciences using an automated
+   potentiometric titration system to determine the total alkalinity.
+
+ Total Chlorophyll-a (>0.7um) samples were collected into 2 L polyethylene sample bottles,
+ immediately placed in dark bags and stored in a fridge. Samples were filtered onto 25mm GF/F
+ filters using low vacuum filtration. Samples were analyzed on board. Initially at the beginning
+ of the cruise, all filters were immediately put into scintillation vials with 10 mL/L of 90%
+ acetone (made with NANOpur water), labeled and put into a 4 °C cooler for 24 hours. Later, due
+ to time constraints, the filters were preserved in the -20 °C freezer in scintillation vials until
+ they could be processed. During filtration and extraction, the samples were kept dark as much as
+ possible. After 24 hour extraction by acetone at -20 °C, the samples were brought to room
+ temperature for an hour. Chlorophyll-a and phaeo-pigment levels were measured with a Turner
+ Designs 10 AU-005 Field Fluorometer SN:5152FRXX. The sample was acidified with 2 drops of 1N
+ hydrochloric acid to obtain the phaeo-pigment reading.
+
+ Phytoplankton and bacterioplankton were collected in 2 ml capacity cryogenic vial and fixed with
+ 0.2 ml of 10% paraformaldehyde by vortex mixing. Samples were maintained for at least 15 min at
+ laboratory temperature to allow fixation, and then stored at -80 degree C until analysis at the
+ Bedford Institute of Oceanography. Cell concentrations of picophytoplankton, nanophytoplankton,
+ and bacterioplankton (i.e. non-autofluorescent picoplankton) in thawed samples were analyzed by
+ flow cytometry (Becton Dickinson FACSort) following protocols in routine use (Li and Dickie, 2001).
+
+ Iodine 129 samples were collected into 1 L PVC bottles and returned to the Laboratory of the
+ Atlantic Environmental Radioactivity Unit (AERU) at the Bedford Institute of Oceanography (BIO).
+ In the laboratory, a NaI carrier was added to a 200 mL aliquot of the seawater sample, it was
+ slightly acidified, purified using multiple hexane extractions and iodine was precipitated as NaI.
+ The NaI precipitate was shipped to the IsoTrace Laboratory at the University of Toronto where 129I
+ analyses were performed by accelerator mass spectrometry (Smith et al. 1998; 1999; 2005).
+
+ Cesium 137 samples were collected into 10 L plastic carboys. The water samples were passed
+ through a potassium ferrocyanide (KCFC) packed resin column in the laboratory (AERU) which
+ quantitatively extracts 137Cs from seawater (Smith et al. 1990; Smith & Ellis 1995). The KCFC
+ resin was deployed in a standard geometry and measured using a hyperpure Ge detector having an
+ efficiency of 25%.
+
+ Halocarbons: CFC-11 and CFC-12:
+   Halocarbon samples were collected in a Perfektum 250 mL glass syringe (Popper & Sons Inc.).
+   CFC-12 and CFC-11 were analyzed at sea on the Institute of Ocean Sciences automated purge
+   and trap system. Separation and detection of the components was achieved using a 60 m,
+   0.32 mm GasPro G fused silica column and a Hewlett Packard GC/Electron Capture Detector,
+   respectively.
+
+ References:
+
+ 1. Owens, W. B., and R. C. Millard Jr., 1985, A new algorithm for CTD oxygen calibration.
+    J. Physical Oceanography., 15, 621-631.
+
+ 2. Carpenter, J.H., 1965. The Chesapeake Bay Institute technique for the Winkler dissolved
+    oxygen method, Limnol. Oceanogr., 10, 141-3.
+
+ 3. Holmes, R.M., Aminot, A., Kérouel, R., Hooker, B.A. and Peterson, B.J. (1999). A simple and
+    precise method for measuring ammonium in marine and freshwater ecosystems. Can. J. Fish.
+    Aquat. Sci., 56: 1801-1808.
+
+ 4. J. Barwell-Clarke and F. Whitney. 1996. Institute of Ocean Sciences Nutrient Methods and
+    Analysis. Canadian Technical Report of Hydrography and Ocean Sciences, No. 182, 43 pp.
+
+ 5. Li, W.K.W., and Dickie, P.M. 2001. Monitoring phytoplankton, bacterioplankton, and
+    virioplankton in a coastal inlet (Bedford Basin) by flow cytometry. Cytometry 44: 236-246.
+
+ 6. Smith, J.N., Ellis, K.M. and Jones, E.P. 1990. Cesium-137 transport into the Arctic Ocean
+    through Fram Strait. Journal of Geophysical Research. 95(C2):1693-1701.
+
+ 7. Smith, J.N. and Ellis, K.M. 1995. Radionuclide tracer profiles at the CESAR Ice Station and
+    Canadian Ice Island in the Western Arctic Ocean. Deep-Sea Research II. 42(6):1447-1470.
+
+ 8. Smith, J.N., Ellis, K.M. and Kilius, L.R. 1998. 129I and 137Cs tracer measurementsin the
+    Arctic Ocean. Deep-Sea Research I. 45(6):959-984.
+
+ 9. Smith, J.N., Ellis, K.M. and Boyd, T.M. 1999. Circulation features in the Central Arctic
+    Ocean revealed by nuclear fuel reprocessing tracers from SCICEX 95 and 96, 1999. Journal
+    of Geophysical Research. 104(C12):29,663-29,677.
+ .
+!-1-- ---2--- -3-- --4--- ---5---- ---6---- --7--- ---8--- --9-- --10- ---11-- ---12--- 13 ---14-- ---15-- 16
+!Samp Sample_ Bott Pressu Temperat Salinity Oxygen Fluores Trans Trans Fluores Salinity Fl Cesium1 Cesium1 Fl
+!le_  Method  le_  re     ure               :      cence:  missi missi cence_  :Bottle  ag 37      37uncer ag
+!Numb         Numb                          Dissol Calibra vity  vity2 CDOM:            ~o         t       ~u
+!er           er                            ved:   ted:Sea             URU:             tt                 m1
+!                                           SBE    point               Wetlabs          le                 37
+!---- ------- ---- ------ -------- -------- ------ ------- ----- ----- ------- -------- -- ------- ------- --
+*END OF HEADER
+ 1518 USM       21    5.7   4.6837  22.3179   7.86   0.097  61.3  56.6   0.109 -99.0000 0     1.32    0.16 0
+ 1520 USM       23    5.7   4.7411  22.3810   7.86   0.097  61.3  56.6   0.105 -99.0000 0   -99.00  -99.00 0
+ 1519 USM       22    5.8   4.7607  22.4826   7.71   0.097  61.4  56.6   0.109 -99.0000 0   -99.00  -99.00 0
+ 1521 USM       24    5.8   4.7945  22.4834   7.71   0.097  61.4  56.6   0.106  22.4704 0   -99.00  -99.00 0
+ 1514 USM       17  303.7  -0.1127  34.5210   6.43   0.033  65.1  59.7   0.101 -99.0000 0   -99.00  -99.00 0
+ 1515 USM       18  303.7  -0.1127  34.5204   6.43   0.033  65.1  59.7   0.100 -99.0000 0     4.68    0.23 0
+ 1516 USM       19  303.7  -0.1127  34.5208   6.43   0.033  65.1  59.7   0.101 -99.0000 0   -99.00  -99.00 0
+ 1517 USM       20  303.7  -0.1125  34.5198   6.43   0.033  65.0  59.7   0.101  34.5245 0   -99.00  -99.00 0
+ 1510 USM       13  405.2   0.6409  34.7816   6.58   0.028  65.3  59.8   0.093 -99.0000 0   -99.00  -99.00 0
+ 1511 USM       14  405.2   0.6410  34.7815   6.58   0.028  65.2  59.8   0.094 -99.0000 0     4.04    0.34 0
+ 1512 USM       15  405.2   0.6412  34.7817   6.58   0.029  65.2  59.8   0.095 -99.0000 0   -99.00  -99.00 0
+ 1513 USM       16  405.2   0.6415  34.7818   6.58   0.029  65.2  59.8   0.093  34.7811 0   -99.00  -99.00 0
+ 1507 USM       10  607.4   0.5191  34.8472   6.79   0.027  65.4  59.9   0.092 -99.0000 0     4.32    0.22 0
+ 1506 USM        9  607.5   0.5194  34.8470   6.79   0.027  65.4  59.9   0.093 -99.0000 0   -99.00  -99.00 0
+ 1508 USM       11  607.5   0.5191  34.8471   6.79   0.027  65.3  59.9   0.092 -99.0000 0   -99.00  -99.00 0
+ 1509 USM       12  607.5   0.5191  34.8470   6.79   0.027  65.3  59.9   0.094  34.8473 0   -99.00  -99.00 0
+ 1503 USM        6  810.3   0.2359  34.8653   6.87   0.028  65.5  59.8   0.093 -99.0000 0     4.45    0.55 0
+ 1504 USM        7  810.3   0.2358  34.8651   6.87   0.028  65.5  60.0   0.092 -99.0000 0   -99.00  -99.00 0
+ 1502 USM        5  810.4   0.2356  34.8652   6.87   0.028  65.4  60.0   0.091 -99.0000 0   -99.00  -99.00 0
+ 1505 USM        8  810.4   0.2360  34.8653   6.87   0.028  65.5  60.0   0.092  34.8658 0   -99.00  -99.00 0
+ 1499 USM        2 1013.8   0.0114  34.8802   6.91   0.028  65.6  60.1   0.093 -99.0000 0     6.55    0.51 0
+ 1498 USM        1 1013.9   0.0111  34.8803   6.91   0.027  65.6  60.0   0.092 -99.0000 0   -99.00  -99.00 0
+ 1500 USM        3 1013.9   0.0112  34.8804   6.91   0.028  65.6  60.1   0.093 -99.0000 0   -99.00  -99.00 0
+ 1501 USM        4 1013.9   0.0111  34.8803   6.91   0.028  65.6  60.1   0.093  34.8811 0   -99.00  -99.00 0

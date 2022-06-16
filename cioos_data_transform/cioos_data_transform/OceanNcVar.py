@@ -765,6 +765,16 @@ class OceanNcVar(object):
             elif all(is_in([name], ios_varname) for name in ["carbon", "14"]) and is_in(["/mille"], varunits):
                 bodc_code = "D14CMIXX"
                 bodc_units = "PPT"
+            elif all(is_in([name], ios_varname) for name in ["cesium", "137"]) and is_in(["mbq/l"], varunits):
+                if is_in(["uncert"], ios_varname):
+                    bodc_code = "SE37GSTX"
+                    self.long_name = "Activity standard error of caesium-137 (cesium-137) per unit volume of the water body"
+                else:
+                    bodc_code = "CS37GSTX"
+                    self.long_name = "Activity of caesium-137 (cesium-137) per unit volume of the water body"
+                bodc_units = "Bq/L"
+                #             Bq /    mBq
+                self.data = (1.0 / 1000.0) * np.asarray(self.data, dtype=float)
             else:
                 raise Exception(
                     "Isotope units not defined", ios_varname, varunits, vartype

@@ -674,7 +674,13 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 attributes={"featureType": ncfile.global_attrs["featureType"]},
             )
 
-        elif is_in(["carbon:isotope"], channel.name) and not is_in(["flag"], channel.name):
+        elif is_in(
+            [
+                "carbon:isotope",
+                "cesium",
+            ],
+            channel.name
+        ) and not is_in(["flag"], channel.name):
             ncfile.add_var(
                 "isotope",
                 channel.name,
