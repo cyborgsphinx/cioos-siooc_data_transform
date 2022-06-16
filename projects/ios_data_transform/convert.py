@@ -745,6 +745,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "turbidity:seapoint",
                     "ethane",
                     "propane",
+                    "methylene_chloride",
                     "ethylene",
                     "dimethylsulfoniopropionate",
                     "dimethyl_sulphide",

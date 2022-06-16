@@ -1038,6 +1038,10 @@ class OceanNcVar(object):
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
                 self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            elif is_in(["methylene_chloride"], ios_varname) and is_in(["pmol/l"], varunits):
+                bodc_code = "RWSX0004"
+                bodc_units = "pmol/L"
+                self.long_name = "Concentration of dichloromethane (methylene chloride) per unit volume in the water body"
             elif is_in(["ethylene"], ios_varname) and is_in(["mol/l"], varunits):
                 bodc_code = "AW02GCTX"
                 bodc_units = "pmol/L"

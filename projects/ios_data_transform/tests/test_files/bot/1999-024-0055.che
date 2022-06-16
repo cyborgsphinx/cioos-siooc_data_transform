@@ -1,0 +1,305 @@
+*2014/11/20 09:52:39.26
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 1999/09/04 18:52:00.000
+    NUMBER OF RECORDS   : 11
+    DATA DESCRIPTION    : Bottle:Rosette:Up:NoStop + CTD
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 20
+
+    $TABLE: CHANNELS
+    ! No Name                          Units            Minimum        Maximum
+    !--- ----------------------------- ---------------- -------------- --------------
+       1 Sample_Number                 n/a              244            254
+       2 Pressure                      decibar          10             395.3
+       3 Salinity:Bottle               PSS-78           30.171         34.734
+       4 Oxygen:Dissolved              mL/L             5.377          9.271
+       5 Nitrate_plus_Nitrite          umol/L           0              16.6
+       6 Silicate                      umol/L           4.4            32.4
+       7 Phosphate                     umol/L           0.66           1.71
+       8 Temperature                   'deg C (IPTS68)' -1.418         5.605
+       9 Salinity                      PSS-78           30.169         34.74
+      10 Chlorofluorocarbon_12         pmol/L           1.13           2.74
+      11 Flag:Chlorofluorocarbon_12    n/a
+      12 Chlorofluorocarbon_11         pmol/L           2.23           5.69
+      13 Flag:Chlorofluorocarbon_11    n/a
+      14 Chlorofluorocarbon_113        pmol/L           0.13           0.49
+      15 Flag:Chlorofluorocarbon_113   n/a
+      16 Methylene_Chloride            pmol/L           7.11           11.66
+      17 Flag:Methylene_Chloride       n/a
+      18 Carbontetrachloride           pmol/L           2.49           5.72
+      19 Flag:Carbontetrachloride      n/a
+      20 Oxygen:Isotope:18             /mille           -3.36          -0.2
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        5  I       I       0
+       2  -99   ' '        7  F       R4      1
+       3  -99   ' '        8  F       R4      3
+       4  -99   ' '        8  F       R4      3
+       5  -99   ' '        6  F       R4      1
+       6  -99   ' '        6  F       R4      1
+       7  -99   ' '        7  F       R4      2
+       8  -99   ' '        8  F       R4      3
+       9  -99   ' '        8  F       R4      3
+      10  -99   ' '    ' '    F7.2    R4    ' '
+      11  -99   ' '        2  NQ      C     ' '
+      12  -99   ' '    ' '    F7.2    R4    ' '
+      13  -99   ' '        2  NQ      C     ' '
+      14  -99   ' '    ' '    F7.2    R4    ' '
+      15  -99   ' '        2  NQ      C     ' '
+      16  -99   ' '    ' '    F7.2    R4    ' '
+      17  -99   ' '        2  NQ      C     ' '
+      18  -99   ' '    ' '    F7.2    R4    ' '
+      19  -99   ' '        2  NQ      C     ' '
+      20  -99   ' '    ' '    F7.2    R4    ' '
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1999-24
+    AGENCY              : IOS, Ocean Science and Productivity, Sidney, B.C.
+    COUNTRY             : Canada
+    PROJECT             : JOIS 1999
+    SCIENTIST           : McLaughlin F.
+    PLATFORM            : Sir Wilfrid Laurier
+
+*LOCATION
+    GEOGRAPHIC AREA     : Canadian Arctic Archipelago
+    STATION             : AG4
+    EVENT NUMBER        : 55
+    LATITUDE            :  70  10.56000 N  ! (deg min)
+    LONGITUDE           : 122  56.34000 W  ! (deg min)
+    WATER DEPTH         : 394
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        SPRD2IS                  3.4.4  2001/03/29 11:12:41        11        11
+        SORT                     3.1    2001/03/29 11:17:11        11        11
+        REMOVECH                 5.0    2001/03/29 11:47:20        11        11
+        REMOVECH                 6.0    2002/02/12 11:01:37        11        11
+        HDREDIT2                 1.3    2002/02/12 11:10:10 ?         ?
+        HDREDIT2                 1.3    2002/02/12 12:58:12 ?         ?
+        HDREDIT2                 1.9    2004/01/14 16:50:51 ?         ?
+        CLEAN                    4.5    2004/01/14 16:51:46        11        11
+        SORT                     3.4.1  2004/01/21 12:50:08        11        11
+        MERGE                    3.1    2004/01/21 12:50:57        11        11
+        SORT                     3.4.1  2004/01/21 14:54:58        11        11
+        REMOVECH                 6.0    2004/01/21 15:19:33        11        11
+        HDREDIT2                 1.9    2004/01/21 16:38:12 ?         ?
+        REORDER                  1.2.1  2004/01/26 09:40:14 ?         ?
+        CLEAN                    4.5    2004/01/26 09:41:35        11        11
+        HDREDIT2                 1.9    2004/01/29 13:37:04 ?         ?
+        HDREDIT2                 2.1    2004/05/28 09:47:13 ?         ?
+        CHANGE_FLAGS             1.0    2013/07/16 11:46:11        11        11
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 15:19:07        11        11
+        CHANGE_FLAGS             2.0    2014/11/20 09:52:39        11        11
+    $END
+    $REMARKS
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure
+         Pressure channel sorted according to values in sort channel
+        -The following CHANNEL(S) were removed from file.
+         oxy-1
+         oxy-2
+         NO3-1
+         NO3-2
+         SiO4-1
+         SiO4-2
+         PO4-1
+         PO4-2
+        -The following CHANNEL(S) were removed from file.
+         d18O
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Change Pad Value to -99 in All Channels.
+         - Delete Empty Channels:   0 deleted.
+         - Set channel name post-colon letters to upper case.
+         - Remove Sea-Bird comments from the header.
+        -The following SORT parameters were used.
+         Sorted by channel: Sample_Number [n/a]
+         Pressure channel sorted according to values in sort channel
+        -The following MERGE parameters were used:
+         Merge Channel: Sample_Number [n/a]
+         Merge Scheme Used: Add Secondary to Primary
+         Overlap Scheme Used: Keep Primary
+         Primary Channels to Include: ALL
+         Secondary Channels to Include:
+           Chlorofluorocarbon_12 [pmol/L],
+           Chlorofluorocarbon_11 [pmol/L],
+           Chlorofluorocarbon_113 [pmol/L],
+           Methylene_Chloride [pmol/L],
+           Carbontetrachloride [pmol/L],
+           Ratio:F12/11 [ ],
+           Ratio:Fr12/113 [ ],
+           Ratio:Fr113/11 [ ],
+           ;Ratio:MC/11 [ ],
+           Ratio:CT/11 [ ],
+           Ratio:MC/CT [ ],
+           Flag:Chlorofluorocarbon_12 [ ],
+           Flaf:Chlorofluorocarbon_11 [ ],
+           Flag:Chlorofluorocarbon_113 [ ],
+           Flag:Methylene_Chloride [ ],
+           Flag:Carbontetrachloride [ ],
+           Oxygen_Isotopes [ppt]
+         Primary file  : K:\Share\9924\IOSSHELL_JAN_04\99240055.CLNCHE_SORT
+         Secondary file: K:\Share\9924\IOSSHELL_JAN_04\99240055.cfc_o18_sort
+
+        Comments from secondary file:
+        K:\Share\9924\IOSSHELL_JAN_04\99240055.cfc_o18_sort
+        ---------------------------------------------------
+        -The following SORT parameters were used.
+        Sorted by channel: Sample_Number [n/a]
+        Pressure channel sorted according to values in sort channel
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure [dbars]
+         Pressure channel sorted according to values in sort channel
+        -The following CHANNEL(S) were removed from file.
+         Ratio:F12/11
+         Ratio:Fr12/113
+         Ratio:Fr113/11
+         ;Ratio:MC/11
+         Ratio:CT/11
+         Ratio:MC/CT
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Change Pad Value to -99 in All Channels.
+         - Delete Empty Channels:   0 deleted.
+         - Remove Sea-Bird comments from the header.
+    $END
+
+*COMMENTS
+    Cruise 9924 water chemistry data :
+    "Canadian Arctic Archipelago - August 23 - September 8, 1999"
+    Field operations were carried out from the CCGS Sir Wilfrid Laurier
+    CTD/Rosette casts were deployed from the boat deck using an A-frame and
+    winch mounted on the port side.
+
+    Determination of CTD data at bottle stops:
+    Method of determination reviewed in December 2003 by Sarah
+    Zimmermann. Data are from the downcast Guildline CTD, found by
+    matching the SBE-19 upcast bottle trip pressures to the Guildline
+    after correcting for the SBE-19 surface offset (1 to 2 db depending
+    on station), sensor to bottle center offset (-0.6 db), and an
+    additional offset of +0.2db. [Performed by Julie Bacle and
+    Humfrey Melling]  It was determined by looking at the CTD and
+    bottle salinities that no further offset was required to correct
+    for the bottle flushing and fluid dynamics around the package.
+    [Performed by Sarah Zimmermann]  The listed pressures are the
+    applied corrections.
+    Note : Some stations (FT1, FT3, BS2, BS3-test, JR1,JR4, JRL4,
+    EI9, CI1) were missing SBE-19 bottle trip pressures.  For these
+    stations, the Guildline CTD data were found by taking the records
+    where bottle salinities matched the CTD salinities.  The nature
+    of this method already accounts for the pressure offsets, thus
+    no further corrections were required. [Performed by Mary O’Brien]
+    Note : There are still some question Regarding CTD Salinity Calibration :
+    Five stations (87, 88, 89, 91 and 92) show a 0.01 difference between
+    CTD and bottles in the high salinity, deep water. See file
+    report_199924_ctdbottlestopdata.doc for more detail.
+
+    Temperature and bottle salinities at the bottle trip depths are included :
+    Temperature_ITS68 and Salinity_PSS-78
+
+    Dissolved Oxygen :
+    Analyzed onboard the CCGS Sir wilfrid Laurier by Mary O'Brien		
+     using an automated version of the Micro-Winkler Technique as described in :		
+    "Carpenter, J. H., 1965.  The Chesapeake Bay Institute technique for the "		
+    "Winkler dissolved oxygen method, Limnol. Oceanogr., 10, 141-3.  "		
+    The titration is done using a Metrohn Dosimat 665 and the end point 		
+    is detected using a Brinkmann probe colorimeter PC900.		
+    The methodology is described by an internal OSAP document (Dissolved 		
+    Oxygen Determination Methods and Procedures by Bernard Minkley and 		
+    George Chase). Standard pooled deviation for 26 duplicates for the oxygen 		
+    analysis is 0.034 mL/L.  Range for all data is 5.2 to 10.3 mL/L		
+    "note - only the first of the duplicates is included in the archived data ie, no
+    averaged data for dissolved oxygen is included in the archive.		
+
+    Bottle salinities : 		
+    Samples were brought back to IOS and analyzed using a Portasal 		
+    (model 8410; Serial number 59724) which was standardized using		
+    IAPSO standard seawater (batch P134).  Analysis done by Doug Sieberg.
+    No duplicate samples were taken.
+
+    "Nutrients : (silicate, nitrate plus nitrite and orthophosphate)"
+    Samples were analyzed onboard by Janet Barwell-clarke.
+    Nutrients  were analyzed using Technicon Autoanalyzer II components.
+    Reactive silicate and nitrate plus nitrite were determined according to
+    " Technicon Industrial Methods No. 186-71 W and 158-71 W respectively, and"
+     soluble orthophosphate was determined using a modified Technicon method
+    "as described in :  Brynjolfson, S.J., 1973.  A modification of the Technicon"
+    "methodology for the determination of orthophosphate in seawater, "
+    "Paper presented at Water Resources Services, Vancouver,  B.C."
+    "The method is also described in an internal document : ""Institute of Ocean "
+    "Sciences Nutrient Methods and Analysis"" by J. Barwell-Clarke and F Whitney "
+    1996. Most of the samples were analyzed in duplicate and
+    pooled standard deviations were calculated as follows :
+
+    Silicate:		
+    69 samples were analyzed in duplicate		
+    "Pooled standard deviation for 699 pairs :  Sp=0.203 umol/L, n=69 "		
+    (range for all data is 2.1 to 46.0 umol/L)		
+    Archived data is the average of the duplicates.		
+
+    Orthophosphate:		
+    36 samples were analyzed in duplicate		
+    "Pooled standard deviation for 36 pairs :  Sp=0.034 umol/L, n=36 "		
+    (range for all data is 0.0 to 1.9 umol/L)		
+    Archived data is the average of the duplicates.		
+
+    Nitrate plus Nitrite:		
+    69 samples were analyzed in duplicate		
+    "Pooled standard deviation for 69 pairs:  Sp=0.07 umol/L, n=69 "	
+    (range for all data is 0.0 to 17.0 umol/L)
+    Archived data is the average of the duplicates.
+
+    Oxygen isotopes :
+    Samples were analyzed by The 'Stable Isotope Laboratory' at the University of
+    Calgary as described in the file :  UofC_O18_analysis_description.doc
+    The 18O/16O ratio was determined using the common CO2-H2O
+    equilibration technique (Epstein, 1953; O'Neil et al., 1975) in which
+    millimole quantities of CO2 are equilibrated with water samples
+    under constant temperatures. Subsequently, the CO2 is cryogenically
+    purified and analyzed mass spectrometrically for its 18O/16O ratio.
+    Note that this technique measures the isotopic activity of 18O and not
+    the actual 18O concentration. For dilute waters, differences between
+    isotopic activity and concentration are negligible. For saline waters
+    and brines, however, supplemental water chemistry data and longer
+    equilibration times are needed to obtain true isotopic compositions
+    (Horita, 1993; Sofer, 1972).
+
+    CFC Measurements (analyst:  Nes Sutherland)
+    CFC analysis was carried out on the IOS automated purge and trap system.
+    Separation and detection of the components was achieved using a 60 m, 0.32 mm
+    GasPro Gas separator fused silica column and a Hewlett Packard GC/Electron
+    Capture Detector.  Standardization was done using a gas standard (S14) made
+    at Brookhaven National Laboratories and standardized at Scripps Institute
+    of Oceanography according to the SIO1993 scale. Analyses for CFC12, CFC11,
+    CFC113, and CCl4 was carried out. Air samples were taken as a further check
+    on the operation of the system.  All concentrations are reported in
+    picomoles/litre. Note : the Methylene_chloride data is not calibrated to
+    reference standards.
+!-1-- --2--- ---3--- ---4--- --5-- --6-- --7--- ---8--- ---9--- --10-- - --12-- - --14-- - --16-- - --18-- - --20--
+!Samp Pressu Salinit Oxygen: Nitra Silic Phosph Tempera Salinit Chloro F Chloro F Chloro F Methyl F Carbon F Oxygen
+!le_  re     y:      Dissolv te_   ate   ate    ture    y       fluoro l fluoro l fluoro l ene_   l tetrac l :     
+!Numb        Bottle  ed      plus_                              carbon ~ carbon ~ carbon ~ Chlori ~ hlorid ~ Isotop
+!er                          Nitri                              _12    1 _11    1 _113   1 de     d e      d e:18  
+!                            te                                        2        1        3        e        e       
+!---- ------ ------- ------- ----- ----- ------ ------- ------- ------ - ------ - ------ - ------ - ------ - ------
+*END OF HEADER
+  254   10.0  30.171   7.390   0.0   4.4   0.66   5.605  30.169 -99.00 0 -99.00 0 -99.00 0 -99.00 0 -99.00 0  -3.36
+  253   25.4  32.102   9.271   0.0   6.3   0.96  -0.823  32.103 -99.00 0 -99.00 0 -99.00 0 -99.00 0 -99.00 0  -2.66
+  252   50.0  32.464   7.584   7.3  14.6   1.28  -1.377  32.427   2.74 0   5.69 0   0.49 0  11.66 0   5.72 0  -3.07
+  251   75.3  32.785   6.519  12.4  25.0   1.58  -1.418  32.773   2.40 0   5.12 0   0.38 0  11.60 0   4.45 0  -2.65
+  250  100.3  33.079   6.105  15.0  30.9   1.71  -1.397  33.065   2.08 0   4.24 0   0.35 3  11.02 0   3.69 0  -2.01
+  249  150.2  33.790   5.573  16.6  32.4   1.60  -0.936  33.789   1.57 0   3.03 0   0.23 0   8.90 0   2.81 0  -1.23
+  248  199.9  34.417   5.377  16.1  26.7   1.35  -0.329  34.385   1.25 0   2.32 0   0.17 0   7.41 0   2.51 0  -0.64
+  247  250.4  34.623   5.432  15.8  24.5   1.18   0.013  34.630   1.19 0   2.34 0   0.13 0   7.56 0   2.49 0  -0.20
+  246  299.8  34.699   5.458  15.7  24.7   1.15   0.132  34.700   1.13 0   2.23 0   0.13 0   7.65 0   2.90 0  -0.30
+  245  351.0  34.729   5.537  15.6  24.4   1.12   0.188  34.733   1.15 0   2.29 0   0.14 0   7.52 0   2.80 0  -0.30
+  244  395.3  34.734   5.581  15.4  24.5   1.11   0.200  34.740   1.19 0   2.33 0   0.25 3   7.11 0   3.05 0  -0.48
