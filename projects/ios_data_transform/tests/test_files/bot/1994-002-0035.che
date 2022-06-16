@@ -1,0 +1,283 @@
+*2013/12/16 14:42:58.95
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 1994/05/16 18:58:00.000
+    NUMBER OF RECORDS   : 23
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop + CTD:Up
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 18
+
+    $TABLE: CHANNELS
+    ! No Name                                   Units            Minimum        Maximum
+    !--- -------------------------------------- ---------------- -------------- --------------
+       1 Pressure                               decibar          16.3           4025.7
+       2 Sample_Number                          n/a              200            222
+       3 Oxygen:Dissolved                       mL/L             0.371          7.07
+       4 Oxygen:Dissolved                       umol/kg          16.1           308
+       5 Salinity:Bottle                        PSS-78           32.542         34.67
+       6 Temperature                            'deg C (IPTS68)' 1.53           8.53
+       7 Nitrate                                umol/L           6.8            45.9
+       8 Nitrite                                umol/L           0              0.25
+       9 Phosphate                              umol/L           0.88           3.31
+      10 Silicate                               umol/L           12.1           176.7
+      11 Alkalinity:Total:Potentiometric        umol/kg          2201.5         2467.3
+      12 Flag:Alkalinity:Total:Potentiometric   n/a
+      13 Carbon:Dissolved:Inorganic             umol/kg          2000.4         2393
+      14 Flag:Carbon:Dissolved:Inorganic        n/a
+      15 Chlorofluorocarbon_11                  pmol/kg          0              6.506
+      16 Flag:Chlorofluorocarbon_11             n/a
+      17 Chlorofluorocarbon_12                  pmol/kg          0              2.313
+      18 Flag:Chlorofluorocarbon_12             n/a
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        7  F       ' '     1
+       2  -99   ' '        5  I       I       0
+       3  -99   ' '        8  F       ' '     3
+       4  -99   ' '        6  F       ' '     1
+       5  -99   ' '        9  F       ' '     4
+       6  -99   ' '        9  F       ' '     4
+       7  -99   ' '        6  F       R4      1
+       8  -99   ' '    ' '    F7.2    R4    ' '
+       9  -99   ' '        7  F       R4      2
+      10  -99   ' '        6  F       R4      1
+      11  -999  ' '    ' '    F7.1    R4    ' '
+      12  0     ' '        3  NQ      C     ' '
+      13  -999  ' '    ' '    F7.1    R4    ' '
+      14  0     ' '        3  NQ      C     ' '
+      15  -99   ' '    ' '    F8.3    R4    ' '
+      16  0     ' '        2  NQ      C     ' '
+      17  -99   ' '    ' '    F8.3    R4    ' '
+      18  0     ' '        2  NQ      C     ' '
+    $END
+    $REMARKS
+        Raw data in file 94020035
+        VI03  = 10.043      ! Volume of iodate standard (cm**3)
+        NI03  = .01012706   ! Normalitity of iodate standard
+        VREG  = 2.0         ! Volume of sample displaced by reagents (cm**3)
+        DOREG = 0.0017      ! Absolute amount of O2 added with reagents (ml)
+        UFLAG = -1          ! 0|-1, -1 indicates DO_mass is valid
+        Data quality is expressed with the following flags
+        ------------------------------------------------------------------------------
+        1 = Sample for this measurement was drawn from water bottle but not analyzed
+              (not normally used).
+        2 = Acceptable measurement (not normally used).
+        3 = Questionable measurement (no problem observed in sampling or analysis,
+              but value is not trusted, nonetheless; includes outlyers).
+        4 = Bad measurement (known problem with sampling or analysis, but not
+              serious enough to completely discard the value).
+        5 = Not reported (lost sample; unredeemably bad measurement).
+        6 = Mean of replicate measurements.
+        7 = Manual chromatographic peak measurement.
+        8 = Irregular digital chromatographic peak integration.
+        9 = Sample not drawn for this measurement from this bottle (not normally
+              used).
+        ------------------------------------------------------------------------------
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1994-02
+    AGENCY              : 'IOS, Climate Chemistry and Ocean Physics, Sidney,'
+        CONTINUED       : ' B.C.'
+    COUNTRY             : Canada
+    PROJECT             : Line P, WOCE, JGOFS
+    SCIENTIST           : Whitney F.
+    PLATFORM            : John P. Tully
+
+*LOCATION
+    STATION             : MP20
+    EVENT NUMBER        : 35
+    LATITUDE            :  49  33.90000 N  ! (deg min)
+    LONGITUDE           : 138  39.80000 W  ! (deg min)
+    WATER DEPTH         : 3973
+
+*INSTRUMENT
+    TYPE                : Bottle
+    MODEL               : Niskin 10 Litre
+    $REMARKS
+        Dissolved oxygen concentration determined using an automated
+        titration system consisting of a Brinkman Dosimat (model 665)
+        and a PC 900 Colorimeter.
+    $END
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        AutoOxy.bas              1.2    1994/05/17 05:06:29 ' '              26
+        CLEAN                    2.1    1994/05/21 16:41:50        26        26
+        MERGE                    2.3    1999/01/27 14:25:38        26        26
+        REMOVECH                 6.0    2003/05/20 15:44:13        26        26
+        MERGE                    2.8    2003/05/20 15:45:05        26        26
+        HDREDIT2                 1.6    2003/05/20 15:52:48 ?         ?
+        CLEAN                    4.2    2003/05/20 15:55:50        26        26
+        SORT                     3.4.1  2004/04/23 11:15:11        26        26
+        MERGE                    3.4    2012/02/08 16:17:57        23        23
+        HDREDIT2                 2.5.1  2012/02/08 16:20:41 ?         ?
+        MERGE                    3.4    2012/11/09 11:12:03        23        23
+        HDREDIT2                 2.5.1  2012/11/09 11:40:26 ?         ?
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 14:42:58        23        23
+    $END
+$REMARKS
+C.H. Culbertson's paper on Dissolved Oxygen in the 'Woce
+Hydrographic Program Operations and Methods - July 1991'
+-The following CLEAN parameters were used.
+-The following MERGE parameters were used:
+ Merge Channel: Sample_Number
+ Merge Scheme Used: Add Secondary to Primary
+ Overlap Scheme Used: Keep Primary
+ Primary Channels to Include:
+   pressure, Dissolved_Oxygen:vol, Dissolved_Oxygen:mas, Flask_Number,
+   Salinity:Bottle
+ Secondary Channels to Include:
+   Temperature:CTD, Silicate, Nitrate, Phosphate
+ Primary file  : e:\data\1994\9402\94020035.hyd
+ Secondary file: e:\data\1994\9402\94020035.ios
+-The following CHANNEL(S) were removed from file.
+ Flask_Number
+ Silicate
+ Nitrate_plus_nitrite
+ Phosphate
+-The following MERGE parameters were used:
+ Merge Channel: Sample_Number
+ Merge Scheme Used: Add Secondary to Primary
+ Overlap Scheme Used: Keep Primary
+ Primary Channels to Include: ALL
+ Secondary Channels to Include:
+   Nitrate,
+   Nitrite,
+   Phosphate,
+   Silicate
+ Primary file  : H:\STNPCHEM\process\1994\1994-02\bottle\94020035.rem
+ Secondary file: H:\STNPCHEM\process\1994\1994-02\bottle\94020035.ios
+CLEAN functions:
+ - Reset #RECS, MIN & MAX values in header.
+ - Change Pad Value to -99 in All Channels.
+ - Delete Empty Channels:   0 deleted.
+ - Set channel name post-colon letters to upper case.
+-The following SORT parameters were used.
+ Sorted by channel: Pressure
+ Pressure channel sorted according to values in sort channel
+-The following MERGE parameters were used: 2012/02/08 16:17:57
+ Merge Channel: Pressure
+ Merge Scheme Used: Add Secondary to Primary
+ Overlap Scheme Used: Average
+ Primary Channels to Include: ALL
+ Secondary Channels to Include:
+   Alkalinity:Total:Potentiometric,
+   Flag:Alkalinity:Total:Potentiometric,
+   Carbon:Dissolved:Inorganic,
+   Flag:Carbon:Dissolved:Inorganic
+ Primary file  : P:\John Pages Archive\1994-02\1994-02-0035.che
+ Secondary file: P:\John Pages Archive\1994-02\1994-02-0035.cln
+
+Comments from secondary file:
+P:\John Pages Archive\1994-02\1994-02-0035.cln
+----------------------------------------------
+-CLEAN functions: 2012/02/08 16:13:24 20
+Reset #RECS, MIN & MAX values in header.
+Delete Empty Channels:     0 deleted.
+-HEADER EDITS: 2012/02/08 16:20:41
+ Applied edit header: O:\Data Processing\Header Comments\Work\DIC & Alkalinity 1992-01 to 1994-02.tx
+-The following MERGE parameters were used: 2012/11/09 11:12:03 2012/11/09 11:12:03 2012/11/09 11:12:
+ Merge Channel: Pressure
+ Merge Scheme Used: Add Secondary to Primary
+ Overlap Scheme Used: Keep Secondary
+ Primary Channels to Include: ALL
+ Secondary Channels to Include:
+   Chlorofluorocarbon_11,
+   Flag:Chlorofluorocarbon_11,
+   Chlorofluorocarbon_12,
+   Flag:Chlorofluorocarbon_12
+ Primary file  : P:\John Pages Archive\1994-02\CFC\1994-02-0035.che
+ Secondary file: P:\John Pages Archive\1994-02\CFC\1994-02-0035.ios
+-HEADER EDITS: 2012/11/09 11:40:26
+ Applied edit header: O:\Data Processing\Header Comments\Work\Freons.txt
+$END
+
+*COMMENTS
+    confusion as to what samples where taken from what Niskin bottle.
+    duplicates taken from Niskin bottles 1 to 3.
+
+    Collection method:
+    ------------------
+      A rosette, holding 24 ten-litre water samplers, with a CTD was used.
+
+    Analysis methods:
+    -----------------
+
+      Salinity samples are collected in glass bottles and analyzed on Guildline
+      model 8410 Portasal Salinometers which are standardized with IAPSO standard
+      seawater.
+
+      Oxygen samples are analyzed on an automated Winkler titration system
+      following the procedures of Carpenter (1965). A Brinkmann model 665 Dosimat
+      and model PC910 Colorimeter is controlled by Visual-Basic program to
+      titrate the oxygen samples.
+
+      Nutrient samples are analyzed fresh on board using a Technicon AAII auto-
+      analyzer following methods described in Barwell-Clarke and Whitney (1996).
+
+      Chlorophyll was extracted with 90% acetone and analyzed fluorimetrically.
+
+    Dissolved inorganic carbon (DIC) was determined using coulometric analysis.
+
+    Total Alkalinity was determined by Potentiometric Titrations using the
+    Edmond Closed Cell, Non-Linear Method. All total alkalinity data prior to
+    and including cruise 1999-01 are of poor quality and should be used with
+    caution. Data have been re-quality controlled and flagged, but even data
+    flagged as good contain unknown accuracy errors. Users should consult the
+    PACIFICA corrected values at CDIAC for estimates of these errors.
+    .
+    CFC-11 and CFC-12 were analyzed using Gas Chromatography, following
+    procedure of Bullister and Weiss (1987). In their current form, they not
+    meet the relaxed WOCE standard for CFC's. Therefore the CFC qulaity flags
+    have been given a value of'3'(questionable). The results have blank
+    corrections with limits of detection accounted for, as stated in the report.
+    For CFC methods refer to the "Centre for Ocean Climate Chemistry Freon Data
+    Report" located in the cruise .DOC directory.
+    .
+      References:
+      1. Carpenter, J.H. 1965. The Chesapeake Bay Institute Technique for the
+      Winkler Dissolved Oxygen Method. Limmnol. & Oceanogr., 10: 141-143.
+      2. J. Barwell-Clarke and F. Whitney. 1996. Institute of Ocean Sciences
+      Nutrient Methods and Analysis. Canadian Technical Report of Hydrography
+      and Ocean Sciences, No. 182, 43 pp.
+      3. Minkley, B.G., and F.A. Whitney. 2001. Summary of Hydrographic/CTD
+      Observations Made Along Line P and at Station P: 1991-1999. Canadian
+      Data Report of Hydrography and Ocean Sciences 156: 45 pp.
+!--1--- -2-- ---3--- --4-- ---5---- ---6---- --7-- --8--- --9--- --10- --11-- 12 --13-- 14 ---15-- - ---17-- -
+!Pressu Samp Oxygen: Oxyge Salinity Temperat Nitra Nitrit Phosph Silic Alkali Fl Carbon Fl Chlorof F Chlorof F
+!re     le_  Dissolv n:    :Bottle  ure      te    e      ate    ate   nity:T ag :Disso ag luoroca l luoroca l
+!       Numb ed      Disso                                             ~al:Po ~e lved:  ~g rbon_11 ~ rbon_12 ~
+!       er           lved                                              tentio tr Inorga an         1         1
+!                                                                      metric ic nic    ic         1         2
+!------ ---- ------- ----- -------- -------- ----- ------ ------ ----- ------ -- ------ -- ------- - ------- -
+*END OF HEADER
+   16.3  200   6.963 303.4  32.5420   8.5300   6.8   0.19   0.88  12.1 2206.7 2  2000.4 2    6.506 3   2.313 3
+   49.8  201   7.070 308.0  32.5450   8.3300   6.9   0.07   0.90  12.3 2201.5 2  2002.8 2    6.501 3   2.228 3
+  100.6  202   6.784 295.5  32.5820   6.7900  10.3   0.06   1.14  16.3 2207.4 2  2022.0 2    5.865 3   2.278 3
+  200.5  203   3.829 166.6  33.8170   5.6000  29.9   0.25   2.22  48.9 2289.3 2  2192.9 2    3.131 3   1.697 3
+  300.5  204   2.529 110.0  33.8550   4.5500  36.8   0.00   2.69  69.6 2306.7 2  2251.9 2    2.182 3   1.109 3
+  400.1  205   1.512  65.8  33.9630   4.2000  41.1   0.00   2.98  87.2 2320.9 2  2293.5 2    1.255 3   0.576 3
+  600.3  206   0.714  31.0  34.1370   3.8400  43.7   0.00   3.17 109.7 2348.2 2  2334.6 2    0.322 3   0.228 3
+  800.1  207   0.485  21.1  34.2650   3.4000  44.6   0.00   3.25 128.2 2376.6 2  2359.8 2    0.105 3   0.128 3
+ 1000.7  208   0.383  16.7  34.3550   3.0300  45.0   0.00   3.29 142.0 2400.6 3  2377.6 2    0.000 3   0.000 3
+ 1200.4  209   0.371  16.1  34.4150   2.7400  45.9   0.00   3.29 152.0 2396.3 2  2383.3 2    0.000 3   0.000 3
+ 1400.5  210   0.463  20.1  34.4670   2.4900  45.4   0.00   3.31 160.3 2420.9 3  2390.5 2    0.000 3   0.000 3
+ 1599.6  211   0.670  29.1  34.5110   2.2700  45.5   0.00   3.27 166.5 2416.0 2  2391.5 2    0.000 3   0.000 3
+ 1801.0  212   0.933  40.5  34.5500   2.1000  44.3   0.00   3.19 169.9 2426.8 2  2393.0 2    0.000 3   0.097 3
+ 2000.7  213   1.258  54.7  34.5770   1.9600  43.5   0.00   3.13 175.3 2445.8 3  2381.8 2    0.000 3   0.164 3
+ 2200.4  214   1.556  67.6  34.6000   1.8500  42.5   0.00   3.05 176.4 2454.4 3  2379.9 2    0.064 3   0.000 3
+ 2399.2  215   1.788  77.7  34.6160   1.7700  42.4   0.00   3.01 176.7 2456.9 3  2371.3 2  -99.000 9 -99.000 9
+ 2600.9  216   2.084  90.6  34.6320   1.6900  41.4   0.00   2.95 176.2 2443.1 3  2369.7 2  -99.000 9 -99.000 9
+ 2800.7  217   2.302 100.1  34.6430   1.6300  40.9   0.00   2.90 176.1 2452.6 3  2362.9 2  -99.000 9 -99.000 9
+ 2999.7  218   2.502 108.7  34.6510   1.5900  40.2   0.00   2.86 176.0 -999.0 9  2354.6 2  -99.000 9 -99.000 9
+ 3200.7  219   2.676 116.3  34.6590   1.5600  39.8   0.00   2.83 175.1 2449.2 2  -999.0 9  -99.000 9 -99.000 9
+ 3400.5  220   2.792 121.4  34.6640   1.5400  39.2   0.00   2.79 174.9 2447.6 2  2350.6 2  -99.000 9 -99.000 9
+ 3602.0  221   2.981 129.6  34.6700   1.5300  39.0   0.00   2.78 175.4 2453.9 2  2347.8 2  -99.000 9 -99.000 9
+ 4025.7  222   2.918 126.8  34.6690   1.5400  38.7   0.00   2.78 174.9 2467.3 3  2344.9 2  -99.000 9 -99.000 9
