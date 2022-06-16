@@ -1,0 +1,169 @@
+*2013/12/16 15:09:42.05
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : PDT 1996/04/09 10:27:49.000
+    NUMBER OF RECORDS   : 1
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop
+    FILE TYPE           : ASCII
+    DATA TYPE           : REAL*4
+    NUMBER OF CHANNELS  : 13
+
+    $TABLE: CHANNELS
+    ! No Name                              Units     Minimum        Maximum
+    !--- --------------------------------- --------- -------------- --------------
+       1 Sample_Number                     n/a       7              7
+       2 Pressure                          decibar   140            140
+       3 Oxygen:Dissolved                  umol/kg   2.4            2.4
+       4 Oxygen:Dissolved                  mL/L      0.54E-01       0.54E-01
+       5 Salinity:Bottle                   PSS-78    31.2344        31.2344
+       6 Silicate                          umol/L    110.2          110.2
+       7 Phosphate                         umol/L    5.29           5.29
+       8 Ammonium                          umol/L    4.33           4.33
+       9 Nitrogen:Dissolved:Organic        umol/L    7.6            7.6
+      10 Flag:Nitrogen:Dissolved:Organic   n/a
+      11 Dimethyl_Sulphide                 nmol/L    0.8E-01        0.8E-01
+      12 Carbon:Dissolved:Inorganic        umol/kg   2269.3         2269.3
+      13 Hydrogen_Sulfide                  umol/L    3.1            3.1
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        5  I       I       0
+       2  -99   ' '        7  F       ' '     1
+       3  -99   ' '        6  F       ' '     1
+       4  -99   ' '        8  F       ' '     3
+       5  -99   ' '        9  F       ' '     4
+       6  -99   ' '    ' '    F6.1    R4    ' '
+       7  -99   ' '    ' '    F7.2    R4    ' '
+       8  -99   ' '    ' '    F7.2    R4    ' '
+       9  -99   ' '    ' '    F6.1    R4    ' '
+      10  -99   ' '        2  NQ      C     ' '
+      11  -99   ' '    ' '    F7.2    R4    ' '
+      12  -99   ' '    ' '    F7.1    R4    ' '
+      13  -99   ' '    ' '    F7.2    R4    ' '
+    $END
+    $REMARKS
+        Data quality is expressed with the following flags
+        ----------------------------------------------------------------------------
+        1 = Sample for this measurement was drawn from water bottle but not analyzed
+            (not normally used).
+        2 = Acceptable measurement (not normally used).
+        3 = Questionable measurement (no problem observed in sampling or analysis,
+            but value is not trusted, nonetheless; includes outlyers).
+        4 = Bad measurement (known problem with sampling or analysis, but not
+            serious enough to completely discard the value).
+        5 = Not reported (lost sample; unredeemably bad measurement).
+        6 = Mean of replicate measurements.
+        7 = Manual chromatographic peak measurement.
+        8 = Irregular digital chromatographic peak integration.
+        9 = Sample not drawn for this measurement from this bottle (not normally
+            used).
+        ----------------------------------------------------------------------------
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1996-06
+    AGENCY              : IOS, Ocean Science and Productivity, Sidney, B.C.
+    COUNTRY             : Canada
+    PROJECT             : Plankton Productivity
+    SCIENTIST           : Mackas D.
+    PLATFORM            : Vector
+
+*LOCATION
+    STATION             : SI03
+    EVENT NUMBER        : 2
+    LATITUDE            :  48  35.35000 N  ! (deg min)
+    LONGITUDE           : 123  30.20000 W  ! (deg min)
+    WATER DEPTH         : 230
+
+*INSTRUMENT
+    TYPE                : Bottle
+    MODEL               : Niskin 10 litre
+    $REMARKS
+        Dissolved oxygen concentration determined using an automated
+        titration system consisting of a Brinkman Dosimat (model 665)
+        and a PC 900 Colorimeter.
+    $END
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        AutoOxy.bas              1.8    1996/04/10 16:34:10 ' '              19
+        OxyRedo.bas              1.0    1996/04/19 15:32:22        19        19
+        CLEAN                    2.2    1997/03/24 14:01:18         1         1
+        REMOVECH                 3.0    1997/03/27 10:28:03         1         1
+        CLEAN                    3.0.1  2001/11/14 12:56:15        10        10
+        CLEAN                    3.0.1  2001/11/19 09:32:05         9         9
+        HDREDIT2                 1.51   2003/03/14 11:02:50 ?         ?
+        MERGE                    3.0    2003/09/23 13:57:34         9         9
+        REMOVECH                 6.0    2003/09/23 14:11:19         9         9
+        HDREDIT2                 1.7    2003/09/23 14:11:25 ?         ?
+        CLEAN                    4.4    2003/09/23 14:11:32         1         1
+        SORT                     3.4.1  2004/04/13 15:00:02         1         1
+        HDREDIT2                 2.0    2004/05/19 11:02:34 ?         ?
+        CHANGE_FLAGS             1.0    2013/07/16 11:45:28         1         1
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 15:09:42         1         1
+    $END
+    $REMARKS
+        C.H. Culbertson's paper on Dissolved Oxygen in the 'Woce
+        Hydrographic Program Operations and Methods - July 1991'
+        OxyRedo fixs DO_mass and DO_volumne when incorrect values
+        for VIO3, NIO3, blank, or standard have been entered.
+        CLEAN functions performed:
+         - Reset #RECS, MIN & MAX values in header.
+        -The following CHANNEL(S) were removed from file.
+         Temperature:Sample
+         Thiosulfate_titer
+         Flask_Number
+         Flask_Volume
+         Blank
+         Standard
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Customise the Data Column Headings at the end of the header.
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Customise the Data Column Headings at the end of the header.
+        -The following MERGE parameters were used:
+         Merge Channel: Sample_Number
+         Merge Scheme Used: Interweave Records from Both Files
+         Overlap Scheme Used: Keep Primary
+         Primary Channels to Include: ALL
+         Secondary Channels to Include:
+           Nitrate_plus_Nitrite,
+           Flag:Nitrate_plus_Nitrite,
+           Silicate,
+           Phosphate,
+           Ammonium,
+           Chlorophyll:Extracted,
+           Nitrogen:Dissolved:Organic,
+           Flag:Nitrogen:Dissolved:Organic,
+           Dimethyl_Sulphide,
+           Carbon_Dioxide:Total,
+           Hydrogen_Sulfide
+         Primary file  : H:\New_Archive\1996\1996-06\hydro\1996-06-0002.che
+         Secondary file: H:\New_Archive\1996\1996-06\hydro\1996-06-0002.rev
+        -The following CHANNEL(S) were removed from file.
+         Salinity:CTD
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Change Pad Value to -99 in All Channels.
+         - Delete Empty Channels:   3 deleted.
+         - Set channel name post-colon letters to upper case.
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure
+         Pressure channel sorted according to values in sort channel
+    $END
+!-1-- --2--- --3-- ---4--- ---5---- --6-- --7--- --8--- --9-- - --11-- --12-- --13--
+!Samp Pressu Oxyge Oxygen: Salinity Silic Phosph Ammoni Nitro F Dimeth Carbon Hydrog
+!le_  re     n:    Dissolv :Bottle  ate   ate    um     gen:D l yl_    :Disso en_   
+!Numb        Disso ed                                   ~solv ~ Sulphi lved:  Sulfid
+!er          lved                                       ed:Or i de     Inorga e     
+!                                                       ganic c        nic          
+!---- ------ ----- ------- -------- ----- ------ ------ ----- - ------ ------ ------
+*END OF HEADER
+    7  140.0   2.4   0.054  31.2344 110.2   5.29   4.33   7.6 3   0.08 2269.3   3.10
