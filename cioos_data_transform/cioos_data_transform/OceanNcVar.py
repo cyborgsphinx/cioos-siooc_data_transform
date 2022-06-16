@@ -960,6 +960,10 @@ class OceanNcVar(object):
                 bodc_units = "mg/m^3"
                 self.standard_name = "mass_concentration_of_chlorophyll_a_in_water_body"
                 self.long_name = "Concentration of chlorophyll-a {chl-a CAS 479-61-8} per unit volume of the water body [particulate >unknown phase] by in-situ chlorophyll fluorometer"
+            elif is_in(["fluorescence_cdom"], ios_varname) and is_in(["volts"], varunits):
+                bodc_code = "FVLTCDOM"
+                bodc_units = "volts"
+                self.long_name = "Raw signal (volts) of instrument output by linear-response CDOM fluorometer"
             elif is_in(["transmissivity"], ios_varname) and is_in(["%/metre"], varunits):
                 bodc_code = "POPTPZ01"
                 bodc_units = "%/metre"
