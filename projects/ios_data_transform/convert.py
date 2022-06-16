@@ -644,7 +644,14 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 attributes={"featureType": ncfile.global_attrs["featureType"]},
             )
 
-        elif is_in(["carbon:dissolved", "carbon:particulate"], channel.name) and not is_in(
+        elif is_in(
+            [
+                "carbon:dissolved",
+                "carbon:particulate",
+                "nitrogen:dissolved",
+            ],
+            channel.name
+        ) and not is_in(
             [
                 "flag"
             ],

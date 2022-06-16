@@ -968,6 +968,10 @@ class OceanNcVar(object):
                 bodc_code = "TCO2POTX"
                 bodc_units = "mg/L"
                 self.long_name = "Concentration of total inorganic carbon per unit volume of the water body"
+            elif is_in(["nitrogen:dissolved:organic"], ios_varname) and is_in(["umol/l"], varunits):
+                bodc_code = "MDMAP009"
+                bodc_units = "umol/L"
+                self.long_name = "Concentration of organic nitrogen per unit volume of the water body"
             elif ios_varname.lower() == "ph" or ios_varname.lower().startswith("ph:"):
                 bodc_code = "PHXXPR01"
                 bodc_units = "n/a"
