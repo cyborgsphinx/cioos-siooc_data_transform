@@ -980,9 +980,18 @@ class OceanNcVar(object):
                 bodc_code = "IC000083"
                 bodc_units = "umol/L"
                 self.long_name = "Concentration of dissolved organic carbon per unit volume of the water body"
-            elif is_in(["carbon:particulate:organic"], ios_varname) and is_in(["umol/l"], varunits):
+            elif is_in(["carbon:particulate:organic"], ios_varname):
                 bodc_code = "MDMAP010"
                 bodc_units = "umol/L"
+                if is_in(["umol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["mg/m^3"], varunits):
+                    mg_per_m3_to_ug_per_L = 1.0
+                    g_to_mol = 1.0 / 12.0
+                    conversion_rate = mg_per_m3_to_ug_per_L * g_to_mol
+                else:
+                    raise Exception("Unknown unit conversion to umol/L", varunits, ios_varname)
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
                 self.long_name = "Concentration of particulate organic carbon per unit volume of the water body"
             elif is_in(["carbon:dissolved:inorganic"], ios_varname) and is_in(["umol/kg"], varunits):
                 bodc_code = "TCO2MSXX"
