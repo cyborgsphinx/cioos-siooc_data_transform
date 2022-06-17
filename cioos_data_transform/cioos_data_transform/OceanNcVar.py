@@ -1022,6 +1022,10 @@ class OceanNcVar(object):
                 bodc_code = "IC000120"
                 bodc_units = "pmol/L"
                 self.long_name = "Concentration of aluminium (aluminum) per unit volume of the water body"
+            elif is_in(["total_suspended_solids"], ios_varname) and is_in(["mg/l"], varunits):
+                bodc_code = "RBYJLY26"
+                bodc_units = "mg/L"
+                self.long_name = "Concentration of suspended particulate material in the water column"
             elif ios_varname.lower() == "ph" or ios_varname.lower().startswith("ph:"):
                 bodc_code = "PHXXPR01"
                 bodc_units = "n/a"
