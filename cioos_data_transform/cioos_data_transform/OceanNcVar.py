@@ -1005,6 +1005,19 @@ class OceanNcVar(object):
                 bodc_code = "MDMAP009"
                 bodc_units = "umol/L"
                 self.long_name = "Concentration of organic nitrogen per unit volume of the water body"
+            elif is_in(["nitrogen:particulate:organic"], ios_varname):
+                bodc_code = "MDMAP010"
+                bodc_units = "umol/L"
+                if is_in(["umol/l"], varunits):
+                    conversion_rate = 1.0
+                elif is_in(["mg/m^3"], varunits):
+                    mg_per_m3_to_ug_per_L = 1.0
+                    g_to_mol = 1.0 / 12.0
+                    conversion_rate = mg_per_m3_to_ug_per_L * g_to_mol
+                else:
+                    raise Exception("Unknown unit conversion to umol/L", varunits, ios_varname)
+                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.long_name = "Concentration of particulate organic nitrogen per unit volume of the water body"
             elif is_in(["aluminum:dissolved"], ios_varname) and is_in(["pmol/l"], varunits):
                 bodc_code = "IC000120"
                 bodc_units = "pmol/L"
