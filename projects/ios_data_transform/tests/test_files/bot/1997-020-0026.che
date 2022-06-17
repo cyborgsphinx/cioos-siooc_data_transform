@@ -1,0 +1,210 @@
+*2013/12/16 15:12:58.81
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 1997/08/10 00:49:00.000
+    NUMBER OF RECORDS   : 23
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop + CTD:Up
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 21
+
+    $TABLE: CHANNELS
+    ! No Name                         Units           Minimum        Maximum
+    !--- ---------------------------- --------------- -------------- --------------
+       1 Sample_Number                n/a             188772         188794
+       2 Bottle_Number                n/a             1              23
+       3 Pressure                     decibar         15.2           59.2
+       4 Temperature                  'deg C (ITS90)' 4.178          4.562
+       5 Salinity                     PSS-78          33.438         33.471
+       6 Salinity:Bottle              PSS-78          33.45          33.496
+       7 Oxygen:Dissolved             mL/L            7.34           7.734
+       8 Nitrate_plus_Nitrite         umol/L          0.1            0.9
+       9 Nitrite                      umol/L          0.2E-01        0.8E-01
+      10 Silicate                     umol/L          0.8            2
+      11 Phosphate                    umol/L          0.2            0.41
+      12 Chlorofluorocarbon_12        pmol/L          2.9            3.03
+      13 Chlorofluorocarbon_11        pmol/L          5.94           6.25
+      14 Chlorofluorocarbon_113       pmol/L          0.41           0.41
+      15 Carbontetrachloride          pmol/L          6.98           8.55
+      16 Carbon:Dissolved:Inorganic   umol/kg         2032.62        2052.6
+      17 Alkalinity:Total             umol/kg         2230.37        2235.6
+      18 Chlorophyll:Extracted        mg/m^3          1.75           3.25
+      19 Oxygen:Isotope:18            /mille          -0.74          -0.48
+      20 Barium:Dissolved             nmol/L          40.7           47.1
+      21 Aluminum:Dissolved           pmol/L          12.23          16.14
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        7  I       I       0
+       2  -99   ' '        3  I       I       0
+       3  -99   ' '        7  F       R4      1
+       4  -99   ' '        8  F       R4      3
+       5  -99   ' '        8  F       R4      3
+       6  -99   ' '        8  F       R4      3
+       7  -99   ' '        8  F       R4      3
+       8  -99   ' '        6  F       R4      1
+       9  -99   ' '        7  F       R4      2
+      10  -99   ' '        6  F       R4      1
+      11  -99   ' '        7  F       R4      2
+      12  -99   ' '        7  F       R4      2
+      13  -99   ' '        7  F       R4      2
+      14  -99   ' '        7  F       R4      2
+      15  -99   ' '        7  F       R4      2
+      16  -99   ' '        8  F       R4      2
+      17  -99   ' '        8  F       R4      2
+      18  -99   ' '        7  F       R4      2
+      19  -99   ' '        7  F       R4      2
+      20  -99   ' '        7  F       R4      1
+      21  -99   ' '        7  F       R4      2
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1997-20
+    AGENCY              : JOIS (12 US and Canadian Agencies)
+    COUNTRY             : Canada
+    PROJECT             : Joint Ocean Ice Study
+    SCIENTIST           : Falkner K.
+    PLATFORM            : Louis S. St. Laurent
+
+*LOCATION
+    GEOGRAPHIC AREA     : 'Hudson Strait, Davis Strait, Jones Sound, Nares'
+        CONTINUED       : ' Strait'
+    STATION             : D9
+    EVENT NUMBER        : 26
+    LATITUDE            :  67   2.87000 N  ! (deg min)
+    LONGITUDE           :  54  35.52000 W  ! (deg min)
+    WATER DEPTH         : 64
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        SPRD2IS                  3.4.6  2002/03/21 15:05:34        23        23
+        HDREDIT2                 1.3    2002/03/26 11:40:12 ?         ?
+        HDREDIT2                 1.3    2002/03/27 11:52:06 ?         ?
+        REMOVECH                 6.0    2002/04/10 15:29:35        23        23
+        HDREDIT2                 1.3    2002/04/10 15:33:26 ?         ?
+        HDREDIT2                 1.3    2002/04/25 10:41:15 ?         ?
+        REMOVECH                 6.0    2002/04/25 10:43:48        23        23
+        SORT                     3.2    2002/04/25 10:47:52        23        23
+        CLEAN                    3.7.1  2002/04/25 10:53:17        23        23
+        HDREDIT2                 1.9    2004/03/25 11:30:31 ?         ?
+        HDREDIT2                 2.0    2004/05/19 11:58:18 ?         ?
+        HDREDIT2                 2.1    2004/05/28 09:35:23 ?         ?
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 15:12:58        23        23
+    $END
+    $REMARKS
+        -The following CHANNEL(S) were removed from file.
+         CTD_cast
+         Pressure:raw
+         Temperature:ITS90:adjusted
+         Salinity:PSS78:adjusted
+         Salinity:downcast:gradient
+         Pressure:unadjusted
+         Oxygen:dissolved:molar
+         TCO2-1
+         TCO2-2
+         TCO2-3
+         ALK-1
+         ALK-2
+         ALK-3
+         Pressure_ctd_cal98
+         Temp-CTD_cal98
+         Sal-CTD_cal98
+         Fluorom_cal98
+         Trans_cal98
+        -The following CHANNEL(S) were removed from file.
+         Pressure_Nominal
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure
+         Pressure channel sorted according to values in sort channel
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Change Pad Value to -99 in All Channels.
+         - Delete Empty Channels:   0 deleted.
+         - Set channel name post-colon letters to upper case.
+    $END
+
+*COMMENTS
+    Cruise Dates :  August 1/97 to August 20/97
+
+    The water sampling and CTD casts were carried out from the starboard boat deck
+    using an A-frame and a hydraulic winch wrapped with a conducting sea cable.
+    A 24-bottle GO (General Oceanics) rosette sampler outfitted with
+    24 10 L BIO-design bottles was used to collect the samples.
+
+    See the following files for information on the data :
+
+    9720chem.xls   --->   excel workbook from which archived data was derived,
+    contains more detailed information.
+
+    Methods.doc  --->   provides information on the analytical methods used.
+
+    Leg1summ.doc   --->   9720 Cruise Summary.
+
+    The values of pressure associated with each water sample are estimated on the
+    presumption that the water in the bottle when closed on the UPCAST originates
+    some distance below the CTD/rosette.  The reason is that the wake of the
+    rosette catches up with the rosette when it is stopped for sampling.  Because
+    the wake is turbulent, the uncertainty of the level of sampling is relatively
+    large (+/-4 m).  The average effective downward displacement for this  data
+    set is 2 m, deduced from an analysis of salinity values from the downcast
+    CTD and from bottles.
+
+    The values of CTD temperature and salinity associated with each water sample
+    are derived from the UPCAST (when samples were acquired). These are the CTD
+    values most representative of the water in a bottle when it is closed on the
+    UPCAST, since both the CTD and the bottle are engulfed in the wake of the
+    rosette when it is stopped for sampling. However, because the turbulent
+    wake is inhomogeneous and because oceanographic bottles do not flush
+    instantaneously, an exact correspondence cannot be expected. The calculated
+    discrepancy between the upcast CTD and the sample analysis suggests a
+    mismatch equivalent to the change in T & S over about (+/-3 m). Depending
+    on the vertical gradients in T & S, this mismatch may be important, or
+    negligible.
+
+    For more information and detail on the pressure and ctd temperatures and
+    ctd salinities see the following files:
+
+    1997-20-22_ICTD_cond_calib_&_bot_levels.doc   --->   Describes the procedure
+    used in choosing the Depth and Temperature for the geochemical samples
+    for cruises 1997-20, 1997-21 and 1997-22.
+
+    1997-20-22_bottle-level_data.xls   --->   contains an analysis of ctd/ros
+    bottle levels for cruises 1997-20, 1997-21 and 1997-22.
+
+    End of comments
+!--1--- 2- --3--- ---4--- ---5--- ---6--- ---7--- --8-- --9--- --10- --11-- --12-- --13-- --14-- --15-- ---16-- ---17-- --18-- --19-- --20-- --21--
+!Sample Bo Pressu Tempera Salinit Salinit Oxygen: Nitra Nitrit Silic Phosph Chloro Chloro Chloro Carbon Carbon: Alkalin Chloro Oxygen Barium Alumin
+!_      tt re     ture    y       y:      Dissolv te_   e      ate   ate    fluoro fluoro fluoro tetrac Dissolv ity:    phyll: :      :      um:   
+!Number ~u                        Bottle  ed      plus_                     carbon carbon carbon hlorid ed:     Total   Extrac Isotop Dissol Dissol
+!       mb                                        Nitri                     _12    _11    _113   e      Inorgan         ted    e:18   ved    ved   
+!       er                                        te                                                    ic                                         
+!------ -- ------ ------- ------- ------- ------- ----- ------ ----- ------ ------ ------ ------ ------ ------- ------- ------ ------ ------ ------
+*END OF HEADER
+ 188790 19   15.2   4.560  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188793 22   15.4   4.555  33.441 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188792 21   16.1   4.556  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188791 20   16.2   4.559  33.440 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188787 16   16.4   4.559  33.439  33.450   7.734   0.1   0.02   0.9   0.22   2.90   6.11   0.41   6.98 2034.91 2235.60   3.15  -0.48   40.7  12.73
+ 188794 23   16.4   4.555  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188788 17   16.7   4.559  33.440 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188789 18   16.7   4.560  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188786 15   31.8   4.540  33.445 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188784 13   31.9   4.560  33.438 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188783 12   32.0   4.556  33.440 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188782 11   32.1   4.556  33.440 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188781 10   32.3   4.559  33.439  33.450   7.716   0.1   0.04   0.8   0.20   2.94   6.25   0.41   7.33 2032.62 2233.30   3.25  -0.74   41.6  12.23
+ 188780  9   32.4   4.558  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188785 14   32.6   4.562  33.439 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188773  2   47.1   4.249  33.467  33.496   7.417   0.6   0.08   1.6   0.35   2.91   6.13   0.41   7.88 2052.15 2231.62   2.09  -0.71   45.3  13.31
+ 188774  3   48.1   4.246  33.468 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188777  6   48.4   4.253  33.469 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188778  7   48.4   4.259  33.468 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188779  8   48.5   4.258  33.468 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188775  4   48.6   4.249  33.467 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188776  5   48.8   4.244  33.468 -99.000 -99.000 -99.0 -99.00 -99.0 -99.00 -99.00 -99.00 -99.00 -99.00  -99.00  -99.00 -99.00 -99.00  -99.0 -99.00
+ 188772  1   59.2   4.178  33.471  33.487   7.340   0.9   0.03   2.0   0.41   3.03   5.94   0.41   8.55 2052.60 2230.37   1.75  -0.72   47.1  16.14

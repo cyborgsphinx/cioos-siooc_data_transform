@@ -656,6 +656,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                 "carbon:dissolved",
                 "carbon:particulate",
                 "nitrogen:dissolved",
+                "aluminum:dissolved",
             ],
             channel.name
         ) and not is_in(
