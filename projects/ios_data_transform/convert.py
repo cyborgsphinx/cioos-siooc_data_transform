@@ -794,10 +794,9 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
             )
 
         else:
-            if not is_in(["record", "sample", "date", "time"], channel.name):
-                logging.warn(
-                    f"{channel.name} ({channel.units}) not transferred to netcdf file !"
-                )
+            logging.warn(
+                f"{channel.name} ({channel.units}) not transferred to netcdf file !"
+            )
 
     if is_current:
         # Calculate North and East components of speed if missing
