@@ -5,6 +5,11 @@ from pytz import timezone
 import numpy as np
 
 
+def apply_conversion_rate(data, rate, null=-99):
+    out = [datum * rate if datum != null else datum for datum in data]
+    return np.asarray(out, dtype=float)
+
+
 class OceanNcVar(object):
     def __init__(
         self,
@@ -865,7 +870,7 @@ class OceanNcVar(object):
                     raise Exception("No known conversion from {} to mg/m^3".format(varunits))
             else:
                 raise Exception("No known conversions to {}".format(bodc_units))
-            self.data = conversion_rate * np.asarray(self.data, dtype=float)
+            self.data = apply_conversion_rate(self.data, conversion_rate)
 
         elif vartype == "conductivity":
             if is_in(["s/m"], varunits):
@@ -991,7 +996,7 @@ class OceanNcVar(object):
                     conversion_rate = mg_per_m3_to_ug_per_L * g_to_mol
                 else:
                     raise Exception("Unknown unit conversion to umol/L", varunits, ios_varname)
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
                 self.long_name = "Concentration of particulate organic carbon per unit volume of the water body"
             elif is_in(["carbon:dissolved:inorganic"], ios_varname) and is_in(["umol/kg"], varunits):
                 bodc_code = "TCO2MSXX"
@@ -1016,7 +1021,7 @@ class OceanNcVar(object):
                     conversion_rate = mg_per_m3_to_ug_per_L * g_to_mol
                 else:
                     raise Exception("Unknown unit conversion to umol/L", varunits, ios_varname)
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
                 self.long_name = "Concentration of particulate organic nitrogen per unit volume of the water body"
             elif is_in(["aluminum:dissolved"], ios_varname) and is_in(["pmol/l"], varunits):
                 bodc_code = "IC000120"
@@ -1070,7 +1075,7 @@ class OceanNcVar(object):
                     conversion_rate = 1000.0
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
             elif is_in(["propane"], ios_varname) and is_in(["mol/l"], varunits):
                 bodc_code = "AX03GCTX"
                 bodc_units = "pmol/L"
@@ -1081,7 +1086,7 @@ class OceanNcVar(object):
                     conversion_rate = 1000.0
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
             elif is_in(["methylene_chloride"], ios_varname) and is_in(["pmol/l"], varunits):
                 bodc_code = "RWSX0004"
                 bodc_units = "pmol/L"
@@ -1096,7 +1101,7 @@ class OceanNcVar(object):
                     conversion_rate = 1000.0
                 else:
                     raise Exception("No known conversion from {} to picomoles/L".format(varunits))
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
             elif is_in(["dimethylsulfoniopropionate_dissolved"], ios_varname) and is_in(["mol/l"], varunits):
                 bodc_code = "DMSPGCD1"
                 bodc_units = "nmol/L"
@@ -1107,7 +1112,7 @@ class OceanNcVar(object):
                     conversion_rate = 1000.0
                 else:
                     raise Exception("No known conversion from {} to nanomoles/L".format(varunits))
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
             elif is_in(["dimethylsulfoniopropionate_total"], ios_varname) and is_in(["mol/l"], varunits):
                 bodc_code = "DMSPPTR3"
                 bodc_units = "nmol/L"
@@ -1118,7 +1123,7 @@ class OceanNcVar(object):
                     conversion_rate = 1000.0
                 else:
                     raise Exception("No known conversion from {} to nanomoles/L".format(varunits))
-                self.data = conversion_rate * np.asarray(self.data, dtype=float)
+                self.data = apply_conversion_rate(self.data, conversion_rate)
             elif is_in(["dimethyl_sulphide"], ios_varname) and is_in(["nmol/l"], varunits):
                 bodc_code = "DMSXGCD4"
                 bodc_units = "nmol/L"
@@ -1138,6 +1143,8 @@ class OceanNcVar(object):
             elif is_in(["bacteria"], ios_varname) and is_in(["/ml"], varunits):
                 bodc_code = "P18318A9"
                 bodc_units = "/mL"
+                if is_in(["10^6"], varunits):
+                    self.data = apply_conversion_rate(self.data, 1000000)
                 self.long_name = "Abundance of bacteria per unit volume of the water body"
             elif is_in(["picophytoplankton"], ios_varname) and is_in(["/ml"], varunits):
                 bodc_code = "PU00A02Z"
