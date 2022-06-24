@@ -1,0 +1,402 @@
+*2014/11/20 09:52:27.99
+*IOS HEADER VERSION 1.10 2011/10/26 2011/10/26
+
+*FILE
+    START TIME          : UTC 1998/09/16 18:17:27.000
+    TIME INCREMENT      : 0 0 0 0.416667E-01 0  ! (day hr min sec ms)
+    NUMBER OF RECORDS   : 22
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop + CTD:Up
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 15
+
+    $TABLE: CHANNELS
+    ! No Name                          Units     Minimum        Maximum
+    !--- ----------------------------- --------- -------------- --------------
+       1 Pressure                      decibar   1.7            1502.4
+       2 Sample_Number                 n/a       302            323
+       3 Salinity:Bottle               PSS-78    32.491         34.5016
+       4 Phosphate                     umol/L    0.33           3.28
+       5 Nitrate_plus_Nitrite          umol/L    0              45.4
+       6 Silicate                      umol/L    1.6            162.2
+       7 Oxygen:Dissolved              mL/L      0.278          6.914
+       8 Chlorofluorocarbon_11         pmol/kg   0              4.57
+       9 Flag:Chlorofluorocarbon_11    n/a
+      10 Chlorofluorocarbon_12         pmol/kg   0              2.19
+      11 Flag:Chlorofluorocarbon_12    n/a
+      12 Chlorofluorocarbon_113        pmol/kg   0              1.1
+      13 Flag:Chlorofluorocarbon_113   n/a
+      14 Carbontetrachloride           pmol/kg   0              4.49
+      15 Flag:Carbontetrachloride      n/a
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format  Type  Decimal_Places
+    !---  ----  -----  -----  ------  ----  --------------
+       1  -99   ' '        7  F       ' '     1
+       2  -99   ' '        5  I       I       0
+       3  -99   ' '        9  F       ' '     4
+       4  -99   ' '        7  F       ' '     2
+       5  -99   ' '        6  F       ' '     1
+       6  -99   ' '        6  F       ' '     1
+       7  -99   ' '        8  F       ' '     3
+       8  -99   ' '    ' '    F7.2    R4    ' '
+       9  0     ' '        2  NQ      C     ' '
+      10  -99   ' '    ' '    F7.2    R4    ' '
+      11  0     ' '        2  NQ      C     ' '
+      12  -99   ' '    ' '    F7.2    R4    ' '
+      13  0     ' '        2  NQ      C     ' '
+      14  -99   ' '    ' '    F7.2    R4    ' '
+      15  0     ' '        2  NQ      C     ' '
+    $END
+    $REMARKS
+
+        Comments from secondary file: e:\data\1998\9829\98290094.cor
+        --------------------------------------------------------------------------------------
+        Raw data in file 98290094
+        VI03  =   10.01     ! Volume of iodate standard (cm**3)
+        NI03  =   .01012876 ! Normality of iodate standard
+        VREG  = 2.0         ! Volume of sample displaced by reagents (cm**3)
+        DOREG = 0.0017      ! Absolute amount of O2 added with reagents (ml)
+        UFLAG =  0          ! 0|-1, -1 indicates DO_mass is valid
+
+        Comments from secondary file:
+        Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.samavg
+        --------------------------------------------------------------------------------------
+        Flag channels initialized with zeros. Non-zero values have the following significance:
+        --------------------------------------------------------------------------------------
+        1 = Sample for this measurement was drawn from water bottle but not analyzed
+              (not normally used).
+        2 = Acceptable measurement (not normally used).
+        3 = Questionable measurement (no problem observed in sampling or analysis,
+              but value is not trusted, nonetheless; includes outlyers).
+        4 = Bad measurement (known problem with sampling or analysis, but not
+              serious enough to completely discard the value).
+        5 = Not reported (lost sample; unredeemably bad measurement).
+        6 = Mean of replicate measurements.
+        7 = Manual chromatographic peak measurement.
+        8 = Irregular digital chromatographic peak integration.
+        9 = Sample not drawn for this measurement from this bottle (not normally used).
+        --------------------------------------------------------------------------------------
+        This file converted from Sea-Bird file: W:\ctd\9829\comp\98290094.ros
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1998-29
+    AGENCY              : IOS, Ocean Science and Productivity, Sidney, BC
+    COUNTRY             : Canada
+    PROJECT             : Line P
+    SCIENTIST           : Whitney F.
+    PLATFORM            : John P. Tully
+
+*LOCATION
+    GEOGRAPHIC AREA     : Line  P, N.E. Pacific Ocean
+    STATION             : MP12
+    EVENT NUMBER        : 94
+    LATITUDE            :  48  57.96000 N  ! (deg min)
+    LONGITUDE           : 130  39.84000 W  ! (deg min)
+    WATER DEPTH         : 3248
+
+*COMMENTS
+    Sample 305, oxygen sample end-point had low colorimeter value.
+    Sample 308, oxygen sample poor end-point due to large air bubble on colorime
+    Sample 315, oxygen sample end-point had low colorimeter value.
+
+    Collection method:
+    ------------------
+      A rosette, holding 24 ten-litre water samplers, with a CTD was used.
+
+    Analysis methods:
+    -----------------
+
+      Salinity samples are collected in glass bottles and analyzed on Guildline
+      model 8410 Portasal Salinometers which are standardized with IAPSO standard
+      seawater.
+
+      Oxygen samples are analyzed on an automated Winkler titration system
+      following the procedures of Carpenter (1965). A Brinkmann model 665 Dosimat
+      and model PC910 Colorimeter is controlled by Visual-Basic program to
+      titrate the oxygen samples.
+
+      Nutrient samples are analyzed fresh on board using a Technicon AAII auto-
+      analyzer following methods described in Barwell-Clarke and Whitney (1996).
+
+      Chlorophyll was extracted with 90% acetone and analyzed fluorimetrically.
+
+    CFC-11, CFC-12, CFC_113 and Carbon tetrachloride in their current form, do not meet the
+    relaxed WOCE standard for CFC's. Therefore the CFC qulaity flags have been given a value
+    of'3'(questionable). For CFC methods refer to the "Ocean Science and Productivity Division
+    Line P cruises 9829, 9901 and 9910 CFC Data Report" located in the cruise .DOC directory.
+    .
+      References:
+      1. Carpenter, J.H. 1965. The Chesapeake Bay Institute Technique for the
+      Winkler Dissolved Oxygen Method. Limmnol. & Oceanogr., 10: 141-143.
+      2. J. Barwell-Clarke and F. Whitney. 1996. Institute of Ocean Sciences
+      Nutrient Methods and Analysis. Canadian Technical Report of Hydrography
+      and Ocean Sciences, No. 182, 43 pp.
+      3. Minkley, B.G., and F.A. Whitney. 2001. Summary of Hydrographic/CTD
+      Observations Made Along Line P and at Station P: 1991-1999. Canadian
+      Data Report of Hydrography and Ocean Sciences 156: 45 pp.
+
+    Comments from secondary file:
+    Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.samavg
+    ---------------------------------------------------
+    SBE HEADER
+    Sea-Bird SBE 9 Raw Data File:
+    FileName = D:\DATA\9829\98290094.DAT
+    Software Version 4.233
+    Temperature SN = 2095
+    Conductivity SN = 1766
+    Number of Bytes Per Scan = 27
+    Number of Voltage Words = 3
+    System UpLoad Time = Sep 16 1998  18:17:27
+    NMEA Latitude = 48 57.96 N
+    NMEA Longitude = 130 39.84 W
+    NMEA UTC (Time) = Sep 16 1998  18:17:27
+    Store Lat/Lon Data = Add to Header Only
+    Command Line = seasave
+    Ship:      J.P.TULLY
+    Cruise:    9829
+    Station:   MP12
+    Depth:     3248
+    FREON CAST.
+    # nquan = 10
+    # nvalues = 2662
+    # units = metric
+    # name 0 = scan: scan number
+    # name 1 = pr: pressure [db]
+    # name 2 = t090: temperature, pri, ITS-90 [deg C]
+    # name 3 = t190: temperature, sec, ITS-90 [deg C]
+    # name 4 = c0S/m: conductivity, primary [S/m]
+    # name 5 = c1S/m: conductivity, secondary [S/m]
+    # name 6 = sal00: salinity, PSS-78 [PSU], T0, C0
+    # name 7 = sal11: salinity, PSS-78 [PSU], T1, C1
+    # name 8 = nbf: number of bottles fired
+    # name 9 = flag:  0.000e+00
+    # interval = seconds: 0.0416667
+    # start_time = Sep 16 1998 18:17:27
+    # sensor 0 = Frequency  0  temperature, primary, 2095, 15-AUG-98s
+    # sensor 1 = Frequency  1  conductivity, primary, 1766, 18-AUG-98, cpcor = -9.57
+    00e-08
+    # sensor 2 = Frequency  2  pressure, 63507, 01-11-1996
+    # sensor 3 = Frequency  3  temperature, secondary, 2038, 01-May-98s
+    # sensor 4 = Frequency  4  conductivity, secondary, 1762, 08-May-98s, cpcor = -9
+    .5700e-08
+    # sensor 5 = Extrnl Volt  0  fluorometer, sea tech, WS3S-417P
+    # sensor 6 = Extrnl Volt  2  transmissometer, 182D, 96/11/13
+    # sensor 7 = Extrnl Volt  4  irradiance (PAR), 4495, 97/02/17
+    # datcnv_date = Oct 27 1998 16:19:31, 4.229
+    # datcnv_in = 98290094.DAT 98290012.CON
+    # datcnv_bottle_scan_range_source = scans marked with bottle confirm bit, -2, 5
+    END*
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name                     Vers   Date       Time     Recs In   Recs Out
+    !   ------------------------ ------ ---------- -------- --------- ---------
+        MERGE                    1.0    1998/10/06 11:20:27        22        22
+        MERGE                    2.3    2000/01/12 14:09:08        22        22
+        REMOVECH                 3.2    2000/01/14 09:47:56        22        22
+        REMOVECH                 4.0    2000/05/26 08:45:35        22        22
+        HDREDIT2                 1.2    2001/12/24 11:49:18 ?         ?
+        HDREDIT2                 1.6    2003/04/28 14:59:43 ?         ?
+        CLEAN                    4.2    2003/04/28 16:24:58        22        22
+        SORT                     3.4.1  2004/04/14 08:32:44        22        22
+        SORT                     3.4.1  2004/10/14 15:38:45        22        22
+        MERGE                    3.2    2004/10/14 15:41:48        22        22
+        SORT                     3.4.1  2004/10/14 15:43:50        22        22
+        HDREDIT2                 2.3    2004/10/14 15:44:46 ?         ?
+        HDREDIT2                 2.3    2004/10/18 11:30:05 ?         ?
+        MERGE                    3.5    2013/06/28 10:53:38        22        22
+        HDREDIT2                 2.6    2013/06/28 11:11:49 ?         ?
+        CLEAN                    5.1    2013/06/28 11:14:00        22        22
+        CHANGE_CTD_CHANNEL_NAMES 1.0    2013/12/16 15:16:46        22        22
+        REMOVECH                 8.2    2014/02/04 13:46:57        22        22
+        CHANGE_FLAGS             2.0    2014/11/20 09:52:27        22        22
+    $END
+    $REMARKS
+        -The following MERGE parameters were used:
+         Primary File Extension: cln
+         Secondary File Extension: ios
+         Merge Channel: Sample_Number
+         Merge Scheme Used:
+          Interweave Records from Both Files
+         Overlap Scheme Used:
+          Keep Primary
+         Primary Channels to Include:
+         Sample_Number,Pressure,Temperature:Primary,Salinity:T0:C0,Salinity:T1:C1,Transm
+         Secondary Channels to Include:
+         Sample_Number,Phosphate,Nitrate,Silicate,Ammonium,Chlorophyll
+        -The following MERGE parameters were used:
+         Merge Channel: Sample_Number
+         Merge Scheme Used: Interweave Records from Both Files
+         Overlap Scheme Used: Keep Primary
+         Primary Channels to Include:
+           Pressure, Temperature:Primary, Salinity:T0:C0, Salinity:T1:C1,
+           Transmissivity, Irradiance_PAR, Chl_fluorescence, Bottle_Number,
+           Salinity:Bottle, Phosphate, Nitrate_plus_Nitrite, Silicate,
+           Ammonium, Chlorophyll
+         Secondary Channels to Include:
+           Dissolved_Oxygen:vol
+         Primary file  : e:\data\1998\9829\98290094.hyn
+         Secondary file: e:\data\1998\9829\98290094.cor
+
+        Comments from secondary file: e:\data\1998\9829\98290094.cor
+        ------------------------------------------------------------
+        C.H. Culbertson's paper on Dissolved Oxygen in the 'Woce
+        Hydrographic Program Operations and Methods - July 1991'
+        OxyRedo fixes DO_mass and DO_volumne when incorrect values
+        for VIO3, NIO3, blank, or standard had been entered.
+        OxyRedo fixes DO_mass and DO_volumne when incorrect values
+        for VIO3, NIO3, blank, or standard had been entered.
+        -The following CALIB parameters were used:
+        Calibration type = C
+        Pressure offset =        0.0
+        Calibration file = d:\data\1998\9829\9829oxy.cor
+        -The following CHANNEL(S) were removed from file.
+         SALINITY:PRIMARY
+         SALINITY:SECONDARY
+         TEMPERATURE:SECONDARY
+         Temperature:Primary
+         Salinity:T0:C0
+         Salinity:T1:C1
+         VOLTAGE:SEATECH
+         TRANS_ATTENUATION_COEF
+         FLUOROMETER:SEATECH
+         FLUOROMETER:SEAPOINT
+         FLUOROMETER_SEATECH
+         FLUOROMETER_SEAPOINT
+         TEMPERATURE:SAMPLE
+         DISSOLVED_OXYGEN:MASS
+         THIOSULFATE_TITER
+         FLASK_NUMBER
+         FLASK_VOLUME
+         BLANK
+         STANDARD
+         IRRADIANCE_PAR
+         CHL_FLUORESCENCE
+         Transmissivity
+         Bottle_Number
+         SALINITY:CTD
+         TEMPERATURE:CTD
+         Temperature
+        -The following CHANNEL(S) were removed from file.
+         Ammonium
+        CLEAN functions:
+         - Reset #RECS, MIN & MAX values in header.
+         - Change Pad Value to -99 in All Channels.
+         - Delete Empty Channels:   1 deleted.
+         - Set channel name post-colon letters to upper case.
+         - Remove Sea-Bird comments from the header.
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure
+         Pressure channel sorted according to values in sort channel
+        -The following SORT parameters were used.
+         Sorted by channel: Sample_Number
+         Pressure channel sorted according to values in sort channel
+        -The following MERGE parameters were used:
+         Merge Channel: Sample_Number
+         Merge Scheme Used: Add Secondary to Primary
+         Overlap Scheme Used: Keep Primary
+         Primary Channels to Include: ALL
+         Secondary Channels to Include:
+           Pressure,
+           Temperature:Secondary,
+           Salinity:T1:C1
+         Primary file  : Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.chesort
+         Secondary file: Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.samavg
+
+        Comments from secondary file:
+        Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.samavg
+        ---------------------------------------------------
+        -The following ADDSAMP parameters were used:
+        Sample Number Lookup File: Q:\Cruise_Data\1998-29\COMP\addsamp.csv
+        Bottle Channel Name: Bottle_Number
+        -The following BINAVE parameters were used:
+        Bin channel = Bottle_Number
+        Averaging interval =    1.00
+        Minimum bin value =       0.000
+        Average value was used
+        Interpolated values were NOT used for empty bins
+        Channel 'NUMBER_OF_BIN_RECORDS' was added to file.
+        -The following SORT parameters were used.
+         Sorted by channel: Pressure
+         Pressure channel sorted according to values in sort channel
+        -HEADER EDITS: 2004/10/14 15:44:46
+         Channel  8: Temperature:Secondary [deg C (ITS90)]
+           Units ==> deg C (ITS90)
+        -HEADER EDITS: 2004/10/18 11:30:05
+         Applied edit header: O:\Data Processing\Header Comments\Work\Rosette.TXT
+        -The following MERGE parameters were used: 2013/06/28 10:53:38
+         Merge Channel: Pressure
+         Merge Scheme Used: Add Secondary to Primary
+         Overlap Scheme Used: Keep Secondary
+         Primary Channels to Include: ALL
+         Secondary Channels to Include:
+           Chlorofluorocarbon_11,
+           Flag:Chlorofluorocarbon_11,
+           Chlorofluorocarbon_12,
+           Flag:Chlorofluorocarbon_12,
+           Chlorofluorocarbon_113,
+           Flag:Chlorofluorocarbon_113,
+           Carbontetrachloride,
+           Flag:Carbontetrachloride
+         Primary file  : P:\John Pages Archive\1998-29\CFC\1998-29-0094.che
+         Secondary file: P:\John Pages Archive\1998-29\CFC\1998-29-0094.ios
+        -HEADER EDITS: 2013/06/28 11:11:49
+         Applied edit header: O:\Data Processing\Header Comments\Work\Freons 1998 - 1999.txt
+        -CLEAN functions: 2013/06/28 11:14:00 20
+         Reset #RECS, MIN & MAX values in header.
+         Delete Empty Channels:     0 deleted.
+        -REMOVECH 2014/02/04 13:46:57
+         The following CHANNEL(S) were removed:
+          Temperature:Secondary [deg C (ITS90)]
+          Salinity:T1:C1 [PSS-78]
+    $END
+
+*INSTRUMENT
+    TYPE                : Bottle
+    MODEL               : Niskin 10 Litre
+    $REMARKS
+
+        Comments from secondary file: e:\data\1998\9829\98290094.cor
+        ------------------------------------------------------------
+        Dissolved oxygen concentration determined using an automated
+        titration system consisting of a Brinkman Dosimat (model 665)
+        and a PC 900 Colorimeter.
+
+        Comments from secondary file:
+        Q:\Cruise_Data\1998-29\COMP\new\1998-29-0094.samavg
+        ---------------------------------------------------
+        SOFTWARE VERSION 4.233
+    $END
+!--1--- -2-- ---3---- --4--- --5-- --6-- ---7--- --8--- 9 --10-- - --12-- - --14-- -
+!Pressu Samp Salinity Phosph Nitra Silic Oxygen: Chloro F Chloro F Chloro F Carbon F
+!re     le_  :Bottle  ate    te_   ate   Dissolv fluoro l fluoro l fluoro l tetrac l
+!       Numb                 plus_       ed      carbon ~ carbon ~ carbon ~ hlorid ~
+!       er                   Nitri               _11    1 _12    1 _113   1 e      d
+!                            te                         1        2        3        e
+!------ ---- -------- ------ ----- ----- ------- ------ - ------ - ------ - ------ -
+*END OF HEADER
+    1.7  323  32.4910   0.33   0.0   2.3   5.743   3.00 3   1.57 3   0.21 3   3.35 3
+   10.2  322  32.5018   0.34   0.0   2.1   5.733   3.05 3   1.58 3   0.27 3   4.26 3
+   25.6  321  32.5824   0.34   0.0   1.6   5.807   3.11 3   1.58 3   0.39 3   3.96 3
+   50.8  320  32.7464   0.41   0.0   3.2   6.914   4.22 3   2.03 3   0.43 3   3.60 3
+   75.2  319  32.7432   0.61   2.8   4.9   6.575   4.37 3   2.10 3   0.25 3   3.90 3
+   98.3  318  32.7785   0.86   7.3   8.0   6.298   4.57 3   2.19 3   0.34 3   4.49 3
+  125.4  317  33.0742   1.20  13.5  15.1   5.648 -99.00 0 -99.00 0 -99.00 0 -99.00 0
+  149.5  316  33.4928   1.50  19.4  22.6   4.919   4.49 3   2.06 3   0.50 3   2.61 3
+  198.5  315  33.8976   1.78  25.4  33.7   4.134   3.93 3   1.73 3   0.37 3   2.02 3
+  250.5  314  33.9492   2.06  28.9  45.0   3.440   3.09 3   1.43 3   0.18 3   1.60 3
+  303.9  313  33.9275   2.29  32.2  53.5   2.952   2.61 3   1.23 3   0.22 3   1.56 3
+  403.6  312  33.9323   2.71  38.2  71.3   1.975   1.58 3   0.60 3   0.32 3   1.25 3
+  503.6  311  34.0094   2.95  41.1  83.1   1.225   0.74 3   0.28 3   0.04 3   0.88 3
+  601.1  310  34.1383   3.15  43.5  97.4   0.592   0.17 3   0.04 3   0.00 3   0.39 3
+  649.8  309  34.1824   3.19  43.9 104.6   0.447   0.10 3   0.01 3   0.04 3   0.35 3
+  697.2  308  34.2118   3.21  44.9 110.4   0.403   0.06 3   0.00 3   1.10 4   0.24 3
+  748.4  307  34.2446   3.23  44.6 116.3   0.333   0.00 3   0.00 3   0.00 3   0.21 3
+  801.3  306  34.2851   3.26  44.7 119.6   0.303   0.00 3   0.00 3   0.00 3   0.17 3
+  899.9  305  34.3335   3.28  44.8 127.2   0.282   0.00 3   0.00 3   0.05 3   0.00 3
+ 1000.5  304  34.3689   3.28  45.4 133.9   0.278   0.01 3   0.00 3   0.69 4   0.16 3
+ 1201.3  303  34.4303   3.26  45.3 148.5   0.369   0.00 3   0.00 3   0.00 3   0.16 3
+ 1502.4  302  34.5016   3.18  44.9 162.2   0.699   0.00 3   0.00 3   0.00 3   0.00 3

@@ -1129,8 +1129,12 @@ class OceanNcVar(object):
                 bodc_units = "nmol/L"
                 self.long_name = "Concentration of dimethyl sulphide in the water body"
             elif is_in(["carbontetrachloride"], ios_varname) and is_in(["pmol/l"], varunits):
-                bodc_code = "QCMXMASS"
+                bodc_code = "CCL4AFX1"
                 bodc_units = "pmol/L"
+                self.long_name = "Concentration of carbontetrachloride in the water body"
+            elif is_in(["carbontetrachloride"], ios_varname) and is_in(["pmol/kg"], varunits):
+                bodc_code = "QCMXMASS"
+                bodc_units = "pmol/kg"
                 self.long_name = "Concentration of carbontetrachloride in the water body"
             elif is_in(["barium:dissolved"], ios_varname) and is_in(["nmol/l"], varunits):
                 bodc_code = "RWS00147"
