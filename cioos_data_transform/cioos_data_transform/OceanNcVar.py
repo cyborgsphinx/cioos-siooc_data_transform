@@ -715,7 +715,7 @@ class OceanNcVar(object):
                 bodc_code = "FR11GCKG"
                 bodc_units = "pmol/kg"
                 self.long_name = "Concentration of trichlorofluoromethane per unit mass of the water body"
-            elif ios_varname.endswith("_11") and is_in(["pmol/l"], varunits):
+            elif ios_varname.endswith("_11") and is_in(["pmol/l", "nmol/m^3"], varunits):
                 bodc_code = "FR11GCTX"
                 bodc_units = "pmol/L"
                 self.long_name = "Concentration of trichlorofluoromethane per unit volume of the water body"
