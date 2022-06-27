@@ -1052,6 +1052,11 @@ class OceanNcVar(object):
                 bodc_units = "ntu"
                 self.standard_name = "sea_water_turbidity"
                 self.long_name = "Turbidity of water in the water body by SeaPoint turbidity meter and laboratory calibration against formazin"
+            elif is_in(["turbidity:wetlabs"], ios_varname) and is_in(["ntu", "ftu", "stu"], varunits):
+                bodc_code = "TURBXXXX"
+                bodc_units = "ntu"
+                self.standard_name = "sea_water_turbidity"
+                self.long_name = "Turbidity of water in the water body"
             # umol/L is likely a mistake, assume it is actually umol/kg
             elif is_in(["alkalinity:total"], ios_varname) and is_in(["umol/kg", "umol/L"], varunits):
                 bodc_code = "MDMAP014"

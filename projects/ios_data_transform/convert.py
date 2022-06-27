@@ -751,6 +751,7 @@ def convert_channels(ncfile, shell, dimensions, is_current=False):
                     "ph:",
                     "par",
                     "turbidity:seapoint",
+                    "turbidity:wetlabs",
                     "ethane",
                     "propane",
                     "methylene_chloride",
