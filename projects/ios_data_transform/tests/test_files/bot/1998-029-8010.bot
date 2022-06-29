@@ -1,0 +1,249 @@
+*2021/12/20 16:43:42.35
+*IOS HEADER VERSION 2.0      2016/04/28 2016/06/13 IVF16
+
+*FILE
+    START TIME          : UTC 1998/09/11 22:58:00.000
+    END TIME            : UTC 1998/09/11 23:05:00.000
+    TIME ZERO           : UTC 1980/01/01 00:00:00.000
+    NUMBER OF RECORDS   : 2
+    DATA DESCRIPTION    : Bottle:Rosette:Up:Stop + CTD:Up
+    FILE TYPE           : ASCII
+    NUMBER OF CHANNELS  : 13
+
+    $TABLE: CHANNELS
+    ! No Name                               Units    Minimum        Maximum
+    !--- ---------------------------------- -------- -------------- --------------
+       1 Date                               n/a      6828           6828
+       2 Time                               n/a      0.9569445      0.9618056
+       3 Sample_Order                       n/a      50             51
+       4 Sampler_Type                       n/a
+       5 Sampler_ID_Number                  n/a
+       6 Sample_Number                      n/a      78             79
+       7 Depth                              metres   10             30
+       8 Iron:Filtered:Buffered:0.1         nmol/L   0.1            0.13
+       9 Flag:Iron:Filtered:Buffered:0.1    n/a
+      10 Iron:Filtered:Buffered:0.45        nmol/L   0.1            0.11
+      11 Flag:Iron:Filtered:Buffered:0.45   n/a
+      12 Iron:Unfiltered:Buffered           nmol/L   0.13           0.13
+      13 Flag:Iron:Unfiltered:Buffered      n/a
+    $END
+
+    $TABLE: CHANNEL DETAIL
+    ! No  Pad   Start  Width  Format      Type  Decimal_Places
+    !---  ----  -----  -----  ----------  ----  --------------
+       1  -99   ' '    ' '    YYYY/MM/DD  D     ' '
+       2  -99   ' '    ' '    HH:MM:SS    T     ' '
+       3  -99   ' '    ' '    I4          I     ' '
+       4  ' '   ' '        8  ' '         C     ' '
+       5  ' '   ' '        8  ' '         C     ' '
+       6  -99   ' '    ' '    I4          I     ' '
+       7  -99   ' '    ' '    F7.1        R4    ' '
+       8  -99   ' '    ' '    F7.2        R4    ' '
+       9  ' '   ' '        7  NQ          C     ' '
+      10  -99   ' '    ' '    F7.2        R4    ' '
+      11  ' '   ' '        7  NQ          C     ' '
+      12  -99   ' '    ' '    F7.2        R4    ' '
+      13  ' '   ' '        7  NQ          C     ' '
+    $END
+    $REMARKS
+        Quality flags have the following significance:
+        ----------------------------------------------------------------------------------
+        0 = Acceptable measurement with no header comment
+        1 = Sample for this measurement was collected but not analyzed. Sample lost.
+        2 = Acceptable measurement with header comment
+        3 = Questionable measurement (Probably Good)
+        4 = Poor measurement (Probably Bad)
+        5 = Measurement not reported (Bad)
+        6 = Mean of replicate measurements
+        7 = Manual chromatographic peak measurement
+        8 = Irregular digital chromatographic peak integration
+        9 = Sample was planned for this measurement from this bottle but was not collected
+        ----------------------------------------------------------------------------------
+    $END
+
+*ADMINISTRATION
+    MISSION             : 1998-29
+    AGENCY              : IOS, Ocean Science and Productivity, Sidney, B.C.
+    COUNTRY             : Canada
+    PROJECT             : Line P
+    SCIENTIST           : Whitney, F.
+    PLATFORM            : John P. Tully
+
+*LOCATION
+    STATION             : Cobb10
+    EVENT NUMBER        : 8010
+    LATITUDE            :  46  49.66000 N  ! (deg min)
+    LONGITUDE           : 130  49.28000 W  ! (deg min)
+
+*INSTRUMENT
+    TYPE                : Bottle
+    MODEL               : Sampler_Type
+    LOCATION            : Mid-ship                              ! custom item
+
+*HISTORY
+
+    $TABLE: PROGRAMS
+    !   Name         Vers   Date       Time     Recs In   Recs Out
+    !   ------------ ------ ---------- -------- --------- ---------
+        SPRD2IS      4.9    2013/02/11 14:32:47         2         2
+        HDREDIT2     2.6    2013/02/11 14:44:10 ?         ?
+        SORT         3.6    2013/02/11 14:44:49         2         2
+        CLEAN        5.1    2013/02/11 14:45:15         2         2
+        SORT         3.6    2013/02/11 14:45:57         2         2
+        CHANGE_FLAGS 2.0    2014/11/20 09:52:28         2         2
+        HDREDIT2     3.2    2021/12/20 16:40:27 ?         ?
+        ADTIMCH      4.4    2021/12/20 16:43:04         2         2
+        REMOVECH     8.2    2021/12/20 16:43:42         2         2
+    $END
+    $REMARKS
+        -HEADER EDITS: 2013/02/11 14:44:10
+         Applied edit header: O:\Data Processing\Header Comments\Work\1998-29-Iron.txt
+        -SORT parameters: 2013/02/11 14:44:49
+         Sorted in ascending order of channel Date_Time
+        -CLEAN functions: 2013/02/11 14:45:14 20
+         Reset #RECS, MIN & MAX values in header.
+         Delete Empty Channels:     8 deleted.
+         Set header Start and End times from the data.
+        -SORT parameters: 2013/02/11 14:45:57
+         Sorted in ascending order of channel Depth
+        -HEADER EDITS: 2021/12/20 16:40:27
+         Applied edit header: D:\Telework\2021-008\Processing\doc\HYDRO\2021-008-bot-hdr.txt
+        -The following ADTIMCH parameters were used.
+         Add IOS header Time/Date channels
+        -REMOVECH 2021/12/20 16:43:42
+         The following CHANNEL(S) were removed:
+          Date_Time [YYYY/MM/DD HH:MM]
+    $END
+
+*COMMENTS
+
+    For Collection and Analysis Methods, and Explanation of Abbreviations please see the
+    Metadata Sheet in the Iron Spreadsheet file located in the Cruise .DOC directory.
+
+    Analysis methods:
+    -----------------
+    Chlorophyll samples were filtered onto 25mm GF/F filters and stored in glass
+    scintillation vials at -80C prior to analysis. Samples were extracted in
+    90% acetone at -20C for 24 hours in the lab and analyzed on a Turner 10AU fluorometer
+    calibrated with commercially pure chlorophyll a standard (Sigma).
+    Fluorescence readings taken before and after acidification were used to
+    calculate chlorophyll and phaeopigment concentrations (Holm-Hansen et al 1965).
+    Chlorophyll samples were analyzed at IOS in Room 2423 1 to 5 weeks after the cruise.
+    Variability is assessed as the CV% (std dev / mean*100).
+    Flags and comments apply to chlorophyll values only.
+    Chlorophyll values ranged from  0.05-20.68 ug/l in 103 samples.
+    Average %CV for this cruise was 5.86% (after one duplicate was rejected, original 8.25%)
+    with 5 out of 23 duplicate pairs having a CV>10% and 0 duplicate pairs having a CV>30%.
+    Our average dataset %CV is 3.83% for 2013 - 2020 so the overall quality of this dataset
+    is acceptable.
+    For details see worksheet “CV%” in file QF2021-008_CHL*.xlsx.
+
+    Oxygen samples were analyzed at sea using an automated Winkler titration System
+    (Metrohm Dosimat model 876 and a UV light source and detector with a 365nm filter
+    controlled by LV02_876 software designed and constructed by Scripps Institution
+    of Oceanography) with modifications based on Carpenter (1965) and adhering to
+    WOCE protocols (Culberson 1991).
+    For details including a duplicate analysis, see document QF2021-008OXY*.xlsx.
+
+    Salinity samples were collected in 200 mL type ll glass bottles with disposable
+    nylon inserts and screw caps supplied by Ocean Scientific International Limited.
+    They were analyzed in a temperature-controlled lab on a Guildline 8400B Salinometer
+    standardized with IAPSO standard seawater 68 - 75 days after collection.
+    For details including a duplicate analysis, see document QF2021-008SAL*.xlsx.
+
+    Nutrient samples were collected in plastic tubes and quick frozen in aluminum
+    blocks stored in a -20C freezer. For samples 400m and deeper a second set of
+    samples are collected and stored cool for silicate analysis. All samples were
+    returned to the Insitute of Ocean Sciences and they were analyzed using an
+    Astoria-Pacific Analyzer following methods described in
+    IOS Nutrient Methods (1996) Barwell-Clarke and Whitney.
+    For details including a duplicate analysis, see document QF2021-008nuts*.xlsx.
+
+    DMS samples were collected in 250mL ground glass stoppered bottles and stored in a
+    fridge, in the dark and removed one at a time before analysis. A sample was loaded
+    onto the stripper and purged with UHP Nitrogen for 10 minutes at ~100mL/min.
+    The DMS was extracted from the water and absorbed into a Tenax TA trap kept at -80C.
+    The trap was subsequently desorbed at 100 deg C (with a dewar containing boiling water)
+    onto a Chromosil 330 column which eluted onto a Flame Photometric Detector (FPD).
+    All samples were run as soon as possible after being collected.
+    The minimum detectable level for DMS is 0.10 nmol/L, so “0” values should be
+    interpreted as <0.1nmol/L.
+    DMS data are limited to 2 significant figures.
+    Unless otherwise indicated the % relative difference between duplicates is <20%.
+    For more detail see file "2021-008 DMS report*.doc" and for data and duplicate analysis
+    see "QF2021-008_DMS_summary*.xls."
+
+    DMSP-D: Approximately 50-100mL of seawater is drained from the niskin into a magnetic
+    filtration funnel containing a 0.7um GF/F filter.  The first 3.5mL is collected
+    in a polypropylene tube containing 50uL of a 50% sulphuric acid solution.
+    A new funnel and filter are used for each sample.
+    DMSP-T: 3.5mL of seawater was collected directly from the Niskin into a polypropylene
+    tube (15mL) containing 50uL of a 50% sulphuric acid solution.
+    DMSP-D and DMSP-T:
+    Samples are stored in the dark at 4 degrees C for a minimum of 24 hours. They are
+    hydrolized and analyzed at the Institute of Ocean Sciences when time permits.
+    The minimum detectable level is 0.1 nM, so “0” values should be interpreted as <0.1 nM.
+    DMSP data are limited to 2 significant figures.
+    Unless otherwise indicated the % relative difference between duplicates is <20%.
+    For details on analysis and raw data, see document "QF2021-008_dmsp_summary*.xlsx.
+
+    References:
+    1. Barwell-Clarke, J. and Whitney, F. 1996. Institute of Ocean Sciences
+    Nutrient Methods and Analysis. Canadian Technical Report of Hydrography
+    and Ocean Sciences, No. 182, 43 pp.
+    2. Carpenter, J.H. 1965. The Chesapeake Bay Institute Technique for the
+    Winkler Dissolved Oxygen Method. Limmnol. & Oceanogr., 10: 141-143.
+    3. Culberson, C.H. 1991. Dissolved oxygen. WOCE Hydrographic
+    Programme Operations and Methods (July 1991). 15pp.
+    4. Holm-Hansen, O., Lorenzen, C.J., Holmes, R.W., and Strickland J.D.H. 1965.
+    Fluorometric Determination of Chlorophyll. J.du Cons. Intl. Pour l’Epl.
+    De la Mer. 30:3-15.
+
+        * For PDF versions of these papers see folder
+              \\Cruise_Data\DOCUMENTS\Analysis Reference Papers
+        ---------------------------------------------------------------------------------
+
+    CTD Data Processing Notes:
+    --------------------------
+    Conductivity, Transmissivity, Fluorescence:URU:Seapoint and PAR data are
+    nominal and unedited except that some records were removed in editing temperature
+    and salinity.
+
+    There were 2 WetLabs CStar transmissometers in use during this cruise:
+        Channel Transmissometer refers to sensor #1185DR (650nm - red)
+        Channel Transmissometer:Green refers to sensor #1883DG (530nm - green)
+    For comparison with other Institute of Ocean Sciences cruises, note that the
+    transmissometer wavelength is 650nm unless otherwise stated.
+
+    NOTE: While the CTD fluorescence data are expressed in concentration units, they
+    do not always compare well to extracted chlorophyll samples, particularly for
+    casts far from shore. It is recommended that users check extracted chlorophyll
+    values where available.
+
+    Both salinity channels were found to be reading much lower relative to bottle
+    samples than in 3 previous cruises using the same equipment, and a little lower
+    than during the cruise that followed. Channel Salinity:T1:C1 was found to be lower
+    than bottles by an average of 0.0055psu in deep water. Since delayed analysis and
+    small errors due to incomplete flushing both would have led to bottle values being
+    too high, no recalibration was applied to the CTD salinity. While confidence in the
+    bottle comparison is lower than usual, it is likely that channel Salinity:T1:C1
+    is within ±0.003psu.
+
+    The dissolved oxygen sensor was mounted on the primary pump and all primary channels
+    produced bad data for cast #37. The system returned to reasonable values by the end
+    of the cast, but there was some evidence of drift in primary temperature and salinity
+    thereafter. The dissolved oxgyen data looked ok in the comparison with bottles
+    except for cast #37. Dissolved oxygen was removed from file 2021-008-0037.che.
+
+    For details on the processing see the report: 2021-008_Processing_Report.doc.
+    ---------------------------------------------------------------------------------
+!----1----- ---2---- -3- ---4--- ---5--- -6- --7--- --8--- --9--- --10-- --11-- --12-- --13--
+!   Date      Time   Sam Sampler Sampler Sam Depth  Iron:  Flag:I Iron:  Flag:I Iron:  Flag: 
+!                    ple _Type   _ID_    ple        Filter ron:Fi Filter ron:Fi Unfilt Iron:U
+!                    _           Number  _          ed:    ~ered: ed:Buf ~red:B ered:  nfilte
+!                    Ord                 Num        Buffer Buffer fered: uffere Buffer red:Bu
+!                    er                  ber        ed:0.1 ed:0.1 0.45   d:0.45 ed     ffered
+!---------- -------- --- ------- ------- --- ------ ------ ------ ------ ------ ------ ------
+*END OF HEADER
+ 1998/09/11 22:58:00  50 GF30    Wilbur   78   10.0   0.10 0        0.11 0        0.13 0
+ 1998/09/11 23:05:00  51 GF30    Jun      79   30.0   0.13 0        0.10 0        0.13 0

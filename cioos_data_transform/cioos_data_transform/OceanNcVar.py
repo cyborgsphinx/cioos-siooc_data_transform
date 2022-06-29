@@ -528,6 +528,16 @@ class OceanNcVar(object):
                     break
             self.name = bodc_code
             self.units = bodc_units
+        elif self.type == "iron":
+            self.datatype = "float32"
+            for i in range(4):
+                bodc_code, bodc_units = self.__get_bodc_code(
+                    self.type, self.name, self.units, i
+                )
+                if bodc_code not in varlist:
+                    break
+            self.name = bodc_code
+            self.units = bodc_units
         elif self.type == "isotope":
             self.datatype = "float32"
             for i in range(4):
@@ -738,6 +748,21 @@ class OceanNcVar(object):
             else:
                 raise Exception(
                     "Chlorofluorocarbon not defined", ios_varname, varunits, vartype
+                )
+
+        elif vartype == "iron":
+            if is_in(["unfiltered:buffered"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "RWS00151"
+                bodc_units = "nmol/L"
+            elif is_in(["filtered:buffered:0.45"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "FEXXAAP2"
+                bodc_units = "nmol/L"
+            elif is_in(["filtered:buffered:0.1"], ios_varname) and is_in(["nmol/l"], varunits):
+                bodc_code = "FEPICP01"  # this may be incorrect
+                bodc_units = "nmol/L"
+            else:
+                raise Exception(
+                    "Iron units not defined", ios_varname, varunits, vartype
                 )
 
         elif vartype == "oxygen":
